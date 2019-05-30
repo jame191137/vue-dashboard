@@ -19,7 +19,6 @@
         <h3 class="title font-weight-light">Graph 1</h3>
       </material-chart-card>
       </v-flex>
-
       <v-flex
         md12
         sm12
@@ -32,20 +31,8 @@
         type="Line"
       >
         <h3 class="title font-weight-light">Graph 2</h3>
-        <!-- <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p> -->
-
-        <!-- <template slot="actions"> -->
-          <!-- <v-icon
-            class="mr-2"
-            small
-          >
-            mdi-clock-outline
-          </v-icon> -->
-          <!-- <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span> -->
-        <!-- </template> -->
       </material-chart-card>
       </v-flex>
-
       <v-flex
         sm6
         xs12
@@ -61,60 +48,15 @@
       <v-card-title>
         <span class="title font-weight-light">Plug state</span>
         </v-card-title>
-
         <v-card-text class="headline font-weight-bold">
-           <!-- <span> -->
            <v-layout justify-center row >
              <v-btn  color="success">Success</v-btn>
            </v-layout>
-           <!-- </span><br> -->
-
         </v-card-text>
-
          <v-divider light></v-divider>
          <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
         </v-card-actions>
       </v-card>
-
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg2
-      >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-        max-height="300"
-      >
-      <v-card-title>
-        <span class="title font-weight-light">Plug state 2</span>
-        </v-card-title>
-
-        <v-card-text class="headline font-weight-bold">
-           <!-- <span> -->
-           <v-layout justify-center row >
-             <v-btn  color="success">Success</v-btn>
-           </v-layout>
-           <!-- </span><br> -->
-
-        </v-card-text>
-
-         <v-divider light></v-divider>
-         <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
-        </v-card-actions>
-      </v-card>
-
       </v-flex>
       <v-flex
         sm6
@@ -130,20 +72,14 @@
         <v-card-title>
           <span class="title font-weight-light">Up time</span>
         </v-card-title>
-
         <v-card-text class="headline font-weight-bold">
            10 hr
         </v-card-text>
          <v-divider light></v-divider>
          <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
         </v-card-actions>
       </v-card>
       </v-flex>
-
       <v-flex
         sm6
         xs12
@@ -158,20 +94,14 @@
         <v-card-title>
           <span class="title font-weight-light">Up time</span>
         </v-card-title>
-
         <v-card-text class="headline font-weight-bold">
            10 hr
         </v-card-text>
          <v-divider light></v-divider>
          <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
         </v-card-actions>
       </v-card>
       </v-flex>
-
       <v-flex
         sm6
         xs12
@@ -186,48 +116,29 @@
         <v-card-title>
           <span class="title font-weight-light">Up time</span>
         </v-card-title>
-
         <v-card-text class="headline font-weight-bold">
            10 hr
         </v-card-text>
          <v-divider light></v-divider>
          <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
         </v-card-actions>
       </v-card>
       </v-flex>
-
       <v-flex
-        sm6
-        xs12
-        md6
-        lg2
+        md12
+        sm12
+        lg6
       >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Up time</span>
-        </v-card-title>
-
-        <v-card-text class="headline font-weight-bold">
-           10 hr
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
-        </v-card-actions>
-      </v-card>
+          <material-chart-card
+            :data="emailsSubscriptionChart.data"
+            :options="emailsSubscriptionChart.options"
+            :responsive-options="emailsSubscriptionChart.responsiveOptions"
+            color="red"
+            type="Bar"
+          >
+            <h4 class="title font-weight-light">30 Days</h4>
+          </material-chart-card>
       </v-flex>
-
       <v-flex
         md12
         sm12
@@ -240,58 +151,15 @@
           color="red"
           type="Bar"
         >
-          <h4 class="title font-weight-light">Email Subscription</h4>
-          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
+          <h4 class="title font-weight-light">30 Days</h4>
         </material-chart-card>
       </v-flex>
-
-      <v-flex
-        md12
-        sm12
-        lg6
-      >
-        <material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
-        >
-          <h4 class="title font-weight-light">Email Subscription</h4>
-          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
-
-          <template slot="actions">
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-flex>
-
-
     </v-layout>
   </v-container>
 </template>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 <script>
-// import LineChart from './LineChart.js'
-
 export default {
   mounted () {
     this.fillData()
@@ -363,6 +231,38 @@ export default {
         }
       },
       emailsSubscriptionChart: {
+        data: {
+          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+          series: [
+            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610]
+
+          ]
+        },
+        options: {
+          axisX: {
+            showGrid: false
+          },
+          low: 0,
+          high: 1000,
+          chartPadding: {
+            top: 0,
+            right: 5,
+            bottom: 0,
+            left: 0
+          }
+        },
+        responsiveOptions: [
+          ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0]
+              }
+            }
+          }]
+        ]
+      },
+      emailsSubscriptionChart2: {
         data: {
           labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
           series: [
