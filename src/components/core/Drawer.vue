@@ -30,7 +30,7 @@
             />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Vuetify MD
+            Monitoring
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -58,7 +58,7 @@
             v-text="link.text"
           />
         </v-list-tile>
-        <v-list-tile
+        <!-- <v-list-tile
           disabled
           active-class="primary"
           class="v-list-item v-list__tile--buy"
@@ -70,7 +70,7 @@
           <v-list-tile-title class="font-weight-light">
             Upgrade To PRO
           </v-list-tile-title>
-        </v-list-tile>
+        </v-list-tile> -->
       </v-layout>
     </v-img>
   </v-navigation-drawer>
@@ -95,38 +95,39 @@ export default {
       {
         to: '/dashboard2',
         icon: 'mdi-view-dashboard',
-        text: 'D'
-      },
-      {
-        to: '/user-profile',
-        icon: 'mdi-account',
-        text: 'User Profile'
-      },
-      {
-        to: '/table-list',
-        icon: 'mdi-clipboard-outline',
-        text: 'Table List'
-      },
-      {
-        to: '/typography',
-        icon: 'mdi-format-font',
-        text: 'Typography'
-      },
-      {
-        to: '/icons',
-        icon: 'mdi-chart-bubble',
-        text: 'Icons'
-      },
-      {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps'
-      },
-      {
-        to: '/notifications',
-        icon: 'mdi-bell',
-        text: 'Notifications'
+        text: 'Dashboard'
       }
+      // ,
+      // {
+      //   to: '/user-profile',
+      //   icon: 'mdi-account',
+      //   text: 'User Profile'
+      // },
+      // {
+      //   to: '/table-list',
+      //   icon: 'mdi-clipboard-outline',
+      //   text: 'Table List'
+      // },
+      // {
+      //   to: '/typography',
+      //   icon: 'mdi-format-font',
+      //   text: 'Typography'
+      // },
+      // {
+      //   to: '/icons',
+      //   icon: 'mdi-chart-bubble',
+      //   text: 'Icons'
+      // },
+      // {
+      //   to: '/maps',
+      //   icon: 'mdi-map-marker',
+      //   text: 'Maps'
+      // },
+      // {
+      //   to: '/notifications',
+      //   icon: 'mdi-bell',
+      //   text: 'Notifications'
+      // }
     ],
     responsive: false
   }),

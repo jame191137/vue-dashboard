@@ -10,13 +10,8 @@ export default [
     view: 'Dashboard'
   },
   {
-    path: '/test',
-    // Relative to /src/views
-    view: 'test'
-  },
-  {
     path: '/dashboard2',
-    // Relative to /src/views
+    name: 'Dashboard2',
     view: 'Dashboard2'
   },
   {

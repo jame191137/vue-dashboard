@@ -6,22 +6,20 @@
   >
     <v-layout wrap>
 
+
       <v-flex
         md12
         sm12
         lg6
       >
-      <v-card>
-        <div class="small">
-          <line-chart :chart-data="datacollection"></line-chart>
-          <button @click="fillData()">Randomize</button>
-        </div>
-        <v-divider light></v-divider>
-        <v-card-actions>
-
-       </v-card-actions>
-      </v-card>
-
+      <material-chart-card
+        :data="dataCompletedTasksChart.data"
+        :options="dataCompletedTasksChart.options"
+        color="green"
+        type="Line"
+      >
+        <h3 class="title font-weight-light">Graph 1</h3>
+      </material-chart-card>
       </v-flex>
 
       <v-flex
@@ -29,16 +27,25 @@
         sm12
         lg6
       >
-        <v-card>
-          <div class="small">
-            <line-chart :chart-data="datacollection"></line-chart>
-            <button @click="fillData()">Randomize</button>
-          </div>
-          <v-divider light></v-divider>
-          <v-card-actions>
+      <material-chart-card
+        :data="dataCompletedTasksChart.data"
+        :options="dataCompletedTasksChart.options"
+        color="green"
+        type="Line"
+      >
+        <h3 class="title font-weight-light">Graph 2</h3>
+        <!-- <p class="category d-inline-flex font-weight-light">Last Last Campaign Performance</p> -->
 
-         </v-card-actions>
-        </v-card>
+        <!-- <template slot="actions"> -->
+          <!-- <v-icon
+            class="mr-2"
+            small
+          >
+            mdi-clock-outline
+          </v-icon> -->
+          <!-- <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span> -->
+        <!-- </template> -->
+      </material-chart-card>
       </v-flex>
 
       <v-flex
@@ -216,31 +223,30 @@
       </v-flex>
 
       <v-flex
-        sm6
-        xs12
-        md6
-        lg2
+        md12
+        sm12
+        lg6
       >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Up time</span>
-        </v-card-title>
+        <material-chart-card
+          :data="emailsSubscriptionChart.data"
+          :options="emailsSubscriptionChart.options"
+          :responsive-options="emailsSubscriptionChart.responsiveOptions"
+          color="red"
+          type="Bar"
+        >
+          <h4 class="title font-weight-light">Email Subscription</h4>
+          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
 
-        <v-card-text class="headline font-weight-bold">
-           10 hr
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        <!-- <v-card-actions class="pa-3">
-                      Rate this album
-        <v-spacer></v-spacer> -->
-
-        </v-card-actions>
-      </v-card>
+          <template slot="actions">
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
+          </template>
+        </material-chart-card>
       </v-flex>
 
       <v-flex
@@ -278,17 +284,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 <script>
-import LineChart from './LineChart.js'
+// import LineChart from './LineChart.js'
 
 export default {
-  components: {
-    LineChart
-  },
-  // data () {
-  //   return {
-  //     datacollection: null
-  //   }
-  // },
   mounted () {
     this.fillData()
   },
