@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <v-menu
     :close-on-content-click="false"
     bottom
@@ -158,4 +158,4 @@ export default {
   .v-responsive {
     cursor: pointer;
   }
-</style>
+</style> -->

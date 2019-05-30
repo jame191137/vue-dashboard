@@ -9,11 +9,11 @@
     mobile-break-point="991"
     width="260"
   >
-    <v-img
+    <!-- <v-img
       :src="image"
       :gradient="sidebarOverlayGradiant"
       height="100%"
-    >
+    > -->
       <v-layout
         class="fill-height"
         tag="v-list"
@@ -23,11 +23,11 @@
           <v-list-tile-avatar
             color="white"
           >
-            <v-img
+            <!-- <v-img
               :src="logo"
               height="34"
               contain
-            />
+            /> -->
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
             Monitoring
@@ -90,12 +90,12 @@ export default {
       {
         to: '/dashboard',
         icon: 'mdi-view-dashboard',
-        text: 'Dashboard'
+        text: 'Dashboard 1'
       },
       {
         to: '/dashboard2',
         icon: 'mdi-view-dashboard',
-        text: 'Dashboard'
+        text: 'Dashboard 2'
       }
       // ,
       // {

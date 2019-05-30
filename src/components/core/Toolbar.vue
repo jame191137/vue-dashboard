@@ -24,7 +24,7 @@
     </div>
 
     <v-spacer />
-    <v-toolbar-items>
+    <!-- <v-toolbar-items>
       <v-flex
         align-center
         layout
@@ -88,7 +88,7 @@
           <v-icon color="tertiary">mdi-account</v-icon>
         </router-link>
       </v-flex>
-    </v-toolbar-items>
+    </v-toolbar-items> -->
   </v-toolbar>
 </template>
 

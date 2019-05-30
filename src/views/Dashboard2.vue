@@ -5,8 +5,6 @@
     grid-list-xl
   >
     <v-layout wrap>
-
-
       <v-flex
         md12
         sm12
@@ -93,14 +91,21 @@
         class="mx-auto"
         color="#ffffff"
         max-width="400"
+        max-height="300"
       >
-        <v-card-title>
-          <span class="title font-weight-light">Up time</span>
+      <v-card-title>
+        <span class="title font-weight-light">Plug state 2</span>
         </v-card-title>
 
         <v-card-text class="headline font-weight-bold">
-           10 hr
+           <!-- <span> -->
+           <v-layout justify-center row >
+             <v-btn  color="success">Success</v-btn>
+           </v-layout>
+           <!-- </span><br> -->
+
         </v-card-text>
+
          <v-divider light></v-divider>
          <v-card-actions>
         <!-- <v-card-actions class="pa-3">
@@ -109,6 +114,7 @@
 
         </v-card-actions>
       </v-card>
+
       </v-flex>
       <v-flex
         sm6
