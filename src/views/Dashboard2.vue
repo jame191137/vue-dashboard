@@ -1,0 +1,466 @@
+<template>
+  <v-container
+    fill-height
+    fluid
+    grid-list-xl
+  >
+    <v-layout wrap>
+
+      <v-flex
+        md12
+        sm12
+        lg6
+      >
+      <v-card>
+        <div class="small">
+          <line-chart :chart-data="datacollection"></line-chart>
+          <button @click="fillData()">Randomize</button>
+        </div>
+        <v-divider light></v-divider>
+        <v-card-actions>
+
+       </v-card-actions>
+      </v-card>
+
+      </v-flex>
+
+      <v-flex
+        md12
+        sm12
+        lg6
+      >
+        <v-card>
+          <div class="small">
+            <line-chart :chart-data="datacollection"></line-chart>
+            <button @click="fillData()">Randomize</button>
+          </div>
+          <v-divider light></v-divider>
+          <v-card-actions>
+
+         </v-card-actions>
+        </v-card>
+      </v-flex>
+
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+        max-height="300"
+      >
+      <v-card-title>
+        <span class="title font-weight-light">Plug state</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           <!-- <span> -->
+           <v-layout justify-center row >
+             <v-btn  color="success">Success</v-btn>
+           </v-layout>
+           <!-- </span><br> -->
+
+        </v-card-text>
+
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+      >
+        <v-card-title>
+          <span class="title font-weight-light">Up time</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           10 hr
+        </v-card-text>
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+      >
+        <v-card-title>
+          <span class="title font-weight-light">Up time</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           10 hr
+        </v-card-text>
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+      >
+        <v-card-title>
+          <span class="title font-weight-light">Up time</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           10 hr
+        </v-card-text>
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+      >
+        <v-card-title>
+          <span class="title font-weight-light">Up time</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           10 hr
+        </v-card-text>
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+      >
+        <v-card-title>
+          <span class="title font-weight-light">Up time</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           10 hr
+        </v-card-text>
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm6
+        xs12
+        md6
+        lg2
+      >
+      <v-card
+        class="mx-auto"
+        color="#ffffff"
+        max-width="400"
+      >
+        <v-card-title>
+          <span class="title font-weight-light">Up time</span>
+        </v-card-title>
+
+        <v-card-text class="headline font-weight-bold">
+           10 hr
+        </v-card-text>
+         <v-divider light></v-divider>
+         <v-card-actions>
+        <!-- <v-card-actions class="pa-3">
+                      Rate this album
+        <v-spacer></v-spacer> -->
+
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        md12
+        sm12
+        lg6
+      >
+        <material-chart-card
+          :data="emailsSubscriptionChart.data"
+          :options="emailsSubscriptionChart.options"
+          :responsive-options="emailsSubscriptionChart.responsiveOptions"
+          color="red"
+          type="Bar"
+        >
+          <h4 class="title font-weight-light">Email Subscription</h4>
+          <p class="category d-inline-flex font-weight-light">Last Campaign Performance</p>
+
+          <template slot="actions">
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
+          </template>
+        </material-chart-card>
+      </v-flex>
+
+
+    </v-layout>
+  </v-container>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
+<script>
+import LineChart from './LineChart.js'
+
+export default {
+  components: {
+    LineChart
+  },
+  // data () {
+  //   return {
+  //     datacollection: null
+  //   }
+  // },
+  mounted () {
+    this.fillData()
+  },
+  methods: {
+    fillData () {
+      this.datacollection = {
+        labels: [this.getRandomInt(), this.getRandomInt()],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [this.getRandomInt(), this.getRandomInt()]
+          }, {
+            label: 'Data One',
+            backgroundColor: '#f87979',
+            data: [this.getRandomInt(), this.getRandomInt()]
+          }
+        ]
+      }
+    },
+    getRandomInt () {
+      return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+    }
+  },
+  data () {
+    return {
+      datacollection: null,
+      dailySalesChart: {
+        data: {
+          labels: ['M', 'T', 'W', 'T', 'F', 'S', '555'],
+          series: [
+            [12, 17, 7, 17, 23, 18, 38]
+          ]
+        },
+        options: {
+          lineSmooth: this.$chartist.Interpolation.cardinal({
+            tension: 0
+          }),
+          low: 0,
+          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          chartPadding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0
+          }
+        }
+      },
+      dataCompletedTasksChart: {
+        data: {
+          labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
+          series: [
+            [230, 750, 450, 300, 280, 240, 200, 190]
+          ]
+        },
+        options: {
+          lineSmooth: this.$chartist.Interpolation.cardinal({
+            tension: 0
+          }),
+          low: 0,
+          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          chartPadding: {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0
+          }
+        }
+      },
+      emailsSubscriptionChart: {
+        data: {
+          labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+          series: [
+            [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+
+          ]
+        },
+        options: {
+          axisX: {
+            showGrid: false
+          },
+          low: 0,
+          high: 1000,
+          chartPadding: {
+            top: 0,
+            right: 5,
+            bottom: 0,
+            left: 0
+          }
+        },
+        responsiveOptions: [
+          ['screen and (max-width: 640px)', {
+            seriesBarDistance: 5,
+            axisX: {
+              labelInterpolationFnc: function (value) {
+                return value[0]
+              }
+            }
+          }]
+        ]
+      },
+      headers: [
+        {
+          sortable: false,
+          text: 'ID',
+          value: 'id'
+        },
+        {
+          sortable: false,
+          text: 'Name',
+          value: 'name'
+        },
+        {
+          sortable: false,
+          text: 'Salary',
+          value: 'salary',
+          align: 'right'
+        },
+        {
+          sortable: false,
+          text: 'Country',
+          value: 'country',
+          align: 'right'
+        },
+        {
+          sortable: false,
+          text: 'City',
+          value: 'city',
+          align: 'right'
+        }
+      ],
+      items: [
+        {
+          name: 'Dakota Rice',
+          country: 'Niger',
+          city: 'Oud-Tunrhout',
+          salary: '$35,738'
+        },
+        {
+          name: 'Minerva Hooper',
+          country: 'Curaçao',
+          city: 'Sinaai-Waas',
+          salary: '$23,738'
+        }, {
+          name: 'Sage Rodriguez',
+          country: 'Netherlands',
+          city: 'Overland Park',
+          salary: '$56,142'
+        }, {
+          name: 'Philip Chanley',
+          country: 'Korea, South',
+          city: 'Gloucester',
+          salary: '$38,735'
+        }, {
+          name: 'Doris Greene',
+          country: 'Malawi',
+          city: 'Feldkirchen in Kārnten',
+          salary: '$63,542'
+        }
+      ],
+      tabs: 0,
+      list: {
+        0: false,
+        1: false,
+        2: false
+      }
+    }
+  }
+  // methods: {
+  //   complete (index) {
+  //     this.list[index] = !this.list[index]
+  //   }
+  // }
+}
+</script>
