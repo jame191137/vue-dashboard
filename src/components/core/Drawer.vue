@@ -96,7 +96,7 @@ export default {
         to: '/dashboard2',
         icon: 'mdi-view-dashboard',
         text: 'Dashboard 2'
-      }
+      },
       // ,
       // {
       //   to: '/user-profile',
@@ -118,11 +118,11 @@ export default {
       //   icon: 'mdi-chart-bubble',
       //   text: 'Icons'
       // },
-      // {
-      //   to: '/maps',
-      //   icon: 'mdi-map-marker',
-      //   text: 'Maps'
-      // },
+      {
+        to: '/maps',
+        icon: 'mdi-map-marker',
+        text: 'Maps'
+      }
       // {
       //   to: '/notifications',
       //   icon: 'mdi-bell',
