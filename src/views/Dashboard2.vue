@@ -10,14 +10,11 @@
         sm12
         lg6
       >
-      <material-chart-card
-        :data="dataCompletedTasksChart.data"
-        :options="dataCompletedTasksChart.options"
-        color="green"
-        type="Line"
-      >
-        <h3 class="title font-weight-light">Graph 1</h3>
-      </material-chart-card>
+        <v-card>
+          <div id="app">
+            <MyChart />
+          </div>
+        </v-card>
       </v-flex>
       <v-flex
         md12
@@ -208,7 +205,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 <script>
+import MyChart from './MyChart.vue'
 export default {
+  name: 'app',
+  components: {
+    MyChart
+  },
   mounted () {
     this.fillData()
   },
