@@ -11,9 +11,7 @@
         lg6
       >
         <v-card>
-          <div id="app">
-            <MyChart />
-          </div>
+            <MyChart :width="100" :height="50"> </MyChart>
         </v-card>
       </v-flex>
       <v-flex
@@ -21,64 +19,37 @@
         sm12
         lg6
       >
-      <material-chart-card
-        :data="dataCompletedTasksChart.data"
-        :options="dataCompletedTasksChart.options"
-        color="green"
-        type="Line"
-      >
-        <h3 class="title font-weight-light">Graph 2</h3>
-      </material-chart-card>
+        <v-card>
+            <MyChart :width="100" :height="50"> </MyChart>
+        </v-card>
       </v-flex>
       <v-flex
+        v-for="i in button_data"
+        :key="i.id"
         sm6
         xs12
         md6
         lg2
       >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-        max-height="300"
-      >
-      <v-card-title>
-        <span class="title font-weight-light">Plug state</span>
-        </v-card-title>
-        <v-card-text class="headline font-weight-bold">
-           <v-layout justify-center row >
-             <v-btn  color="success">Success</v-btn>
-           </v-layout>
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
-      </v-card>
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg2
-      >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-        max-height="300"
-      >
-      <v-card-title>
-        <span class="title font-weight-light">Plug state 2</span>
-        </v-card-title>
-        <v-card-text class="headline font-weight-bold">
-           <v-layout justify-center row >
-             <v-btn  color="success">Success</v-btn>
-           </v-layout>
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
-      </v-card>
+        <v-card
+          class="mx-auto"
+          color="#ffffff"
+          max-width="400"
+          max-height="300"
+        >
+         <v-card-title>
+           <span class="title font-weight-light">{{i.name}}</span>
+           </v-card-title>
+           <v-card-text class="headline font-weight-bold">
+              <v-layout justify-center row >
+                <v-btn color="success" v-on:click="i.message = 'OFF'" v-if="i.message == 'ON' " >{{i.message}}</v-btn>
+                <v-btn color="error" v-on:click="i.message = 'ON'" v-if="i.message == 'OFF'" >{{i.message}}</v-btn>
+              </v-layout>
+           </v-card-text>
+            <v-divider light></v-divider>
+            <v-card-actions>
+           </v-card-actions>
+        </v-card>
       </v-flex>
       <v-flex
         sm6
@@ -174,30 +145,18 @@
         sm12
         lg6
       >
-        <material-chart-card
-            :data="emailsSubscriptionChart.data"
-            :options="emailsSubscriptionChart.options"
-            :responsive-options="emailsSubscriptionChart.responsiveOptions"
-            color="red"
-            type="Bar"
-        >
-          <h4 class="title font-weight-light">30 Days</h4>
-        </material-chart-card>
+      <v-card>
+          <DateChart :chart-data="datacollection" :width="100" :height="50"> </DateChart>
+      </v-card>
       </v-flex>
       <v-flex
         md12
         sm12
         lg6
       >
-        <material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
-        >
-          <h4 class="title font-weight-light">30 Days</h4>
-        </material-chart-card>
+      <v-card>
+          <DateChart :chart-data="datacollection2" :width="100" :height="50"> </DateChart>
+      </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -206,37 +165,64 @@
 <script src="https://unpkg.com/vue-chartjs/dist/vue-chartjs.min.js"></script>
 <script>
 import MyChart from './MyChart.vue'
+import DateChart from './DateChart.js'
 export default {
   name: 'app',
   components: {
-    MyChart
+    MyChart,
+    DateChart
   },
   mounted () {
     this.fillData()
   },
   methods: {
+    changeState: function(i) {
+      // this.button_data[i].message = 'OFF'
+      // if i.message == 'ON':
+      //   i.message = 'OFF'
+      // else
+      //   i.message = 'OFF'
+      // console.log(i)
+    },
     fillData () {
       this.datacollection = {
-        labels: [this.getRandomInt(), this.getRandomInt()],
+        labels: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
         datasets: [
           {
-            label: 'Data One',
+            label: 'Power',
             backgroundColor: '#f87979',
-            data: [this.getRandomInt(), this.getRandomInt()]
-          }, {
-            label: 'Data One',
+            data: [10,20,55,33,77,99,22]
+          }
+        ]
+      },
+      this.datacollection2 = {
+        labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+        datasets: [
+          {
+            label: 'Power',
             backgroundColor: '#f87979',
-            data: [this.getRandomInt(), this.getRandomInt()]
+            data: [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
           }
         ]
       }
-    },
-    getRandomInt () {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5
     }
   },
   data () {
     return {
+      button_data: [
+        {
+          id: 1,
+          name: 'Plug stage 1',
+          status: true,
+          message: 'ON'
+        },
+        {
+          id: 2,
+          name: 'Plug stage 2',
+          status: true,
+          message: 'ON'
+        }
+      ],
       datacollection: null,
       dailySalesChart: {
         data: {
@@ -267,6 +253,7 @@ export default {
           ]
         },
         options: {
+          maintainAspectRatio: false,
           lineSmooth: this.$chartist.Interpolation.cardinal({
             tension: 0
           }),
@@ -418,3 +405,9 @@ export default {
   // }
 }
 </script>
+<style>
+  .small {
+    max-width: 600px;
+    margin:  150px auto;
+  }
+</style>

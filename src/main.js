@@ -1,6 +1,8 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Router from 'vue-router'
 
 // Components
 import './components'
@@ -17,7 +19,21 @@ import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
 
-// Sync store with router
+
+Vue.use(Router)
+
+// import Login from './components/Login.vue'
+//
+// export default new Router({
+//   routes: [
+//     {
+//       path: '/login',
+//       name: 'Login',
+//       component: Login
+//     }
+//   ]
+// })
+
 sync(store, router)
 
 Vue.config.productionTip = false

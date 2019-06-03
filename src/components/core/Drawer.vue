@@ -1,6 +1,8 @@
 <template>
+
   <v-navigation-drawer
     id="app-drawer"
+    v-if="$route.name == 'Dashboard'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
     v-model="inputValue"
     app
     dark
@@ -86,49 +88,7 @@ import {
 export default {
   data: () => ({
     logo: './img/vuetifylogo.png',
-    links: [
-      {
-        to: '/dashboard',
-        icon: 'mdi-view-dashboard',
-        text: 'Dashboard 1'
-      },
-      {
-        to: '/dashboard2',
-        icon: 'mdi-view-dashboard',
-        text: 'Dashboard 2'
-      },
-      // ,
-      // {
-      //   to: '/user-profile',
-      //   icon: 'mdi-account',
-      //   text: 'User Profile'
-      // },
-      // {
-      //   to: '/table-list',
-      //   icon: 'mdi-clipboard-outline',
-      //   text: 'Table List'
-      // },
-      // {
-      //   to: '/typography',
-      //   icon: 'mdi-format-font',
-      //   text: 'Typography'
-      // },
-      // {
-      //   to: '/icons',
-      //   icon: 'mdi-chart-bubble',
-      //   text: 'Icons'
-      // },
-      {
-        to: '/maps',
-        icon: 'mdi-map-marker',
-        text: 'Maps'
-      }
-      // {
-      //   to: '/notifications',
-      //   icon: 'mdi-bell',
-      //   text: 'Notifications'
-      // }
-    ],
+    links: [],
     responsive: false
   }),
   computed: {
@@ -151,6 +111,49 @@ export default {
   mounted () {
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
+    this.links.push(
+          {
+            to: '/dashboard',
+            icon: 'mdi-view-dashboard',
+            text: 'Dashboard 1'
+          },
+          {
+            to: '/dashboard2',
+            icon: 'mdi-view-dashboard',
+            text: 'Dashboard 2'
+          },
+          // ,
+          // {
+          //   to: '/user-profile',
+          //   icon: 'mdi-account',
+          //   text: 'User Profile'
+          // },
+          {
+            to: '/historical',
+            icon: 'mdi-clipboard-outline',
+            text: 'Historical'
+          },
+          // {
+          //   to: '/typography',
+          //   icon: 'mdi-format-font',
+          //   text: 'Typography'
+          // },
+          // {
+          //   to: '/icons',
+          //   icon: 'mdi-chart-bubble',
+          //   text: 'Icons'
+          // },
+          {
+            to: '/maps',
+            icon: 'mdi-map-marker',
+            text: 'Maps'
+          }
+          // {
+          //   to: '/notifications',
+          //   icon: 'mdi-bell',
+          //   text: 'Notifications'
+          // })
+        )
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.onResponsiveInverted)

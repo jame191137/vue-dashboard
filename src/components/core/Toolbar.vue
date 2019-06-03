@@ -1,7 +1,8 @@
 <template>
+
   <v-toolbar
     id="core-toolbar"
-
+    v-if="$route.name == 'Dashboard'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
     flat
     prominent
     style="background: #eee;"
@@ -24,13 +25,13 @@
     </div>
 
     <v-spacer />
-    <!-- <v-toolbar-items>
+    <v-toolbar-items>
       <v-flex
         align-center
         layout
         py-2
       >
-        <v-text-field
+        <!-- <v-text-field
           v-if="responsiveInput"
           class="mr-4 mt-2 purple-input"
           label="Search..."
@@ -79,16 +80,29 @@
               </v-list-tile>
             </v-list>
           </v-card>
-        </v-menu>
+        </v-menu> -->
+        {{"example@mail.com"}}
         <router-link
           v-ripple
           class="toolbar-items"
           to="/user-profile"
         >
-          <v-icon color="tertiary">mdi-account</v-icon>
+          <!-- <v-icon color="tertiary">mdi-account</v-icon> -->
+          <!-- <v-icon>mdi-account</v-icon> -->
+          <!-- <v-btn icon ripple> -->
+            <v-icon color="tertiary">mdi-account-circle</v-icon>
+          <!-- </v-btn> -->
+        </router-link>
+        <router-link
+          v-ripple
+          class="toolbar-items"
+          to="/login"
+        >
+          <!-- <v-icon color="tertiary">mdi-account</v-icon> -->
+          <v-icon color="tertiary">mdi-exit-to-app</v-icon>
         </router-link>
       </v-flex>
-    </v-toolbar-items> -->
+    </v-toolbar-items>
   </v-toolbar>
 </template>
 
@@ -148,6 +162,7 @@ export default {
 </script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Varela+Round');
   #core-toolbar a {
     text-decoration: none;
   }

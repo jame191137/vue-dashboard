@@ -10,6 +10,11 @@ export default [
     view: 'Dashboard'
   },
   {
+    path: '/login',
+    // Relative to /src/views
+    view: 'Login'
+  },
+  {
     path: '/dashboard2',
     name: 'Dashboard2',
     view: 'Dashboard2'
@@ -20,8 +25,10 @@ export default [
     view: 'UserProfile'
   },
   {
-    path: '/table-list',
-    name: 'Table List',
+    path: '/historical',
+    name: 'Historical',
+    // path: '/table-list',
+    // name: 'Table List',
     view: 'TableList'
   },
   {
