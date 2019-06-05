@@ -18,7 +18,7 @@ import App from './App'
 import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
-
+// import Vuex from 'vuex';
 
 Vue.use(Router)
 

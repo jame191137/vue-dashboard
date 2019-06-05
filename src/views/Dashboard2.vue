@@ -4,14 +4,50 @@
     fluid
     grid-list-xl
   >
-    <v-layout wrap>
+    <v-layout justify-center wrap>
       <v-flex
         md12
         sm12
         lg6
+        text-xs-center
       >
         <v-card>
-            <MyChart :width="100" :height="50"> </MyChart>
+          <v-flex
+            md12
+            sm12
+            lg12
+          >
+            <v-card>
+              <v-card-text class="headline font-weight-bold">
+                 {{RT_PSum}} W
+              </v-card-text>
+            </v-card>
+          </v-flex>
+          <v-layout>
+            <v-flex
+              md12
+              sm12
+              lg6
+              ml-3
+            >
+              <v-card>
+                <v-card-text class="headline font-weight-bold">
+                   {{RT_ISum}} A
+                </v-card-text>
+              </v-card>
+            </v-flex>
+            <v-flex
+              md12
+              sm12
+              lg5
+            >
+              <v-card>
+                <v-card-text class="headline font-weight-bold">
+                   {{RT_VSum}} V
+                </v-card-text>
+              </v-card>
+            </v-flex>
+          </v-layout>
         </v-card>
       </v-flex>
       <v-flex
@@ -209,6 +245,9 @@ export default {
   },
   data () {
     return {
+      RT_PSum: 0,
+      RT_ISum: 0,
+      RT_VSum: 0,
       button_data: [
         {
           id: 1,
