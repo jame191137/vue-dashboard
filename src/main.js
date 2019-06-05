@@ -19,7 +19,11 @@ import i18n from '@/i18n'
 import router from '@/router'
 import store from '@/store'
 // import Vuex from 'vuex';
+import VueApexCharts from 'vue-apexcharts'
 
+Vue.use(VueApexCharts)
+
+Vue.component('apexchart', VueApexCharts)
 Vue.use(Router)
 
 // import Login from './components/Login.vue'

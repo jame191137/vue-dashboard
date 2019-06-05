@@ -32,7 +32,7 @@ export default {
   mounted () {
 
     this.renderChart({
-
+      
       datasets: [{
         label: 'power',
         // borderColor: 'rgb(99, 99, 132)',
