@@ -85,7 +85,7 @@ import axios from 'axios';
     },
     methods: {
       loginAPI(e) {
-        axios.post('http://localhost:8997/login', {
+        axios.post('http://35.186.149.130:8997/login', {
             // username: 'admins1',
             // password: '0000'
             username: this.usernametext,
@@ -115,7 +115,8 @@ import axios from 'axios';
         })
       },
       realtimeUsagenAPI(e) {
-        axios.get('http://localhost:8997/realtimeusage', {
+        axios.get('http://35.186.149.130:8997/realtimeusage', {
+        // axios.get('http://localhost:8997/realtimeusage', {
         })
         .then(response => {
             // this.databaseConfiguration = response.data;
