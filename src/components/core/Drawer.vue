@@ -112,11 +112,11 @@ export default {
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
     this.links.push(
-          {
-            to: '/dashboard',
-            icon: 'mdi-view-dashboard',
-            text: 'Dashboard 1'
-          },
+          // {
+          //   to: '/dashboard',
+          //   icon: 'mdi-view-dashboard',
+          //   text: 'Dashboard 1'
+          // },
           {
             to: '/dashboard2',
             icon: 'mdi-view-dashboard',
@@ -143,11 +143,11 @@ export default {
           //   icon: 'mdi-chart-bubble',
           //   text: 'Icons'
           // },
-          {
-            to: '/maps',
-            icon: 'mdi-map-marker',
-            text: 'Maps'
-          }
+          // {
+          //   to: '/maps',
+          //   icon: 'mdi-map-marker',
+          //   text: 'Maps'
+          // }
           // {
           //   to: '/notifications',
           //   icon: 'mdi-bell',

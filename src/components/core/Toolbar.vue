@@ -81,7 +81,7 @@
             </v-list>
           </v-card>
         </v-menu> -->
-        {{ this.$store.state.adminStatus }} {{ this.$store.state.adminStatus }}
+        {{ this.$store.state.email }} {{ "("}}{{this.$store.state.adminStatus}}{{")"}}
         <router-link
           v-ripple
           class="toolbar-items"

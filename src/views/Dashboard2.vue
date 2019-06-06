@@ -19,7 +19,7 @@
           >
             <v-card>
               <v-card-text class="headline font-weight-bold">
-                 {{RT_PSum}} W
+                 {{this.$store.state.RT_PSum}} W
               </v-card-text>
             </v-card>
           </v-flex>
@@ -32,7 +32,7 @@
             >
               <v-card>
                 <v-card-text class="headline font-weight-bold">
-                   {{RT_ISum}} A
+                   {{this.$store.state.RT_ISum}} A
                 </v-card-text>
               </v-card>
             </v-flex>
@@ -43,7 +43,7 @@
             >
               <v-card>
                 <v-card-text class="headline font-weight-bold">
-                   {{RT_VSum}} V
+                   {{this.$store.state.RT_VSum}} V
                 </v-card-text>
               </v-card>
             </v-flex>

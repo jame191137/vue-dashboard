@@ -23,7 +23,7 @@
         >
 
         <v-card-title class="justify-center">
-          <span class="headline font-weight-medium">CP Dashboard</span>
+          <span class="headline font-weight-medium">Lighting Monitoring System</span>
         </v-card-title>
 
           <v-flex xs12 sm10 lg10 ml-5>
@@ -31,7 +31,7 @@
                   v-model="usernametext"
                    prepend-icon="mdi-account"
                    :rules="[rules.required]"
-                   label="Email ผู้ใช้งาน"
+                   label="Email Address"
                    hint=""
                    persistent-hint
                  ></v-text-field>
@@ -49,15 +49,19 @@
             </v-flex>
 
           <v-layout justify-center>
-            <router-link
-              v-ripple
-              class="toolbar-items"
-              to="/dashboard2"
-            >
-              <v-btn v-on:click="loginAPI ()" outlined color="blue" >Login</v-btn>
-            </router-link>
+            <v-btn v-on:click="loginAPI ()" outlined color="blue" >Login</v-btn>
           </v-layout>
-
+          <v-layout justify-center>
+            <v-flex xs12 sm10 lg10 ml-0>
+              <router-link
+                v-ripple
+                class=""
+                to=""
+              >
+                <p class="text-lg-center">Forgot Password ?</p>
+                </router-link>
+            </v-flex>
+          </v-layout>
           </v-container>
         </v-card>
     </v-flex>
@@ -82,29 +86,35 @@ import axios from 'axios';
     methods: {
       loginAPI(e) {
         axios.post('http://localhost:8997/login', {
-            username: 'admins1',
-            password: '0000'
-            // username: this.usernametext,
-            // password: this.passwordtext
+            // username: 'admins1',
+            // password: '0000'
+            username: this.usernametext,
+            password: this.passwordtext
         })
         .then(response => {
             // this.databaseConfiguration = response.data;
-            if (response.data.UPrivilege == 0) {
-
-              this.$store.state.adminStatus = 'Admin'
+            console.log(response.data.status)
+            if (response.data.status == 'fail') {
+              alert('wrong user')
             } else {
-              this.$store.state.adminStatus = 'User'
+              if (response.data.UPrivilege == 0) {
+                this.$store.state.adminStatus = 'Admin'
+              } else {
+                this.$store.state.adminStatus = 'User'
+              }
+              this.$store.state.email = this.usernametext
+              console.log(this.$store.state.adminStatus)
+              this.realtimeUsagenAPI()
+              this.$router.push('/Dashboard2')
             }
-            this.$store.state.adminStatus = this.usernametext
-            console.log(this.$store.state.adminStatus)
-            // console.log(response.data.UPrivilege)
         })
         .catch(error =>{
             // this.errors.push(error);
+            alert('error')
             console.log(error);
         })
       },
-      logirealtimeUsagenAPI(e) {
+      realtimeUsagenAPI(e) {
         axios.get('http://localhost:8997/realtimeusage', {
         })
         .then(response => {
