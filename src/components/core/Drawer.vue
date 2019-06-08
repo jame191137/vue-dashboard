@@ -120,7 +120,7 @@ export default {
           {
             to: '/dashboard2',
             icon: 'mdi-view-dashboard',
-            text: 'Dashboard 2'
+            text: 'Dashboard Zone 1'
           },
           // ,
           // {

@@ -20,7 +20,7 @@
         >
           <v-icon>mdi-view-list</v-icon>
         </v-btn>
-        {{ title }}
+        {{ "Dashboard Zone" }}
       </v-toolbar-title>
     </div>
 

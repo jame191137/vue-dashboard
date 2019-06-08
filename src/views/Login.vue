@@ -71,6 +71,10 @@
 <script>
 import axios from 'axios';
   export default {
+    mounted () {
+      // this.$store.state.url_sev = 'http://localhost:8997'
+      this.$store.state.url_sev = 'http://35.186.149.130:8997'
+    },
     data () {
       return {
         show2: true,
@@ -86,14 +90,13 @@ import axios from 'axios';
     methods: {
       loginAPI(e) {
         // axios.post('http://localhost:8997/login', {
-        axios.post('http://35.186.149.130:8997/login', {
+        axios.post(this.$store.state.url_sev+'/login', {
             // username: 'admins1',
             // password: '0000'
             username: this.usernametext,
             password: this.passwordtext
         })
         .then(response => {
-            // this.databaseConfiguration = response.data;
             console.log(response.data.status)
             if (response.data.status == 'fail') {
               alert('wrong user')
@@ -105,35 +108,16 @@ import axios from 'axios';
               }
               this.$store.state.email = this.usernametext
               console.log(this.$store.state.adminStatus)
-              this.realtimeUsagenAPI()
+              // this.realtimeUsagenAPI()
               this.$router.push('/Dashboard2')
             }
         })
         .catch(error =>{
-            // this.errors.push(error);
             alert('error')
             console.log(error);
         })
-      },
-      realtimeUsagenAPI(e) {
-        // axios.get('http://localhost:8997/realtimeusage', {
-        axios.get('http://35.186.149.130:8997/realtimeusage', {
-        })
-        .then(response => {
-            // this.databaseConfiguration = response.data;
-            // if (response.data.UPrivilege == 0) {
-            console.log(response.data)
-            this.$store.state.RT_PSum = response.data.RT_PSum,
-            this.$store.state.RT_ISum = response.data.RT_ISum,
-            this.$store.state.RT_VSum = response.data.RT_VSum,
-            console.log(this.$store.state.RT_PSum)
-            // console.log(response.data.UPrivilege)
-        })
-        .catch(error =>{
-            // this.errors.push(error);
-            console.log(error);
-        })
-      },
+      }
+
     }
   }
 </script>
