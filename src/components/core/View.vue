@@ -12,7 +12,7 @@
 export default {
   metaInfo () {
     return {
-      title: 'Dashboard'
+      title: 'Lighting Monitoring System'
     }
   }
 }

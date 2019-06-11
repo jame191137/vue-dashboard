@@ -4,65 +4,60 @@
     fluid
     grid-list-xl
   >
-    <v-layout justify-center wrap>
-      <v-flex
-        md12
-        sm12
-        lg6
-        text-xs-center
-      >
-        <v-card height="100%">
-          <v-card-title>
-            <span class="title font-weight-bold">{{"Realtime Usage"}}</span>
-          </v-card-title>
-           <v-divider light></v-divider>
+    <v-layout wrap>
 
-          <v-flex
-            md12
-            sm12
-            lg12
-          >
-            <v-card>
-              <v-card-text class="headline font-weight-bold">
-                 {{this.$store.state.RT_PSum}} W
-              </v-card-text>
-            </v-card>
-          </v-flex>
-          <!-- <v-layout warp> -->
-            <v-flex
-              md12
-              sm12
-              lg12
-              ml-3
-            >
-              <v-card>
-                <v-card-text class="headline font-weight-bold">
-                   {{this.$store.state.RT_ISum}} A
-                </v-card-text>
-              </v-card>
-            </v-flex>
-            <v-flex
-              md12
-              sm12
-              lg12
-            >
-              <v-card>
-                <v-card-text class="headline font-weight-bold">
-                   {{this.$store.state.RT_VSum}} V
-                </v-card-text>
-              </v-card>
-            </v-flex>
-          <!-- </v-layout> -->
+        <v-flex
+          md12
+          sm12
+          lg4
+        >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+            <div class="varela-font boxhead">REALTIME USAGE ( Watts )</div>
+            <div class="varela-font boxtitle">{{this.$store.state.RT_PSum}} W</div>
+          </v-card-text>
+        </v-card>
+        </v-flex>
+
+        <v-flex
+          md12
+          sm12
+          lg4
+        >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+            <div class="varela-font boxhead">REALTIME USAGE ( Amps )</div>
+            <div class="varela-font boxtitle">{{this.$store.state.RT_ISum}} A</div>
+          </v-card-text>
+        </v-card>
+        </v-flex>
+
+        <v-flex
+          md12
+          sm12
+          lg4
+        >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+            <div class="varela-font boxhead">REALTIME USAGE ( Volts )</div>
+            <div class="varela-font boxtitle">{{this.$store.state.RT_VSum}} V</div>
+          </v-card-text>
         </v-card>
       </v-flex>
       <v-flex
         md12
         sm12
-        lg6
+        lg12
       >
         <v-card>
           <v-card-title>
-            <span class="title font-weight-bold">{{"Realtime Trend"}}</span>
+            <span class="varela-font boxhead">{{"Realtime Trend"}}</span>
           </v-card-title>
            <v-divider light></v-divider>
           <!-- <div> -->
@@ -70,145 +65,116 @@
           <!-- </div> -->
         </v-card>
       </v-flex>
+
       <v-flex
         v-for="i in button_data"
         :key="i.id"
-        sm6
+        sm12
         xs12
-        md6
-        lg2
+        md3
+        lg3
       >
-        <v-card
-          class="mx-auto"
-          color="#ffffff"
-          max-width="400"
-          max-height="300"
-        >
-         <v-card-title>
-           <span class="title font-weight-light">{{i.name}}</span>
-           </v-card-title>
-           <v-card-text class="headline font-weight-bold">
-              <v-layout justify-center row >
-                <v-btn color="success" v-on:click="i.message = 'OFF'" v-if="i.message == 'ON' " >{{i.message}}</v-btn>
-                <v-btn color="error" v-on:click="i.message = 'ON'" v-if="i.message == 'OFF'" >{{i.message}}</v-btn>
-              </v-layout>
-           </v-card-text>
-            <v-divider light></v-divider>
-            <v-card-actions>
-           </v-card-actions>
+        <v-card class="border-primary" >
+          <v-card-text>
+          <div class="varela-font boxhead">{{i.name}}</div>
+             <!--
+
+               <v-btn color="success" v-on:click="i.message = 'OFF'" v-if="i.message == 'ON' " >{{i.message}}</v-btn>
+               <v-btn color="error" v-on:click="i.message = 'ON'" v-if="i.message == 'OFF'" >{{i.message}}</v-btn>
+            -->
+             <v-switch
+                 v-model="i.model"
+                :label="`state: ${i.switch_state}`"
+                 color="success"
+                 hide-details
+               ></v-switch>
+            </v-card-text>
         </v-card>
       </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg2
-      >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Up time</span>
-        </v-card-title>
-        <v-card-text class="headline font-weight-bold">
-           {{this.CB_01_Uptime}}
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
-      </v-card>
-      </v-flex>
-      <v-flex
-        sm6
-        xs12
-        md6
-        lg2
-      >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Total today</span>
-        </v-card-title>
 
-        <v-card-text class="headline font-weight-bold">
-           {{this.RT_kWh_Today}} kWH
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
-      </v-card>
-      </v-flex>
       <v-flex
-        sm6
+        v-for="i in uptime_data"
+        :key="i.id"
+        sm12
         xs12
-        md6
-        lg2
+        md3
+        lg3
       >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Daily avh</span>
-        </v-card-title>
-        <v-card-text class="headline font-weight-bold">
-            {{this.RT_kWh_Daily_Avg}} kWH
-        </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
-      </v-card>
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+          <div class="varela-font boxhead">{{i.name}}</div>
+
+            <div class="varela-font boxtitle">{{i.value}}</div>
+          </v-card-text>
+        </v-card>
+
       </v-flex>
+
+
       <v-flex
-        sm6
-        xs12
-        md6
-        lg2
+        md12
+        sm12
+        md3
+        lg3
       >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Total this month</span>
-        </v-card-title>
-        <v-card-text class="headline font-weight-bold">
-           {{this.RT_kWh_Monthly}} kWH
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Total today</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Today}} kWH</div>
         </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
       </v-card>
       </v-flex>
+
       <v-flex
-        sm6
-        xs12
-        md6
-        lg2
+        md12
+        sm12
+        md3
+        lg3
       >
-      <v-card
-        class="mx-auto"
-        color="#ffffff"
-        max-width="400"
-      >
-        <v-card-title>
-          <span class="title font-weight-light">Monthly avh</span>
-        </v-card-title>
-        <v-card-text class="headline font-weight-bold">
-           {{this.RT_kWh_Monthly_Avg}} kWH
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Daily avh</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Daily_Avg}} kWH</div>
         </v-card-text>
-         <v-divider light></v-divider>
-         <v-card-actions>
-        </v-card-actions>
       </v-card>
       </v-flex>
+
+      <v-flex
+        md12
+        sm12
+        md3
+        lg3
+      >
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Total this month</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly}} kWH</div>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        md12
+        sm12
+        md3
+        lg3
+      >
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Monthly avh</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly_Avg}} kWH</div>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+
       <v-flex
         md12
         sm12
@@ -255,7 +221,7 @@ import axios from 'axios';
 import ApexCharts from 'apexcharts'
 export default {
   mounted () {
-    // this.$store.state.url_sev = 'http://localhost:8997'
+    this.$store.state.url_sev = 'http://localhost:8997'
     this.$store.state.url_sev = 'http://35.186.149.130:8997'
     setInterval(() => { this.updateChart() }, 1000)
     setInterval(() => { this.realtimeUsageAPI() }, 1000)
@@ -264,6 +230,23 @@ export default {
     setInterval(() => { this.getSumYear() }, 1000)
     this.getdataRT()
     this.getCBUptime()
+  },
+  watch: {
+    switch1(newValue){
+      if (this.button_data.switch_state == 'ON') {
+        this.button_data.switch_state = 'OFF'
+      } else {
+        this.button_data.switch_state = 'ON'
+      }
+    },
+    switch2(newValue){
+      if (this.button_data.switch_state == 'ON') {
+        this.button_data.switch_state = 'OFF'
+      } else {
+        this.button_data.switch_state = 'ON'
+      }
+    },
+
   },
   methods: {
     realtimeUsageAPI(e) {
@@ -345,6 +328,8 @@ export default {
       .then(response => {
           console.log(response.data)
           this.CB_01_Uptime = response.data.CB_Uptime[0].CB_01_Uptime
+          uptime_data[0].value = response.data.CB_Uptime[0].CB_01_Uptime
+          uptime_data[1].value = response.data.CB_Uptime[0].CB_01_Uptime
       })
       .catch(error =>{
           console.log(error);
@@ -354,7 +339,8 @@ export default {
       const newData = this.$store.state.Psum
       this.chartOptions = {
         chart: {
-            width: "100%"
+            width: "100%",
+            height: 200
           },
           xaxis: {
             categories: this.$store.state.date_Psum
@@ -398,6 +384,7 @@ export default {
   },
   data () {
     return {
+      switch1: true,
       RT_kWh_Today: '',
       RT_kWh_Daily_Avg: '',
       RT_kWh_Monthly: '',
@@ -452,25 +439,64 @@ export default {
         {
           id: 1,
           name: 'Plug stage 1',
-          status: true,
+          model: 'switch1',
+          switch_state: 'ON',
           message: 'ON'
         }
-        // ,
-        // {
-        //   id: 2,
-        //   name: 'Plug stage 2',
-        //   status: true,
-        //   message: 'ON'
-        // }
-    ]
+        ,
+        {
+          id: 2,
+          name: 'Plug stage 2',
+          model: 'switch2',
+          switch_state: 'ON',
+          message: 'ON'
+        }
+      ],
+      uptime_data: [
+        {
+          id: 1,
+          name: 'Uptime 1',
+          value: ' h m'
+        },
+        {
+          id: 2,
+          name: 'Uptime 2',
+          value: ' h m'
+        }
+      ]
 
     }
   }
 }
 </script>
 <style>
-  .small {
-    max-width: 600px;
-    margin:  150px auto;
-  }
+/* @import url('//fonts.googleapis.com/css?family=Nunito'); */
+@import url('//fonts.googleapis.com/css?family=Varela+Round&display=swap');
+
+.border-primary {
+    border-left: .25rem solid #4e73df !important;
+}
+.varela-font{
+  /* font-family: Nunito; line-height: 38px; */
+  font-family: 'Varela Round', sans-serif;
+  /* font-family: 'Nunito', sans-serif; */
+}
+.boxhead {
+  color: #4e73df;
+  font-size: 15px;
+  font-weight: 900 !important;
+  /* letter-spacing: -1px; */
+  text-transform: uppercase !important;
+}
+.boxtitle {
+  color: #464854;
+  font-weight: 500 !important;
+  font-size: 25px;
+  /* letter-spacing: -1px; */
+  text-transform: uppercase !important;
+}
+.small {
+  max-width: 600px;
+  margin:  150px auto;
+}
 </style>

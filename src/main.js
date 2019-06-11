@@ -20,6 +20,9 @@ import router from '@/router'
 import store from '@/store'
 // import Vuex from 'vuex';
 import VueApexCharts from 'vue-apexcharts'
+import VueCookies from 'vue-cookies'
+
+Vue.use(VueCookies)
 
 Vue.use(VueApexCharts)
 

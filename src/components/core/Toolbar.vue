@@ -5,9 +5,9 @@
     v-if="$route.name == 'Dashboard'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
     flat
     prominent
-    style="background: #eee;"
+    style="background: #ffffff;"
   >
-    <div class="v-toolbar-title">
+    <!-- <div class="v-toolbar-title">
       <v-toolbar-title
         class="tertiary--text font-weight-light"
       >
@@ -22,7 +22,7 @@
         </v-btn>
         {{ "Dashboard Zone" }}
       </v-toolbar-title>
-    </div>
+    </div> -->
 
     <v-spacer />
     <v-toolbar-items>
@@ -81,7 +81,7 @@
             </v-list>
           </v-card>
         </v-menu> -->
-        {{ this.$store.state.email }} {{ "("}}{{this.$store.state.adminStatus}}{{")"}}
+        {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}}
         <router-link
           v-ripple
           class="toolbar-items"
@@ -93,27 +93,29 @@
             <v-icon color="tertiary">mdi-account-circle</v-icon>
           <!-- </v-btn> -->
         </router-link>
-        <router-link
+        <!-- <router-link
           v-ripple
           class="toolbar-items"
           to="/login"
         >
-          <!-- <v-icon color="tertiary">mdi-account</v-icon> -->
+
+        </router-link> -->
+        <v-btn v-on:click="logout ()" flat>
           <v-icon color="tertiary">mdi-exit-to-app</v-icon>
-        </router-link>
+        </v-btn>
       </v-flex>
     </v-toolbar-items>
   </v-toolbar>
 </template>
-
 <script>
-
 import {
   mapMutations
 } from 'vuex'
 
 export default {
   data: () => ({
+    email: localStorage.email,
+    adminStatus: localStorage.adminStatus,
     notifications: [
       'Mike, John responded to your email',
       'You have 5 new tasks',
@@ -141,6 +143,10 @@ export default {
   },
 
   methods: {
+    logout () {
+      localStorage.clear()
+      this.$router.push('/login')
+    },
     ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
     onClickBtn () {
       this.setDrawer(!this.$store.state.app.drawer)
@@ -165,5 +171,8 @@ export default {
   @import url('https://fonts.googleapis.com/css?family=Varela+Round');
   #core-toolbar a {
     text-decoration: none;
+    .st{
+
+    }
   }
 </style>

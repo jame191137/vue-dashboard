@@ -1,6 +1,7 @@
 // https://vuex.vuejs.org/en/state.html
 
 const data = {
+  test: '',
   email: '',
   adminStatus: '',
   RT_PSum: 0,

@@ -172,7 +172,11 @@ export default {
 </script>
 
 <style lang="scss">
+.v-navigation-drawer .v-list {
+    background: #4e73df !important;
+}
   #app-drawer {
+
     .v-list__tile {
       border-radius: 4px;
 

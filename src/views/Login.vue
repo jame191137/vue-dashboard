@@ -72,8 +72,8 @@
 import axios from 'axios';
   export default {
     mounted () {
-      // this.$store.state.url_sev = 'http://localhost:8997'
-      this.$store.state.url_sev = 'http://35.186.149.130:8997'
+      this.$store.state.url_sev = 'http://localhost:8997'
+      // this.$store.state.url_sev = 'http://35.186.149.130:8997'
     },
     data () {
       return {
@@ -91,10 +91,10 @@ import axios from 'axios';
       loginAPI(e) {
         // axios.post('http://localhost:8997/login', {
         axios.post(this.$store.state.url_sev+'/login', {
-            // username: 'admins1',
-            // password: '0000'
-            username: this.usernametext,
-            password: this.passwordtext
+            username: 'admins1',
+            password: '0000'
+            // username: this.usernametext,
+            // password: this.passwordtext
         })
         .then(response => {
             console.log(response.data.status)
@@ -102,13 +102,15 @@ import axios from 'axios';
               alert('wrong user')
             } else {
               if (response.data.UPrivilege == 0) {
-                this.$store.state.adminStatus = 'Admin'
+                // this.$cookies.set('adminStatus','Admin')
+                localStorage.adminStatus = 'Admin'
               } else {
-                this.$store.state.adminStatus = 'User'
+                // this.$cookies.set('adminStatus','User')
+                localStorage.adminStatus = 'User'
               }
-              this.$store.state.email = this.usernametext
-              console.log(this.$store.state.adminStatus)
-              // this.realtimeUsagenAPI()
+
+              localStorage.email = this.usernametext
+              localStorage.checklogin = true
               this.$router.push('/Dashboard2')
             }
         })
