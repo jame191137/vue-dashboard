@@ -4,29 +4,54 @@
     fluid
     grid-list-xl
   >
-  <v-layout justify-center mt-5>
+  <v-layout>
     <v-flex
       sm12
-      xs8
-      md8
-      lg5
+      xs12
+      md12
+      lg12
+      xl9
+    >
+    <v-card height="170%" class="justify-center">
+      <v-layout justify-center wrap align-center>
+      <v-flex
+        sm12
+        xs12
+        md6
+        lg6
+        xl6
+
+      >
+      <v-img
+        src="https://upload.wikimedia.org/wikipedia/th/3/39/CPALL2015.png"
+        width="100%"
+        contain
+
+      />
+    </v-flex>
+    <v-flex
+      sm12
+      xs12
+      md6
+      lg6
+      xl6
+      pt-5
+
     >
       <v-card
-
-        class="mx-auto"
+        flat
         color="white"
-        max-width="1000"
       >
-        <v-container
+        <!-- <v-container
           fluid
           grid-list-md
-        >
+        > -->
 
         <v-card-title class="justify-center">
-          <span class="headline font-weight-medium">Lighting Monitoring System</span>
+          <span class="headline font-weight-medium mr-5">Lighting Monitoring System</span>
         </v-card-title>
 
-          <v-flex xs12 sm10 lg10 ml-5>
+          <v-flex xs12 sm10 lg10>
                  <v-text-field
                   v-model="usernametext"
                    prepend-icon="mdi-account"
@@ -37,7 +62,7 @@
                  ></v-text-field>
           </v-flex>
 
-            <v-flex xs12 sm10 lg10 ml-5>
+            <v-flex xs12 sm10 lg10>
               <v-text-field
                   v-model="passwordtext"
                   prepend-icon="mdi-lock"
@@ -62,13 +87,17 @@
                 </router-link>
             </v-flex>
           </v-layout>
-          </v-container>
+          <!-- </v-container> -->
         </v-card>
-    </v-flex>
+      </v-flex>
+    </v-layout>
+  </v-card>
+</v-flex>
   </v-layout>
 </v-container>
 </template>
 <script>
+// const events = new Vue({})
 import axios from 'axios';
   export default {
     mounted () {
@@ -110,7 +139,13 @@ import axios from 'axios';
               }
 
               localStorage.email = this.usernametext
+
+              localStorage.SiteID = response.data.SiteID
+
+              // alert(localStorage.SiteID)
               localStorage.checklogin = true
+              // this.$forceUpdate()
+              // this.$emit('logined')
               this.$router.push('/Dashboard2')
             }
         })
@@ -119,6 +154,7 @@ import axios from 'axios';
             console.log(error);
         })
       }
+
 
     }
   }

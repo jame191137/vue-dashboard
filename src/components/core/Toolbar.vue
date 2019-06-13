@@ -1,8 +1,9 @@
 <template>
-
+<!-- v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' " -->
   <v-toolbar
     id="core-toolbar"
-    v-if="$route.name == 'Dashboard'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
+
+    v-if="$route.name != 'Login'"
     flat
     prominent
     style="background: #ffffff;"
@@ -111,10 +112,10 @@
 import {
   mapMutations
 } from 'vuex'
-
+// const events = new Vue({})
 export default {
   data: () => ({
-    email: localStorage.email,
+    email: '',
     adminStatus: localStorage.adminStatus,
     notifications: [
       'Mike, John responded to your email',
@@ -131,10 +132,20 @@ export default {
   watch: {
     '$route' (val) {
       this.title = val.name
+      this.email = localStorage.email
+      this.adminStatus = localStorage.adminStatus
     }
   },
-
+  // watch : {
+  //   email:function(val) {
+  //      this.kilometers = val;
+  //      this.meters = val * 1000;
+  //   }
+  // },
   mounted () {
+    // console.log(localStorage.email)
+    // this.email = localStorage.email
+    // alert('ss')
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
   },

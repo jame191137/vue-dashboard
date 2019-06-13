@@ -2,7 +2,7 @@
 
   <v-navigation-drawer
     id="app-drawer"
-    v-if="$route.name == 'Dashboard'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
+    v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
     v-model="inputValue"
     app
     dark
@@ -21,18 +21,19 @@
         tag="v-list"
         column
       >
+
         <v-list-tile avatar>
           <v-list-tile-avatar
             color="white"
           >
-            <!-- <v-img
-              :src="logo"
+            <v-img
+              src="https://upload.wikimedia.org/wikipedia/th/3/39/CPALL2015.png"
               height="34"
               contain
-            /> -->
+            />
           </v-list-tile-avatar>
           <v-list-tile-title class="title">
-            Monitoring
+            Lighting Monitoring
           </v-list-tile-title>
         </v-list-tile>
         <v-divider/>
@@ -52,6 +53,7 @@
           :active-class="color"
           avatar
           class="v-list-item"
+          @click="sendZone(link.id)"
         >
           <v-list-tile-action>
             <v-icon>{{ link.icon }}</v-icon>
@@ -59,6 +61,7 @@
           <v-list-tile-title
             v-text="link.text"
           />
+
         </v-list-tile>
         <!-- <v-list-tile
           disabled
@@ -84,10 +87,14 @@ import {
   mapMutations,
   mapState
 } from 'vuex'
-
+import axios from 'axios';
 export default {
   data: () => ({
+    // this.$store.state.url_sev = 'http://localhost:8997'
+    url_sev: 'http://localhost:8997',
+    zone_data: {},
     logo: './img/vuetifylogo.png',
+    logo_cp: 'images/logo_cp.png',
     links: [],
     responsive: false
   }),
@@ -108,7 +115,13 @@ export default {
       return `${this.$store.state.app.sidebarBackgroundColor}, ${this.$store.state.app.sidebarBackgroundColor}`
     }
   },
+  ready() {
+    this.$on('logined', () => {
+      this.getzone()
+    });
+  },
   mounted () {
+
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
     this.links.push(
@@ -128,11 +141,12 @@ export default {
           //   icon: 'mdi-account',
           //   text: 'User Profile'
           // },
-          {
-            to: '/historical',
-            icon: 'mdi-clipboard-outline',
-            text: 'Historical'
-          },
+          // {
+          //   id: '5',
+          //   to: '/historical',
+          //   icon: 'mdi-clipboard-outline',
+          //   text: 'Historical'
+          // },
           // {
           //   to: '/typography',
           //   icon: 'mdi-format-font',
@@ -158,6 +172,12 @@ export default {
   beforeDestroy () {
     window.removeEventListener('resize', this.onResponsiveInverted)
   },
+  watch: {
+    '$route' (val) {
+      getzone()
+      this.email = localStorage.email
+    }
+  },
   methods: {
     ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
     onResponsiveInverted () {
@@ -166,6 +186,30 @@ export default {
       } else {
         this.responsive = false
       }
+    },
+    getzone(e) {
+      axios.post(this.url_sev+'/getzone', {
+          SiteID: localStorage.SiteID
+      })
+      .then(response => {
+          console.log(response.data.status)
+          if (response.data.status == 'fail') {
+            alert('get zone fail')
+          } else {
+
+            // this.links = response.data.zone_data
+            console.log('s')
+
+          }
+      })
+      .catch(error =>{
+          alert('error2')
+          console.log(error);
+      })
+    },
+    sendZone (ZoneID){
+      // alert(ZoneID)
+      localStorage.ZoneID = ZoneID
     }
   }
 }

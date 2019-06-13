@@ -70,21 +70,16 @@
         v-for="i in button_data"
         :key="i.id"
         sm12
-        xs12
-        md3
+        md6
         lg3
       >
         <v-card class="border-primary" >
           <v-card-text>
           <div class="varela-font boxhead">{{i.name}}</div>
-             <!--
-
-               <v-btn color="success" v-on:click="i.message = 'OFF'" v-if="i.message == 'ON' " >{{i.message}}</v-btn>
-               <v-btn color="error" v-on:click="i.message = 'ON'" v-if="i.message == 'OFF'" >{{i.message}}</v-btn>
-            -->
+            <!-- :label="`state: ${i.switch_state}`" -->
              <v-switch
                  v-model="i.model"
-                :label="`state: ${i.switch_state}`"
+
                  color="success"
                  hide-details
                ></v-switch>
@@ -96,8 +91,7 @@
         v-for="i in uptime_data"
         :key="i.id"
         sm12
-        xs12
-        md3
+        md6
         lg3
       >
         <v-card class="border-primary" height="100%">
@@ -112,9 +106,8 @@
 
 
       <v-flex
-        md12
         sm12
-        md3
+        md6
         lg3
       >
       <v-card class="border-primary" height="100%">
@@ -128,9 +121,8 @@
       </v-flex>
 
       <v-flex
-        md12
         sm12
-        md3
+        md6
         lg3
       >
       <v-card class="border-primary" height="100%">
@@ -144,9 +136,8 @@
       </v-flex>
 
       <v-flex
-        md12
         sm12
-        md3
+        md6
         lg3
       >
       <v-card class="border-primary" height="100%">
@@ -160,9 +151,8 @@
       </v-flex>
 
       <v-flex
-        md12
         sm12
-        md3
+        md6
         lg3
       >
       <v-card class="border-primary" height="100%">
@@ -176,8 +166,9 @@
       </v-flex>
 
       <v-flex
-        md12
         sm12
+        xs12
+        md12
         lg8
       >
       <!-- <v-card>
@@ -185,7 +176,7 @@
       </v-card> -->
       <v-card>
         <v-card-title>
-          <span class="title font-weight-bold">{{"Last 30 days (kWH)"}}</span>
+          <span class="varela-font boxhead">{{"Last 30 days (kWH)"}}</span>
         </v-card-title>
          <v-divider light></v-divider>
         <div>
@@ -201,7 +192,7 @@
       >
       <v-card>
         <v-card-title>
-          <span class="title font-weight-bold">{{"Last 12 Months (kHW)"}}</span>
+          <span class="varela-font boxhead">{{"Last 12 Months (kHW)"}}</span>
         </v-card-title>
          <v-divider light></v-divider>
         <div>
@@ -222,12 +213,14 @@ import ApexCharts from 'apexcharts'
 export default {
   mounted () {
     this.$store.state.url_sev = 'http://localhost:8997'
-    this.$store.state.url_sev = 'http://35.186.149.130:8997'
-    setInterval(() => { this.updateChart() }, 1000)
-    setInterval(() => { this.realtimeUsageAPI() }, 1000)
-    setInterval(() => { this.getLogPsum() }, 1000)
-    setInterval(() => { this.getSumDay() }, 1000)
-    setInterval(() => { this.getSumYear() }, 1000)
+    // this.$store.state.url_sev = 'http://35.186.149.130:8997'
+    // setInterval(() => { this.updateChart() }, 60000)
+    setInterval(() => { this.realtimeUsageAPI() }, 60000)
+    setInterval(() => { this.getLogPsum() }, 60000)
+    this.realtimeUsageAPI()
+    this.getLogPsum()
+    this.getSumDay()
+    this.getSumYear()
     this.getdataRT()
     this.getCBUptime()
   },
@@ -250,7 +243,8 @@ export default {
   },
   methods: {
     realtimeUsageAPI(e) {
-      axios.get(this.$store.state.url_sev+'/realtimeusage', {
+      axios.post(this.$store.state.url_sev+'/realtimeusage', {
+          ZoneID: '1'
       })
       .then(response => {
           // this.databaseConfiguration = response.data;
@@ -264,11 +258,12 @@ export default {
       })
       .catch(error =>{
           // this.errors.push(error);
-          console.log(error);
+          console.log(error)
       })
     },
     getLogPsum(e) {
-      axios.get(this.$store.state.url_sev+'/logpsum', {
+      axios.post(this.$store.state.url_sev+'/logpsum', {
+        MeterID: '1'
       })
       .then(response => {
           console.log(response.data)
@@ -281,10 +276,11 @@ export default {
       })
     },
     getSumDay(e) {
-      axios.get(this.$store.state.url_sev+'/sumday', {
+      axios.post(this.$store.state.url_sev+'/sumday', {
+        ZoneID: '1'
       })
       .then(response => {
-          console.log(response.data)
+          // console.log(response.data)
           this.$store.state.diff_dayInMonth = response.data.diff
           this.$store.state.dayInMonth = response.data.dayInMonth
           this.updateChartDaySum()
@@ -294,10 +290,11 @@ export default {
       })
     },
     getSumYear(e) {
-      axios.get(this.$store.state.url_sev+'/sumyear', {
+      axios.post(this.$store.state.url_sev+'/sumyear', {
+        ZoneID: '1'
       })
       .then(response => {
-          console.log(response.data)
+          // console.log(response.data)
           this.$store.state.diff_monthInYear= response.data.diff
           this.$store.state.monthInYear = response.data.monthInYear
           this.updateChartYearSum()
@@ -311,7 +308,7 @@ export default {
           ZoneID: '1'
       })
       .then(response => {
-          console.log(response.data)
+          // console.log(response.data)
           this.RT_kWh_Today = response.data.RT_kWh_Today
           this.RT_kWh_Daily_Avg = response.data.RT_kWh_Daily_Avg
           this.RT_kWh_Monthly = response.data.RT_kWh_Monthly
@@ -326,10 +323,12 @@ export default {
           ZoneID: '1'
       })
       .then(response => {
-          console.log(response.data)
-          this.CB_01_Uptime = response.data.CB_Uptime[0].CB_01_Uptime
-          uptime_data[0].value = response.data.CB_Uptime[0].CB_01_Uptime
-          uptime_data[1].value = response.data.CB_Uptime[0].CB_01_Uptime
+          // console.log(response.data)
+          this.uptime_data = response.data.CB_Uptime
+          // console.log(this.uptime_data[0])
+          // this.CB_01_Uptime = response.data.CB_Uptime[0].CB_01_Uptime
+          // uptime_data[0].value = response.data.CB_Uptime[0].CB_01_Uptime
+          // uptime_data[1].value = response.data.CB_Uptime[0].CB_01_Uptime
       })
       .catch(error =>{
           console.log(error);
@@ -343,10 +342,12 @@ export default {
             height: 200
           },
           xaxis: {
-            categories: this.$store.state.date_Psum
+            categories: this.$store.state.date_Psum,
+            categories2: this.$store.state.date_Psum
           }
       }
       this.series = [{
+       name: "Power",
        data: newData
       }]
     },
@@ -363,8 +364,9 @@ export default {
           },
       }
       this.seriesDaySum = [{
-         data: newData
-        }]
+        name: "Diff",
+        data: newData
+      }]
     },
     updateChartYearSum() {
       const newData = this.$store.state.diff_monthInYear
@@ -378,6 +380,7 @@ export default {
           },
       }
       this.seriesYearSum = [{
+          name: "Diff",
          data: newData
         }]
       },
@@ -393,7 +396,8 @@ export default {
       rand: 0,
       chartOptions: {
         chart: {
-          id: 'vuechart-example'
+          id: 'vuechart-example',
+          height: 200
           },
           xaxis: {
             // categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
@@ -452,19 +456,7 @@ export default {
           message: 'ON'
         }
       ],
-      uptime_data: [
-        {
-          id: 1,
-          name: 'Uptime 1',
-          value: ' h m'
-        },
-        {
-          id: 2,
-          name: 'Uptime 2',
-          value: ' h m'
-        }
-      ]
-
+      uptime_data: []
     }
   }
 }
