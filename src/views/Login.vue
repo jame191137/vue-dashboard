@@ -100,8 +100,8 @@
 import axios from 'axios';
   export default {
     mounted () {
-      this.$store.state.url_sev = 'http://localhost:8997'
-      // this.$store.state.url_sev = 'http://35.186.149.130:8997'
+      // this.$store.state.url_sev = 'http://localhost:8997'
+      this.$store.state.url_sev = 'http://35.186.149.130:8997'
     },
     data () {
       return {
