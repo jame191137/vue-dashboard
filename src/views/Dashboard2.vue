@@ -311,7 +311,7 @@ export default {
     },
     getLogPsum2(e) {
       axios.post(this.$store.state.url_sev+'/logpsum2', {
-        MeterID: ["1"]
+        ZoneID: '1'
       })
       .then(response => {
           console.log(response.data)
