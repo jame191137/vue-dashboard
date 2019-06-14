@@ -67,9 +67,8 @@
                   v-model="passwordtext"
                   prepend-icon="mdi-lock"
                  :rules="[rules.required]"
-                 :type="password"
+                 type="password"
                  label="Password"
-                 hint=""
                ></v-text-field>
             </v-flex>
 
@@ -101,8 +100,8 @@
 import axios from 'axios';
   export default {
     mounted () {
-      // this.$store.state.url_sev = 'http://localhost:8997'
-      this.$store.state.url_sev = 'http://35.186.149.130:8997'
+      this.$store.state.url_sev = 'http://localhost:8997'
+      // this.$store.state.url_sev = 'http://35.186.149.130:8997'
     },
     data () {
       return {
@@ -119,43 +118,45 @@ import axios from 'axios';
     methods: {
       loginAPI(e) {
         // axios.post('http://localhost:8997/login', {
-        axios.post(this.$store.state.url_sev+'/login', {
-            username: 'admins1',
-            password: '0000'
-            // username: this.usernametext,
-            // password: this.passwordtext
-        })
-        .then(response => {
-            console.log(response.data.status)
-            if (response.data.status == 'fail') {
-              alert('wrong user')
-            } else {
-              if (response.data.UPrivilege == 0) {
-                // this.$cookies.set('adminStatus','Admin')
-                localStorage.adminStatus = 'Admin'
+        if (this.usernametext != '' || this.passwordtext != '') {
+          axios.post(this.$store.state.url_sev+'/login', {
+              // username: 'admins1',
+              // password: '0000'
+              username: this.usernametext,
+              password: this.passwordtext
+          })
+          .then(response => {
+              console.log(response.data.status)
+              if (response.data.status == 'fail') {
+                alert('wrong user')
               } else {
-                // this.$cookies.set('adminStatus','User')
-                localStorage.adminStatus = 'User'
+                if (response.data.UPrivilege == 0) {
+                  // this.$cookies.set('adminStatus','Admin')
+                  localStorage.adminStatus = 'Admin'
+                } else {
+                  // this.$cookies.set('adminStatus','User')
+                  localStorage.adminStatus = 'User'
+                }
+
+                localStorage.email = this.usernametext
+
+                localStorage.SiteID = response.data.SiteID
+
+                // alert(localStorage.SiteID)
+                localStorage.checklogin = true
+                // this.$forceUpdate()
+                // this.$emit('logined')
+                this.$router.push('/Dashboard2')
               }
-
-              localStorage.email = this.usernametext
-
-              localStorage.SiteID = response.data.SiteID
-
-              // alert(localStorage.SiteID)
-              localStorage.checklogin = true
-              // this.$forceUpdate()
-              // this.$emit('logined')
-              this.$router.push('/Dashboard2')
-            }
-        })
+          })
         .catch(error =>{
             alert('error')
             console.log(error);
         })
+      }else{
+        alert('Please enter username and password')
       }
-
-
+    }
     }
   }
 </script>

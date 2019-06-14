@@ -215,14 +215,15 @@ import ApexCharts from 'apexcharts';
 export default {
   mounted () {
     // console.log(localStorage.ZoneID)
-    // this.$store.state.url_sev = 'http://localhost:8997'
-    this.$store.state.url_sev = 'http://35.186.149.130:8997'
+    this.$store.state.url_sev = 'http://localhost:8997'
+    // this.$store.state.url_sev = 'http://35.186.149.130:8997'
     // setInterval(() => { this.updateChart() }, 60000)
     setInterval(() => { this.realtimeUsageAPI() }, 60000)
     setInterval(() => { this.getLogPsum() }, 60000)
     setInterval(() => { console.log(this.ZoneID) }, 1000)
     this.realtimeUsageAPI()
-    this.getLogPsum()
+    // this.getLogPsum()
+    this.getLogPsum2()
     this.getSumDay()
     this.getSumYear()
     this.getdataRT()
@@ -308,6 +309,20 @@ export default {
           console.log(error);
       })
     },
+    getLogPsum2(e) {
+      axios.post(this.$store.state.url_sev+'/logpsum2', {
+        MeterID: ["1"]
+      })
+      .then(response => {
+          console.log(response.data)
+          this.list_psum2 = response.data.list_psum
+          this.date_Psum2 = response.data.date_Psum
+          this.updateChart()
+      })
+      .catch(error =>{
+          console.log(error);
+      })
+    },
     getSumDay(e) {
       axios.post(this.$store.state.url_sev+'/sumday', {
         ZoneID: '1'
@@ -368,12 +383,12 @@ export default {
       })
     },
     updateChart() {
-      const newData = this.$store.state.Psum
-      const newData2 = this.$store.state.Psum
+      // const newData = this.$store.state.Psum
+      const newData2 = this.list_psum2
       this.chartOptions = {
         chart: {
             width: "100%",
-            height: 200
+            height: 300
           },
           plotOptions: {
             bar: {
@@ -384,14 +399,15 @@ export default {
           },
           dataLabels: {
             enabled: true,
-            // offsetY: -20,
+            offsetY: -20,
             style: {
               fontSize: '12px',
               colors: ["#304758"]
             }
           },
           xaxis: {
-            categories: this.$store.state.date_Psum
+            // categories: this.$store.state.date_Psum
+            categories: this.date_Psum2
           },
           yaxis: [
             {
@@ -399,7 +415,7 @@ export default {
                 show: true,
               },
               title: {
-                text: "Diff"
+                text: "Kw"
               }
           }
           // ,
@@ -411,14 +427,16 @@ export default {
           // }
         ],
       }
-      this.series = [{
-       name: "Meter 1",
-       data: newData
-       },
-       {
-        name: "Meter 2",
-        data: newData2
-       }]
+      // this.series = [{
+      //  name: "Meter 1",
+      //  data: newData
+      //  },
+      //  {
+      //   name: "Meter 2",
+      //   data: newData2
+      //  }]
+      // console.log(this.list_psum2)
+      this.series = newData2
     },
     updateChartDaySum() {
       const newData = this.$store.state.diff_dayInMonth
@@ -426,7 +444,7 @@ export default {
         chart: {
           // id: 'vuechart-example'
             width: "100%",
-            height: 200
+            height: 300
           },
           plotOptions: {
             bar: {
@@ -446,6 +464,23 @@ export default {
           xaxis: {
             categories: this.$store.state.dayInMonth
           },
+          yaxis: [
+            {
+              axisBorder: {
+                show: true,
+              },
+              title: {
+                text: "kwh"
+              }
+          }
+          // ,
+          // {
+          //   opposite: true,
+          //   axisBorder: {
+          //     show: true,
+          //   }
+          // }
+        ],
       }
       this.seriesDaySum = [{
         name: "Diff",
@@ -457,7 +492,7 @@ export default {
       this.chartOptionsYearSum = {
         chart: {
           width: "100%",
-          height: 200
+          height: 300
         },
         plotOptions: {
           bar: {
@@ -477,6 +512,23 @@ export default {
         xaxis: {
           categories: this.$store.state.monthInYear
         },
+        yaxis: [
+          {
+            axisBorder: {
+              show: true,
+            },
+            title: {
+              text: "kwh"
+            }
+        }
+        // ,
+        // {
+        //   opposite: true,
+        //   axisBorder: {
+        //     show: true,
+        //   }
+        // }
+      ],
       }
       this.seriesYearSum = [{
           name: "Diff",
@@ -486,6 +538,8 @@ export default {
   },
   data () {
     return {
+      list_psum2: [],
+      date_Psum2: [],
       ZoneID: '',
       reloadPage: true,
       test: '',

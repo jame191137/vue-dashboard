@@ -94,8 +94,8 @@ export default {
     Dashboard2
   },
   data: () => ({
-    url_sev: 'http://35.186.149.130:8997',
-    // url_sev: 'http://localhost:8997',
+    // url_sev: 'http://35.186.149.130:8997',
+    url_sev: 'http://localhost:8997',
     zone_data: {},
     logo: './img/vuetifylogo.png',
     logo_cp: 'images/logo_cp.png',
