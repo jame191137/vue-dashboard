@@ -56,7 +56,7 @@
           @click="sendZone(link.id)"
         >
           <v-list-tile-action>
-            <v-icon>{{ link.icon }}</v-icon>
+            <v-icon >{{ link.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-title
             v-text="link.text"
@@ -87,11 +87,15 @@ import {
   mapMutations,
   mapState
 } from 'vuex'
+import Dashboard2 from '@/views/Dashboard2.vue'
 import axios from 'axios';
 export default {
+  components: {
+    Dashboard2
+  },
   data: () => ({
-    url_sev: 'http://35.186.149.130:8997',
-    // url_sev: 'http://localhost:8997',
+    // url_sev: 'http://35.186.149.130:8997',
+    url_sev: 'http://localhost:8997',
     zone_data: {},
     logo: './img/vuetifylogo.png',
     logo_cp: 'images/logo_cp.png',
@@ -174,7 +178,7 @@ export default {
   },
   watch: {
     '$route' (val) {
-      getzone()
+      // this.getzone()
       this.email = localStorage.email
     }
   },
@@ -197,7 +201,7 @@ export default {
             alert('get zone fail')
           } else {
 
-            // this.links = response.data.zone_data
+            this.links = response.data.zone_data
             console.log('s')
 
           }
@@ -207,9 +211,13 @@ export default {
           console.log(error);
       })
     },
-    sendZone (ZoneID){
+    sendZone (ZoneID) {
       // alert(ZoneID)
+      // this.$emit('test')
+      // this.$emit("message", "I changed the message");
+      this.$emit('event_child', 1)
       localStorage.ZoneID = ZoneID
+      // location.reload()
     }
   }
 }

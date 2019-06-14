@@ -1,8 +1,10 @@
 <template>
+
   <v-container
     fill-height
     fluid
     grid-list-xl
+    v-if="reloadPage"
   >
     <v-layout wrap>
 
@@ -159,7 +161,7 @@
         <v-card-text>
           <!-- <v-card-actions>
           </v-card-actions> -->
-          <div class="varela-font boxhead">Monthly avh</div>
+          <div class="varela-font boxhead">Monthly avg</div>
           <div class="varela-font boxtitle">{{this.RT_kWh_Monthly_Avg}} kWH</div>
         </v-card-text>
       </v-card>
@@ -209,14 +211,16 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
 import axios from 'axios';
-import ApexCharts from 'apexcharts'
+import ApexCharts from 'apexcharts';
 export default {
   mounted () {
-    // this.$store.state.url_sev = 'http://localhost:8997'
-    this.$store.state.url_sev = 'http://35.186.149.130:8997'
+    // console.log(localStorage.ZoneID)
+    this.$store.state.url_sev = 'http://localhost:8997'
+    // this.$store.state.url_sev = 'http://35.186.149.130:8997'
     // setInterval(() => { this.updateChart() }, 60000)
     setInterval(() => { this.realtimeUsageAPI() }, 60000)
     setInterval(() => { this.getLogPsum() }, 60000)
+    setInterval(() => { console.log(this.ZoneID) }, 1000)
     this.realtimeUsageAPI()
     this.getLogPsum()
     this.getSumDay()
@@ -225,23 +229,52 @@ export default {
     this.getCBUptime()
   },
   watch: {
-    switch1(newValue){
-      if (this.button_data.switch_state == 'ON') {
-        this.button_data.switch_state = 'OFF'
-      } else {
-        this.button_data.switch_state = 'ON'
-      }
-    },
-    switch2(newValue){
-      if (this.button_data.switch_state == 'ON') {
-        this.button_data.switch_state = 'OFF'
-      } else {
-        this.button_data.switch_state = 'ON'
-      }
-    },
+
+    '$route' (val) {
+
+      this.reloadPage = false
+      this.$nextTick(() => {
+          // Add the component back in
+          this.reloadPage = true
+          // this.realtimeUsageAPI()
+          // this.getLogPsum()
+          // this.getSumDay()
+          // this.getSumYear()
+          // this.getdataRT()
+          // this.getCBUptime()
+          // console.log(localStorage.ZoneID)
+      });
+
+      // this.test = this.$route.id
+      // alert(this.test)
+      // alert(this.test.charAt(9))
+    }
+
+    // switch1(newValue){
+    //   if (this.button_data.switch_state == 'ON') {
+    //     this.button_data.switch_state = 'OFF'
+    //   } else {
+    //     this.button_data.switch_state = 'ON'
+    //   }
+    // },
+    // switch2(newValue){
+    //   if (this.button_data.switch_state == 'ON') {
+    //     this.button_data.switch_state = 'OFF'
+    //   } else {
+    //     this.button_data.switch_state = 'ON'
+    //   }
+    // },
 
   },
+  created() {
+    // alert('sd')
+    this.$on('event_child', function(id){
+			console.log('Event from parent component emitted', id)
+      alert("sdsfsd")
+		})
+	},
   methods: {
+
     realtimeUsageAPI(e) {
       axios.post(this.$store.state.url_sev+'/realtimeusage', {
           ZoneID: '1'
@@ -336,20 +369,56 @@ export default {
     },
     updateChart() {
       const newData = this.$store.state.Psum
+      const newData2 = this.$store.state.Psum
       this.chartOptions = {
         chart: {
             width: "100%",
             height: 200
           },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                position: 'top'
+              }
+            },
+          },
+          dataLabels: {
+            enabled: true,
+            // offsetY: -20,
+            style: {
+              fontSize: '12px',
+              colors: ["#304758"]
+            }
+          },
           xaxis: {
-            categories: this.$store.state.date_Psum,
-            categories2: this.$store.state.date_Psum
+            categories: this.$store.state.date_Psum
+          },
+          yaxis: [
+            {
+              axisBorder: {
+                show: true,
+              },
+              title: {
+                text: "Diff"
+              }
           }
+          // ,
+          // {
+          //   opposite: true,
+          //   axisBorder: {
+          //     show: true,
+          //   }
+          // }
+        ],
       }
       this.series = [{
-       name: "Power",
+       name: "Meter 1",
        data: newData
-      }]
+       },
+       {
+        name: "Meter 2",
+        data: newData2
+       }]
     },
     updateChartDaySum() {
       const newData = this.$store.state.diff_dayInMonth
@@ -358,6 +427,21 @@ export default {
           // id: 'vuechart-example'
             width: "100%",
             height: 200
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                position: 'top',
+              }
+            },
+          },
+          dataLabels: {
+            enabled: true,
+            offsetY: -20,
+            style: {
+              fontSize: '12px',
+              colors: ["#304758"]
+            }
           },
           xaxis: {
             categories: this.$store.state.dayInMonth
@@ -372,12 +456,27 @@ export default {
       const newData = this.$store.state.diff_monthInYear
       this.chartOptionsYearSum = {
         chart: {
-            width: "100%",
-            height: 200
+          width: "100%",
+          height: 200
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              position: 'top',
+            }
           },
-          xaxis: {
-            categories: this.$store.state.monthInYear
-          },
+        },
+        dataLabels: {
+          enabled: true,
+          offsetY: -20,
+          style: {
+            fontSize: '12px',
+            colors: ["#304758"]
+          }
+        },
+        xaxis: {
+          categories: this.$store.state.monthInYear
+        },
       }
       this.seriesYearSum = [{
           name: "Diff",
@@ -387,6 +486,9 @@ export default {
   },
   data () {
     return {
+      ZoneID: '',
+      reloadPage: true,
+      test: '',
       switch1: true,
       RT_kWh_Today: '',
       RT_kWh_Daily_Avg: '',

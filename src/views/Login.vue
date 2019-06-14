@@ -12,7 +12,7 @@
       lg12
       xl9
     >
-    <v-card height="170%" class="justify-center">
+    <v-card height="170%" class="justify-center" style="padding-left:200px">
       <v-layout justify-center wrap align-center>
       <v-flex
         sm12
@@ -24,7 +24,7 @@
       >
       <v-img
         src="https://upload.wikimedia.org/wikipedia/th/3/39/CPALL2015.png"
-        width="100%"
+        width="50%"
         contain
 
       />
@@ -73,10 +73,10 @@
                ></v-text-field>
             </v-flex>
 
-          <v-layout justify-center>
+          <v-layout justify-center mr-5>
             <v-btn v-on:click="loginAPI ()" outlined color="blue" >Login</v-btn>
           </v-layout>
-          <v-layout justify-center>
+          <v-layout justify-center mr-5>
             <v-flex xs12 sm10 lg10 ml-0>
               <router-link
                 v-ripple
@@ -101,8 +101,8 @@
 import axios from 'axios';
   export default {
     mounted () {
-      // this.$store.state.url_sev = 'http://localhost:8997'
-      this.$store.state.url_sev = 'http://35.186.149.130:8997'
+      this.$store.state.url_sev = 'http://localhost:8997'
+      // this.$store.state.url_sev = 'http://35.186.149.130:8997'
     },
     data () {
       return {

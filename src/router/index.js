@@ -17,7 +17,8 @@ import paths from './paths'
 
 function route (path, view, name) {
   return {
-    name: name || view,
+    name: view,
+    // name: name || view,
     path,
     component: (resovle) => import(
       `@/views/${view}.vue`
@@ -50,16 +51,16 @@ router.beforeEach((to, from, next) => {
         var check = ''
         check = localStorage.getItem('checklogin')
         if(check == '' || check == undefined) {
-            console.log('login');
+            // console.log('login');
             // console.log(data.test != undefined);
 
-            console.log(localStorage.getItem('checklogin'));
+            // console.log(localStorage.getItem('checklogin'));
             // console.log(data.test);
             // logger('There is a token, resume. (' + to.path + ')');
             next('login');
         } else {
-            console.log('user ok');
-              console.log(localStorage.getItem('checklogin'));
+            // console.log('user ok');
+            // console.log(localStorage.getItem('checklogin'));
             // logger('There is no token, redirect to login. (' + to.path + ')');
             next();
         }

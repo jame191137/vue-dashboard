@@ -12,13 +12,29 @@ export default [
   {
     path: '/dashboard1',
     name: 'Dashboard1',
-    view: 'Dashboard'
+    view: 'Dashboard2'
   },
   {
     path: '/dashboard2',
     name: 'Dashboard2',
     view: 'Dashboard2'
   },
+  {
+    path: '/dashboard3',
+    name: 'Dashboard3',
+    view: 'Dashboard2'
+  },
+  {
+    path: '/dashboard4',
+    name: 'Dashboard4',
+    view: 'Dashboard2'
+  },
+  {
+    path: '/dashboard5',
+    name: 'Dashboard2',
+    view: 'Dashboard2'
+  },
+
   {
     path: '/user-profile',
     name: 'User Profile',
