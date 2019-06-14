@@ -215,8 +215,8 @@ import ApexCharts from 'apexcharts';
 export default {
   mounted () {
     // console.log(localStorage.ZoneID)
-    this.$store.state.url_sev = 'http://localhost:8997'
-    // this.$store.state.url_sev = 'http://35.186.149.130:8997'
+    // this.$store.state.url_sev = 'http://localhost:8997'
+    this.$store.state.url_sev = 'http://35.186.149.130:8997'
     // setInterval(() => { this.updateChart() }, 60000)
     setInterval(() => { this.realtimeUsageAPI() }, 60000)
     setInterval(() => { this.getLogPsum() }, 60000)
