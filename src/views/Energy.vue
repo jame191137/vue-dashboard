@@ -126,7 +126,8 @@ import ApexCharts from 'apexcharts';
 export default {
   data () {
     return {
-      url_sev: 'http://localhost:8997',
+      // url_sev: 'http://localhost:8997',
+      url_sev: 'http://35.186.149.130:8997'
       datameter: [],
       hour_Psum: [],
       date_Psum: [],

@@ -217,8 +217,8 @@ export default {
     this.ZoneID = localStorage.ZoneID
     // alert(localStorage.ZoneID)
     // console.log(localStorage.ZoneID)
-    this.$store.state.url_sev = 'http://localhost:8997'
-    // this.$store.state.url_sev = 'http://35.186.149.130:8997'
+    // this.$store.state.url_sev = 'http://localhost:8997'
+    this.$store.state.url_sev = 'http://35.186.149.130:8997'
 
     setInterval(() => { this.realtimeUsageAPI() }, 60000)
     setInterval(() => { this.getLogPsum2() }, 60000)

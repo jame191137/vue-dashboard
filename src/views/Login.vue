@@ -104,8 +104,8 @@ import axios from 'axios';
     },
     data () {
       return {
-        url_sev: 'http://localhost:8997',
-        // url_sev: 'http://35.186.149.130:8997',
+        // url_sev: 'http://localhost:8997',
+        url_sev: 'http://35.186.149.130:8997',
         show2: true,
         zone_first: '',
         usernametext: '',
@@ -145,10 +145,10 @@ import axios from 'axios';
         // axios.post('http://localhost:8997/login', {
         if (this.usernametext != '' || this.passwordtext != '') {
           axios.post(this.url_sev+'/login', {
-              username: 'admins1',
-              password: '0000'
-              // username: this.usernametext,
-              // password: this.passwordtext
+              // username: 'admins1',
+              // password: '0000'
+              username: this.usernametext,
+              password: this.passwordtext
           })
           .then(response => {
 
