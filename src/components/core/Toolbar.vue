@@ -82,7 +82,7 @@
             </v-list>
           </v-card>
         </v-menu> -->
-        {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}}
+        {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}} {{ "site :"}}{{ this.SiteID }}
         <router-link
           v-ripple
           class="toolbar-items"
@@ -116,7 +116,9 @@ import {
 export default {
   data: () => ({
     email: '',
-    adminStatus: localStorage.adminStatus,
+    adminStatus: '',
+    SiteID: '',
+    ZoneID: '',
     notifications: [
       'Mike, John responded to your email',
       'You have 5 new tasks',
@@ -134,6 +136,8 @@ export default {
       this.title = val.name
       this.email = localStorage.email
       this.adminStatus = localStorage.adminStatus
+      this.SiteID = localStorage.SiteID
+      this.ZoneID = localStorage.ZoneID
     }
   },
   // watch : {
@@ -143,6 +147,9 @@ export default {
   //   }
   // },
   mounted () {
+    // this.title = val.name
+    // this.email = localStorage.email
+    // this.adminStatus = localStorage.adminStatus
     // console.log(localStorage.email)
     // this.email = localStorage.email
     // alert('ss')

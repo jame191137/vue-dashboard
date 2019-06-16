@@ -100,12 +100,14 @@
 import axios from 'axios';
   export default {
     mounted () {
-      // this.$store.state.url_sev = 'http://localhost:8997'
-      this.$store.state.url_sev = 'http://35.186.149.130:8997'
+
     },
     data () {
       return {
+        url_sev: 'http://localhost:8997',
+        // url_sev: 'http://35.186.149.130:8997',
         show2: true,
+        zone_first: '',
         usernametext: '',
         passwordtext: '',
         emailtext: '',
@@ -116,16 +118,40 @@ import axios from 'axios';
       }
     },
     methods: {
+      getzone(e) {
+        axios.post(this.url_sev+'/getzone', {
+
+            SiteID: localStorage.SiteID
+        })
+        .then(response => {
+            // console.log('get zone')
+            // console.log(response.data.status)
+            if (response.data.status == 'fail') {
+              alert('get zone fail')
+            } else {
+
+              localStorage.ZoneID = response.data.zone_data[0].id
+              // this.$router.push(response.data.zone_data[0].to)
+              this.$router.push('/dashboard1')
+
+            }
+        })
+        .catch(error =>{
+            alert(error)
+            console.log(error);
+        })
+      },
       loginAPI(e) {
         // axios.post('http://localhost:8997/login', {
         if (this.usernametext != '' || this.passwordtext != '') {
-          axios.post(this.$store.state.url_sev+'/login', {
-              // username: 'admins1',
-              // password: '0000'
-              username: this.usernametext,
-              password: this.passwordtext
+          axios.post(this.url_sev+'/login', {
+              username: 'admins1',
+              password: '0000'
+              // username: this.usernametext,
+              // password: this.passwordtext
           })
           .then(response => {
+
               console.log(response.data.status)
               if (response.data.status == 'fail') {
                 alert('wrong user')
@@ -146,7 +172,8 @@ import axios from 'axios';
                 localStorage.checklogin = true
                 // this.$forceUpdate()
                 // this.$emit('logined')
-                this.$router.push('/Dashboard2')
+                this.getzone()
+
               }
           })
         .catch(error =>{

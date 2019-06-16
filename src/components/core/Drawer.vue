@@ -1,8 +1,8 @@
 <template>
-
+  <!--   v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' " -->
   <v-navigation-drawer
     id="app-drawer"
-    v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' "
+    v-if="$route.name != 'Login'"
     v-model="inputValue"
     app
     dark
@@ -53,7 +53,6 @@
           :active-class="color"
           avatar
           class="v-list-item"
-          @click="sendZone(link.id)"
         >
           <v-list-tile-action>
             <v-icon >{{ link.icon }}</v-icon>
@@ -94,8 +93,8 @@ export default {
     Dashboard2
   },
   data: () => ({
-    url_sev: 'http://35.186.149.130:8997',
-    // url_sev: 'http://localhost:8997',
+    // url_sev: 'http://35.186.149.130:8997',
+    url_sev: 'http://localhost:8997',
     zone_data: {},
     logo: './img/vuetifylogo.png',
     logo_cp: 'images/logo_cp.png',
@@ -120,12 +119,12 @@ export default {
     }
   },
   ready() {
-    this.$on('logined', () => {
-      this.getzone()
-    });
+    // this.$on('logined', () => {
+    //   this.getzone()
+    // });
   },
   mounted () {
-
+    // this.getzone()
     this.onResponsiveInverted()
     window.addEventListener('resize', this.onResponsiveInverted)
     this.links.push(
@@ -134,11 +133,11 @@ export default {
           //   icon: 'mdi-view-dashboard',
           //   text: 'Dashboard 1'
           // },
-          {
-            to: '/dashboard2',
-            icon: 'mdi-view-dashboard',
-            text: 'Dashboard Zone 1'
-          },
+          // {
+          //   to: '/dashboard2',
+          //   icon: 'mdi-view-dashboard',
+          //   text: 'Dashboard Zone 1'
+          // },
           // ,
           // {
           //   to: '/user-profile',
@@ -178,7 +177,10 @@ export default {
   },
   watch: {
     '$route' (val) {
-      // this.getzone()
+      // alert((this.links).length)
+      if ( this.$route.name != 'Login'){
+        this.getzone()
+      }
       this.email = localStorage.email
     }
   },
@@ -192,16 +194,32 @@ export default {
       }
     },
     getzone(e) {
+      // alert(localStorage.SiteID)
       axios.post(this.url_sev+'/getzone', {
+
           SiteID: localStorage.SiteID
       })
       .then(response => {
+          console.log('get zone')
           console.log(response.data.status)
           if (response.data.status == 'fail') {
             alert('get zone fail')
           } else {
 
             this.links = response.data.zone_data
+            this.links.push(
+
+              {
+                to: '/energy',
+                icon: 'mdi-clipboard-outline',
+                text: 'Energy'
+              },
+              // {
+              //   to: '/historical',
+              //   icon: 'mdi-clipboard-outline',
+              //   text: 'Historical'
+              // }
+            )
             console.log('s')
 
           }
@@ -211,14 +229,14 @@ export default {
           console.log(error);
       })
     },
-    sendZone (ZoneID) {
-      // alert(ZoneID)
-      // this.$emit('test')
-      // this.$emit("message", "I changed the message");
-      this.$emit('event_child', 1)
-      localStorage.ZoneID = ZoneID
-      // location.reload()
-    }
+    // sendZone (ZoneID) {
+    //   // alert('aa'+ZoneID)
+    //   // this.$emit('test')
+    //   // this.$emit("message", "I changed the message");
+    //   this.$emit('event_child', 1)
+    //   localStorage.ZoneID = ZoneID
+    //   // location.reload()
+    // }
   }
 }
 </script>

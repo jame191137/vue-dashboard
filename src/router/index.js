@@ -16,15 +16,18 @@ import data from '../store/state.js'
 import paths from './paths'
 
 function route (path, view, name) {
+  console.log(name)
   return {
-    name: view,
+    name: name,
     // name: name || view,
-    path,
+    // path,
+    path ,
     component: (resovle) => import(
       `@/views/${view}.vue`
     ).then(resovle)
   }
 }
+
 
 // Create a new router
 const router = new Router({
@@ -59,9 +62,8 @@ router.beforeEach((to, from, next) => {
             // logger('There is a token, resume. (' + to.path + ')');
             next('login');
         } else {
-            // console.log('user ok');
-            // console.log(localStorage.getItem('checklogin'));
-            // logger('There is no token, redirect to login. (' + to.path + ')');
+
+
             next();
         }
     } else {

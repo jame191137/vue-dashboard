@@ -214,12 +214,14 @@ import axios from 'axios';
 import ApexCharts from 'apexcharts';
 export default {
   mounted () {
+    this.ZoneID = localStorage.ZoneID
+    // alert(localStorage.ZoneID)
     // console.log(localStorage.ZoneID)
-    // this.$store.state.url_sev = 'http://localhost:8997'
-    this.$store.state.url_sev = 'http://35.186.149.130:8997'
-    // setInterval(() => { this.updateChart() }, 60000)
+    this.$store.state.url_sev = 'http://localhost:8997'
+    // this.$store.state.url_sev = 'http://35.186.149.130:8997'
+
     setInterval(() => { this.realtimeUsageAPI() }, 60000)
-    setInterval(() => { this.getLogPsum() }, 60000)
+    setInterval(() => { this.getLogPsum2() }, 60000)
     setInterval(() => { console.log(this.ZoneID) }, 1000)
     this.realtimeUsageAPI()
     // this.getLogPsum()
@@ -232,18 +234,26 @@ export default {
   watch: {
 
     '$route' (val) {
-
+      // alert(this.$route.name)
+      clearInterval(this.IntervalRealtime)
+      clearInterval(this.IntervalPsum)
+      this.ZoneID = this.$route.name
+      localStorage.ZoneID = this.$route.name
+      // alert(this.$route.name)
       this.reloadPage = false
       this.$nextTick(() => {
-          // Add the component back in
+
           this.reloadPage = true
-          // this.realtimeUsageAPI()
+          this.IntervalRealtime = setInterval(() => { this.realtimeUsageAPI() }, 60000)
+          this.IntervalPsum = setInterval(() => { this.getLogPsum2() }, 60000)
+          // this.t = setInterval(() => { console.log(this.ZoneID) }, 1000)
+          this.realtimeUsageAPI()
           // this.getLogPsum()
-          // this.getSumDay()
-          // this.getSumYear()
-          // this.getdataRT()
-          // this.getCBUptime()
-          // console.log(localStorage.ZoneID)
+          this.getLogPsum2()
+          this.getSumDay()
+          this.getSumYear()
+          this.getdataRT()
+          this.getCBUptime()
       });
 
       // this.test = this.$route.id
@@ -268,22 +278,22 @@ export default {
 
   },
   created() {
-    // alert('sd')
-    this.$on('event_child', function(id){
-			console.log('Event from parent component emitted', id)
-      alert("sdsfsd")
-		})
+
+    // alert(localStorage.ZoneID)
+    // this.$on('event_child', function(id){
+		// 	console.log('Event from parent component emitted', id)
+    //   alert("sdsfsd")
+		// })
 	},
   methods: {
 
     realtimeUsageAPI(e) {
+
       axios.post(this.$store.state.url_sev+'/realtimeusage', {
-          ZoneID: '1'
+          ZoneID: this.ZoneID
       })
       .then(response => {
-          // this.databaseConfiguration = response.data;
-          // if (response.data.UPrivilege == 0) {
-          // console.log(response.data)
+
           this.$store.state.RT_PSum = response.data.RT_PSum
           this.$store.state.RT_ISum = response.data.RT_ISum
           this.$store.state.RT_VSum = response.data.RT_VSum
@@ -295,26 +305,26 @@ export default {
           console.log(error)
       })
     },
-    getLogPsum(e) {
-      axios.post(this.$store.state.url_sev+'/logpsum', {
-        MeterID: '1'
-      })
-      .then(response => {
-          console.log(response.data)
-          this.$store.state.Psum = response.data.Psum
-          this.$store.state.date_Psum = response.data.date_Psum
-          this.updateChart()
-      })
-      .catch(error =>{
-          console.log(error);
-      })
-    },
+    // getLogPsum(e) {
+    //   axios.post(this.$store.state.url_sev+'/logpsum', {
+    //     MeterID: '1'
+    //   })
+    //   .then(response => {
+    //       console.log(response.data)
+    //       this.$store.state.Psum = response.data.Psum
+    //       this.$store.state.date_Psum = response.data.date_Psum
+    //       this.updateChart()
+    //   })
+    //   .catch(error =>{
+    //       console.log(error);
+    //   })
+    // },
     getLogPsum2(e) {
+
       axios.post(this.$store.state.url_sev+'/logpsum2', {
-        ZoneID: '1'
+        ZoneID: this.ZoneID
       })
       .then(response => {
-          console.log(response.data)
           this.list_psum2 = response.data.list_psum
           this.date_Psum2 = response.data.date_Psum
           this.updateChart()
@@ -325,7 +335,7 @@ export default {
     },
     getSumDay(e) {
       axios.post(this.$store.state.url_sev+'/sumday', {
-        ZoneID: '1'
+        MeterID: this.ZoneID
       })
       .then(response => {
           // console.log(response.data)
@@ -339,7 +349,7 @@ export default {
     },
     getSumYear(e) {
       axios.post(this.$store.state.url_sev+'/sumyear', {
-        ZoneID: '1'
+        MeterID: this.ZoneID
       })
       .then(response => {
           // console.log(response.data)
@@ -353,7 +363,7 @@ export default {
     },
     getdataRT(e) {
       axios.post(this.$store.state.url_sev+'/getdatart', {
-          ZoneID: '1'
+          ZoneID: this.ZoneID
       })
       .then(response => {
           // console.log(response.data)
@@ -368,7 +378,7 @@ export default {
     },
     getCBUptime(e) {
       axios.post(this.$store.state.url_sev+'/cbuptime', {
-          ZoneID: '1'
+          ZoneID: this.ZoneID
       })
       .then(response => {
           // console.log(response.data)
@@ -384,6 +394,7 @@ export default {
     },
     updateChart() {
       // const newData = this.$store.state.Psum
+      console.log(this.list_psum2)
       const newData2 = this.list_psum2
       this.chartOptions = {
         chart: {
@@ -397,12 +408,18 @@ export default {
               }
             },
           },
-          dataLabels: {
-            enabled: true,
-            offsetY: -20,
-            style: {
-              fontSize: '12px',
-              colors: ["#304758"]
+          // dataLabels: {
+          //   enabled: true,
+          //   offsetY: -25,
+          //   style: {
+          //     fontSize: '12px',
+          //     colors: ["#304758"]
+          //   }
+          // },
+          markers: {
+            size: 5,
+            hover: {
+              size: 9
             }
           },
           xaxis: {
@@ -435,7 +452,7 @@ export default {
       //   name: "Meter 2",
       //   data: newData2
       //  }]
-      // console.log(this.list_psum2)
+      // console.log(newData2)
       this.series = newData2
     },
     updateChartDaySum() {
@@ -454,15 +471,19 @@ export default {
             },
           },
           dataLabels: {
+            rotateLabels: 90,
             enabled: true,
-            offsetY: -20,
+            offsetY: -25,
             style: {
               fontSize: '12px',
               colors: ["#304758"]
             }
           },
           xaxis: {
-            categories: this.$store.state.dayInMonth
+            categories: this.$store.state.dayInMonth,
+            title: {
+              // text: "kwh"
+            }
           },
           yaxis: [
             {
@@ -470,7 +491,7 @@ export default {
                 show: true,
               },
               title: {
-                text: "kwh"
+                // text: "kwh"
               }
           }
           // ,
@@ -482,10 +503,12 @@ export default {
           // }
         ],
       }
-      this.seriesDaySum = [{
+      this.seriesDaySum = [
+        {
         name: "Diff",
         data: newData
-      }]
+      }
+    ]
     },
     updateChartYearSum() {
       const newData = this.$store.state.diff_monthInYear
@@ -503,7 +526,7 @@ export default {
         },
         dataLabels: {
           enabled: true,
-          offsetY: -20,
+          offsetY: -25,
           style: {
             fontSize: '12px',
             colors: ["#304758"]
@@ -518,16 +541,10 @@ export default {
               show: true,
             },
             title: {
-              text: "kwh"
+              // text: "kwh"
             }
         }
-        // ,
-        // {
-        //   opposite: true,
-        //   axisBorder: {
-        //     show: true,
-        //   }
-        // }
+
       ],
       }
       this.seriesYearSum = [{
@@ -538,6 +555,9 @@ export default {
   },
   data () {
     return {
+      IntervalPsum: '',
+      IntervalRealtime: '',
+      IntervalPsum: '',
       list_psum2: [],
       date_Psum2: [],
       ZoneID: '',
