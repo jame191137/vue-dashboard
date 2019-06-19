@@ -1,5 +1,6 @@
 <template>
   <v-app>
+
     <core-filter />
 
     <core-toolbar />
@@ -11,10 +12,10 @@
 </template>
 
 <style lang="scss">
-@import '@/styles/index.scss';
-
-/* Remove in 1.2 */
-.v-datatable thead th.column.sortable i {
-  vertical-align: unset;
-}
+// @import '@/styles/index.scss';
+//
+// /* Remove in 1.2 */
+// .v-datatable thead th.column.sortable i {
+//   vertical-align: unset;
+// }
 </style>

@@ -131,7 +131,7 @@
         <v-card-text>
           <!-- <v-card-actions>
           </v-card-actions> -->
-          <div class="varela-font boxhead">Daily avh</div>
+          <div class="varela-font boxhead">Daily avg</div>
           <div class="varela-font boxtitle">{{this.RT_kWh_Daily_Avg}} kWH</div>
         </v-card-text>
       </v-card>
@@ -321,8 +321,8 @@ export default {
     // },
     getLogPsum2(e) {
 
-      axios.post(this.$store.state.url_sev+'/logpsum2', {
-        ZoneID: this.ZoneID
+      axios.post(this.$store.state.url_sev+'/logpsum3', {
+        SiteID: localStorage.SiteID
       })
       .then(response => {
           this.list_psum2 = response.data.list_psum

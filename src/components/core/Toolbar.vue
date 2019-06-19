@@ -8,22 +8,13 @@
     prominent
     style="background: #ffffff;"
   >
-    <!-- <div class="v-toolbar-title">
+    <div class="v-toolbar-title">
       <v-toolbar-title
-        class="tertiary--text font-weight-light"
+        class="tertiary--text font-weight-bold"
       >
-        <v-btn
-          v-if="responsive"
-          class="default v-btn--simple"
-          dark
-          icon
-          @click.stop="onClickBtn"
-        >
-          <v-icon>mdi-view-list</v-icon>
-        </v-btn>
-        {{ "Dashboard Zone" }}
+        {{"Site " }}{{this.SiteName }}
       </v-toolbar-title>
-    </div> -->
+    </div>
 
     <v-spacer />
     <v-toolbar-items>
@@ -82,27 +73,12 @@
             </v-list>
           </v-card>
         </v-menu> -->
-        {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}} {{ "site :"}}{{ this.SiteID }}
-        <router-link
-          v-ripple
-          class="toolbar-items"
-          to="/user-profile"
-        >
-          <!-- <v-icon color="tertiary">mdi-account</v-icon> -->
-          <!-- <v-icon>mdi-account</v-icon> -->
-          <!-- <v-btn icon ripple> -->
-            <v-icon color="tertiary">mdi-account-circle</v-icon>
-          <!-- </v-btn> -->
-        </router-link>
-        <!-- <router-link
-          v-ripple
-          class="toolbar-items"
-          to="/login"
-        >
+        
+        {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}}
 
-        </router-link> -->
+
         <v-btn v-on:click="logout ()" flat>
-          <v-icon color="tertiary">mdi-exit-to-app</v-icon>
+          <v-icon color="red">mdi-exit-to-app</v-icon>
         </v-btn>
       </v-flex>
     </v-toolbar-items>
@@ -138,6 +114,7 @@ export default {
       this.adminStatus = localStorage.adminStatus
       this.SiteID = localStorage.SiteID
       this.ZoneID = localStorage.ZoneID
+      this.SiteName = localStorage.SiteName
     }
   },
   // watch : {

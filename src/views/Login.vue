@@ -167,6 +167,7 @@ import axios from 'axios';
                 localStorage.email = this.usernametext
 
                 localStorage.SiteID = response.data.SiteID
+                localStorage.SiteName = response.data.SiteName
 
                 // alert(localStorage.SiteID)
                 localStorage.checklogin = true

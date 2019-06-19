@@ -93,8 +93,8 @@ export default {
     Dashboard2
   },
   data: () => ({
-    url_sev: 'http://35.186.149.130:8997',
-    // url_sev: 'http://localhost:8997',
+    // url_sev: 'http://35.186.149.130:8997',
+    url_sev: 'http://localhost:8997',
     zone_data: {},
     logo: './img/vuetifylogo.png',
     logo_cp: 'images/logo_cp.png',
@@ -214,11 +214,11 @@ export default {
                 icon: 'mdi-clipboard-outline',
                 text: 'Energy'
               },
-              // {
-              //   to: '/historical',
-              //   icon: 'mdi-clipboard-outline',
-              //   text: 'Historical'
-              // }
+              {
+                to: '/historical',
+                icon: 'mdi-clipboard-outline',
+                text: 'Historical'
+              }
             )
             console.log('s')
 
@@ -242,6 +242,14 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import '@/styles/index.scss';
+
+/* Remove in 1.2 */
+.v-datatable thead th.column.sortable i {
+  vertical-align: unset;
+}
+
 .v-navigation-drawer .v-list {
     background: #4e73df !important;
 }
