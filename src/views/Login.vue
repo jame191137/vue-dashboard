@@ -73,7 +73,7 @@
             </v-flex>
 
           <v-layout justify-center mr-5>
-            <v-btn v-on:click="loginAPI ()" outlined color="blue" >Login</v-btn>
+            <v-btn dark v-on:click="loginAPI ()" outlined color="blue" >Login</v-btn>
           </v-layout>
           <v-layout justify-center mr-5>
             <v-flex xs12 sm10 lg10 ml-0>
@@ -81,6 +81,7 @@
                 v-ripple
                 class=""
                 to=""
+
               >
                 <p class="text-lg-center">Forgot Password ?</p>
                 </router-link>

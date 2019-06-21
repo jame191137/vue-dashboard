@@ -2,15 +2,15 @@
 <!-- v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' " -->
   <v-toolbar
     id="core-toolbar"
-
-    v-if="$route.name != 'Login'"
+    v-if="showTab"
     flat
     prominent
-    style="background: #ffffff;"
+    style="background: #4e73df;"
+    class="tabFont"
   >
-    <div class="v-toolbar-title">
+    <div class="">
       <v-toolbar-title
-        class="tertiary--text font-weight-bold"
+        class="tabFont white--text"
       >
         {{"Site " }}{{this.SiteName }}
       </v-toolbar-title>
@@ -73,8 +73,12 @@
             </v-list>
           </v-card>
         </v-menu> -->
-        
-        {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}}
+        <v-toolbar-title
+          class="tabFont white--text"
+        >
+          {{ this.email }} {{ "("}}{{ this.adminStatus }}{{")"}}
+        </v-toolbar-title>
+
 
 
         <v-btn v-on:click="logout ()" flat>
@@ -93,6 +97,7 @@ export default {
   data: () => ({
     email: '',
     adminStatus: '',
+    showTab: false,
     SiteID: '',
     ZoneID: '',
     notifications: [
@@ -115,6 +120,12 @@ export default {
       this.SiteID = localStorage.SiteID
       this.ZoneID = localStorage.ZoneID
       this.SiteName = localStorage.SiteName
+
+      if ( this.$route.name != 'Login'){
+        this.showTab = true
+      } else {
+        this.showTab = false
+      }
     }
   },
   // watch : {
@@ -169,5 +180,12 @@ export default {
     .st{
 
     }
+  }
+  .tabFont {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 900 !important;
+    /* letter-spacing: -1px; */
+    /* text-transform: uppercase !important; */
   }
 </style>

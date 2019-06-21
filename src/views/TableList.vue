@@ -7,24 +7,36 @@
       sm12
       lg12
     >
-    <v-card>
+    <v-card class="border-primary">
+      <v-card-title class="headtab">
+        <v-icon dark large left > mdi-calendar-clock </v-icon>
+        <span  class="title font-weight-light varela-font boxheadwhite">{{"Date Select"}}</span>
+      </v-card-title>
 
       <v-layout wrap>
-        <v-flex md12
-        sm12
+        <v-flex
+
         lg1
         pt-5>
         <v-subheader>Zone : </v-subheader>
       </v-flex>
 
           <v-flex
-            md12
-            sm12
+
             lg2
             pt-5
           >
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
+             <v-text-field
+               v-model="ZoneName"
+               label="Select Zone"
+               prepend-icon=""
+               readonly
+               v-on="on"
+             ></v-text-field>
+           </template>
+            <!-- <template v-slot:activator="{ on }">
               <v-btn
                 color="blue"
                 dark
@@ -32,14 +44,14 @@
               >
                 {{ZoneName}}
               </v-btn>
-            </template>
+            </template> -->
             <v-list>
               <v-list-tile
-                v-for="(item, index) in items"
+                v-for="(item, index) in list_zone"
                 :key="index"
                 @click="selectZone(item)"
               >
-                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                <v-list-tile-title>{{ item.text }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
@@ -47,21 +59,31 @@
 
       </v-flex>
 
-      <v-flex md12
-        sm12
-        lg1
+      <v-flex
+
+        lg2
+        ml-3
         pt-5>
-        <v-subheader>Meter : </v-subheader>
+        <v-subheader v-if="ZonePick !== ''">Equipment : </v-subheader>
       </v-flex>
 
       <v-flex
-        md12
-        sm12
-        lg5
+
+        lg3
+        mr-5
         pt-5
       >
-          <v-menu offset-y>
+          <v-menu v-if="ZonePick !== ''" offset-y>
             <template v-slot:activator="{ on }">
+             <v-text-field
+               v-model="MeterName"
+               label="Select Equipment"
+               prepend-icon=""
+               readonly
+               v-on="on"
+             ></v-text-field>
+           </template>
+            <!-- <template v-slot:activator="{ on }">
               <v-btn
                 color="blue"
                 dark
@@ -69,21 +91,21 @@
               >
                 {{MeterName}}
               </v-btn>
-            </template>
+            </template> -->
             <v-list>
               <v-list-tile
-                v-for="(item, index) in itemsMeter"
+                v-for="(item2, index) in list_meter"
                 :key="index"
-                @click="selectMeter(item)"
+                @click="selectMeter(item2)"
               >
-                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                <v-list-tile-title>{{ item2.text }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
         </v-flex>
 
-</v-layout>
-<v-layout>
+  </v-layout>
+  <v-layout>
         <v-flex md12
           sm12
           lg1>
@@ -95,18 +117,23 @@
           lg2
 
         >
-         <v-menu
-        >
-           <template v-slot:activator="{ on }">
-             <v-btn
-               color="blue"
-               dark
-               v-on="on"
-             >
-               {{dateStart}}
-             </v-btn>
-           </template>
-
+        <v-menu
+         :nudge-right="40"
+         lazy
+         transition="scale-transition"
+         offset-y
+         full-width
+         max-width="290px"
+         min-width="290px">
+          <template v-slot:activator="{ on }">
+           <v-text-field
+             v-model="dateStart"
+             label="Select Date"
+             prepend-icon=""
+             readonly
+             v-on="on"
+           ></v-text-field>
+         </template>
            <div>
 
              <v-date-picker
@@ -117,6 +144,45 @@
              ></v-date-picker>
            </div>
          </v-menu>
+
+
+      </v-flex>
+
+      <v-flex md12
+        sm12
+        lg2
+        ml-3>
+
+           <v-menu
+            ref="menu"
+            v-model="menu1"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            :return-value.sync="timeStart"
+            lazy
+            transition="scale-transition"
+            offset-y
+            full-width
+            max-width="290px"
+            min-width="290px">
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="timeStart"
+              label="Select Time"
+              prepend-icon=""
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-time-picker
+            format="24hr"
+            v-if="menu1"
+            v-model="timeStart"
+            full-width
+            color="blue"
+            @click:minute="$refs.menu.save(timeStart)"
+          ></v-time-picker>
+        </v-menu>
       </v-flex>
 
 
@@ -129,23 +195,30 @@
       <v-flex
         md12
         sm12
-        lg5
+        lg2
       >
-         <v-menu >
+         <v-menu
+          :nudge-right="40"
+          lazy
+          transition="scale-transition"
+          offset-y
+          full-width
+          max-width="290px"
+          min-width="290px">
            <template v-slot:activator="{ on }">
-             <v-btn
-               color="blue"
-               dark
-               v-on="on"
-             >
-               {{dateEnd}}
-             </v-btn>
-           </template>
+            <v-text-field
+              v-model="dateEnd"
+              label="Select Date"
+              prepend-icon=""
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
 
            <div>
 
              <v-date-picker
-
+               color="blue"
                v-model="picker2"
                class="mt-3"
              ></v-date-picker>
@@ -153,15 +226,51 @@
          </v-menu>
 
       </v-flex>
+      <v-flex
+      md12
+        sm12
+        lg2
+        ml-3>
+
+           <v-menu
+           ref="menu2"
+            v-model="menu2"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            :return-value.sync="timeEnd"
+            lazy
+            transition="scale-transition"
+            offset-y
+            full-width
+            max-width="290px"
+            min-width="290px">
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="timeEnd"
+              label="Select Time"
+              prepend-icon=""
+              readonly
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-time-picker
+            format="24hr"
+            v-if="menu2"
+            v-model="timeEnd"
+            full-width
+            color="blue"
+            @click:minute="$refs.menu2.save(timeEnd)"
+          ></v-time-picker>
+        </v-menu>
+      </v-flex>
 
         <v-flex mb-5>
           <div class="text-xs-center">
 
           <v-btn
-
             color="blue"
             dark
-            v-on="on"
+            v-on:click="checkSelect()"
           >
             FIND
             <!-- <v-icon right dark>mdi-search</v-icon> -->
@@ -178,11 +287,13 @@
 
 
 
-    <v-layout
-    justify-center
-    >
+  <v-layout justify-center>
     <v-flex lg12 pt-5>
-      <v-card>
+      <v-card class="border-primary">
+        <v-card-title class="headtab">
+          <v-icon dark large left > mdi-table-large </v-icon>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"Log Table"}}</span>
+        </v-card-title>
       <template>
         <v-data-table
           :headers="headers"
@@ -195,6 +306,30 @@
             <td class="text-xs-center">{{ props.item.Log_V1 }}</td>
             <td class="text-xs-center">{{ props.item.Log_V2 }}</td>
             <td class="text-xs-center">{{ props.item.Log_V3 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_V12 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_V23 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_V31 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_I1 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_I2 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_I3 }}</td>
+            <td class="text-xs-center">{{ props.item.Log_In }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Pa }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Pb }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Pc }}</td>
+            <td class="text-xs-center">{{ props.item.Log_PSum }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Qa }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Qb }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Qc }}</td>
+            <td class="text-xs-center">{{ props.item.Log_PFa }}</td>
+            <td class="text-xs-center">{{ props.item.Log_PFb }}</td>
+            <td class="text-xs-center">{{ props.item.Log_PFc }}</td>
+            <td class="text-xs-center">{{ props.item.Log_PFSum }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Sa }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Sb }}</td>
+            <td class="text-xs-center">{{ props.item.Log_Sc }}</td>
+            <td class="text-xs-center">{{ props.item.Log_F }}</td>
+            <td class="text-xs-center">{{ props.item.Log_kWh }}</td>
+            <td class="text-xs-center">{{ props.item.Log_kWh_Diff }}</td>
             <!-- <td class="text-xs-center">{{ props.item.iron }}</td> -->
           </template>
         </v-data-table>
@@ -215,10 +350,18 @@ import axios from 'axios';
         // url_sev: 'http://localhost:8997',
         url_sev: 'http://35.186.149.130:8997',
         data_table: [],
-        ZoneName: 'Select Zone',
+        timeStert: null,
+        menu1: false,
+        modal1: false,
+        timeEnd: null,
+        menu2: false,
+        modal2: false,
+        ZoneName: '',
+        ZonePick: '',
+        MeterName: '',
         MeterPick: '',
-        MeterName: 'Select Equipment',
-        MeterPick: '',
+        list_zone: '',
+        list_meter: '',
         items: [{
           "name":"Zone 1",
           "id":"1"
@@ -227,97 +370,41 @@ import axios from 'axios';
           "name":"meter 1",
           "id":"1"
         }],
-        dateStart: 'Select Date',
-        dateEnd: 'Select Date',
+        dateStart: '',
+        dateTimeStart: '',
+        dateTimeENd: '',
+        dateEnd: '',
         picker: new Date().toISOString().substr(0, 10),
         picker2: new Date().toISOString().substr(0, 10),
         headers: [
           { text: 'Log_Date', value: 'Log_Date',align: 'center' },
           { text: 'Log_V1', value: 'Log_V1',align: 'center' },
           { text: 'Log_V2', value: 'Log_V2',align: 'center' },
-          { text: 'Log_V3', value: 'Log_V3',align: 'center' }
-        ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%'
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%'
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%'
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%'
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%'
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%'
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%'
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%'
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%'
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%'
-          }
+          { text: 'Log_V3', value: 'Log_V3',align: 'center' },
+          { text: 'Log_V12', value: 'Log_V12',align: 'center' },
+          { text: 'Log_V23', value: 'Log_V23',align: 'center' },
+          { text: 'Log_V31', value: 'Log_V31',align: 'center' },
+          { text: 'Log_I1', value: 'Log_I1',align: 'center' },
+          { text: 'Log_I2', value: 'Log_I2',align: 'center' },
+          { text: 'Log_I3', value: 'Log_I3',align: 'center' },
+          { text: 'Log_In', value: 'Log_In',align: 'center' },
+          { text: 'Log_Pa', value: 'Log_Pa',align: 'center' },
+          { text: 'Log_Pb', value: 'Log_Pb',align: 'center' },
+          { text: 'Log_Pc', value: 'Log_Pc',align: 'center' },
+          { text: 'Log_PSum', value: 'Log_PSum',align: 'center' },
+          { text: 'Log_Qa', value: 'Log_Qa',align: 'center' },
+          { text: 'Log_Qb', value: 'Log_Qb',align: 'center' },
+          { text: 'Log_Qc', value: 'Log_Qc',align: 'center' },
+          { text: 'Log_PFa', value: 'Log_PFa',align: 'center' },
+          { text: 'Log_PFb', value: 'Log_PFb',align: 'center' },
+          { text: 'Log_PFc', value: 'Log_PFc',align: 'center' },
+          { text: 'Log_PFSum', value: 'Log_PFSum',align: 'center' },
+          { text: 'Log_Sa', value: 'Log_Sa',align: 'center' },
+          { text: 'Log_Sb', value: 'Log_Sb',align: 'center' },
+          { text: 'Log_Sc', value: 'Log_Sc',align: 'center' },
+          { text: 'Log_F', value: 'Log_F',align: 'center' },
+          { text: 'Log_kWh', value: 'Log_kWh',align: 'center' },
+          { text: 'Log_kWh_Diff', value: 'Log_kWh_Diff',align: 'center' }
         ]
       }
     },
@@ -331,14 +418,68 @@ import axios from 'axios';
       }
     },
     mounted () {
-      this.getDataTable()
+      this.getZone()
     },
     methods: {
-      getDataTable(e) {
-        axios.post(this.url_sev+'/datatable', {
-          MeterID: '1'
+      checkSelect(){
+        console.log(this.dateStart)
+        console.log(this.timeStart)
+        if (this.ZonePick == ''){
+          alert('Please select zone')
+        }
+        else if (this.MeterPick == ''){
+          alert('Please select Equipment')
+        }
+        else if (this.dateStart == '' || this.timeStart == '' || this.dateEnd == '' || this.timeEnd == '' || this.dateStart == undefined || this.timeStart == undefined || this.dateEnd == undefined || this.timeEnd == undefined ) {
+          alert('Please select Date and Time')
+        }
+        else{
+          this.getDataTable()
+        }
+      },
+      getZone(e) {
+
+        axios.post(this.url_sev+'/getzone', {
+          SiteID: localStorage.SiteID
         })
         .then(response => {
+            console.log(response.data)
+            this.list_zone = response.data.zone_data
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+      },
+      getMeter(e) {
+
+        axios.post(this.url_sev+'/getmeter', {
+          ZoneID: this.ZonePick
+        })
+        .then(response => {
+            console.log(response.data)
+            this.list_meter = response.data.meter_data
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+      },
+      getDataTable(e) {
+        // alert(this.time1)
+        console.log(this.MeterPick)
+        console.log(this.dateStart)
+        console.log(this.dateEnd)
+        this.dateTimeStart = ''
+        this.dateTimeEnd = ''
+        this.dateTimeStart = this.dateStart + ' ' + this.timeStart
+        this.dateTimeEnd = this.dateEnd + ' ' + this.timeEnd
+        // alert(this.dateStart)
+        axios.post(this.url_sev+'/datatable', {
+          MeterID: this.MeterPick,
+          dateStart: this.dateTimeStart,
+          dateEnd: this.dateTimeEnd
+        })
+        .then(response => {
+            console.log(response.data)
             this.data_table = response.data.list_data
         })
         .catch(error =>{
@@ -346,12 +487,15 @@ import axios from 'axios';
         })
       },
       selectZone(e) {
-        this.ZoneName = e.name
-        this.ZonePick = e.name
+        this.ZoneName = e.text
+        this.ZonePick = e.id
+        this.MeterName = ''
+        this.MeterPick = ''
+        this.getMeter()
       },
       selectMeter(e) {
-        this.MeterName = e.name
-        this.MeterPick = e.name
+        this.MeterName = e.text
+        this.MeterPick = e.id
       }
     }
   }

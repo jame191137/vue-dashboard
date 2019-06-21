@@ -1,8 +1,8 @@
 <template>
-  <!--   v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' " -->
+    <!-- v-if="$route.name == 'Dashboard1'|| $route.name == 'Dashboard2' || $route.name == 'Historical' " -->
   <v-navigation-drawer
     id="app-drawer"
-    v-if="$route.name != 'Login'"
+    v-if="showTab"
     v-model="inputValue"
     app
     dark
@@ -95,6 +95,7 @@ export default {
   data: () => ({
     url_sev: 'http://35.186.149.130:8997',
     // url_sev: 'http://localhost:8997',
+    showTab: false,
     zone_data: {},
     logo: './img/vuetifylogo.png',
     logo_cp: 'images/logo_cp.png',
@@ -179,7 +180,10 @@ export default {
     '$route' (val) {
       // alert((this.links).length)
       if ( this.$route.name != 'Login'){
+        this.showTab = true
         this.getzone()
+      } else {
+        this.showTab = false
       }
       this.email = localStorage.email
     }

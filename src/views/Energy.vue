@@ -12,10 +12,15 @@
       sm12
       lg12
     >
-      <v-card>
-        <v-card-title>
-          <span class="varela-font boxhead">{{"Realtime Trend"}}</span>
+      <v-card class="border-primary" >
+        <v-card-title class="headtab">
+          <v-icon dark large left > mdi-chart-areaspline </v-icon>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"Realtime Trend"}}</span>
         </v-card-title>
+        <!-- <v-card-title>
+           mdi-chart-areaspline
+          <span class="varela-font boxhead">{{"Realtime Trend"}}</span>
+        </v-card-title> -->
          <v-divider light></v-divider>
         <!-- <div> -->
           <apexchart type="area" :options="chartOptions" :series="series"></apexchart>
@@ -31,8 +36,12 @@
       lg4
     >
       <v-card class="border-primary" height="100%">
+        <v-card-title class="headtab">
+          <v-icon dark large left > mdi-speedometer </v-icon>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{i.ZoneName}}{{"( "}}{{i.MeterName}}{{")"}}</span>
+        </v-card-title>
         <v-card-text >
-          <div class="varela-font boxhead">{{i.MeterName}}</div>
+          <!-- <div class="varela-font boxhead">{{i.MeterName}}</div> -->
           <v-layout wrap>
               <v-flex
                 sm6
@@ -363,6 +372,16 @@ export default {
   font-weight: 900 !important;
   /* letter-spacing: -1px; */
   text-transform: uppercase !important;
+}
+.boxheadwhite {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900 !important;
+  /* letter-spacing: -1px; */
+  text-transform: uppercase !important;
+}
+.headtab {
+  background-color: #4e73df;
 }
 .boxtitle {
   color: #464854;
