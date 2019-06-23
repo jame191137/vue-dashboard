@@ -119,7 +119,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Total today</div>
-          <div class="varela-font boxtitle">{{this.RT_kWh_Today}} kWH</div>
+          <div class="varela-font boxtitle2">{{this.RT_kWh_Today}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -134,7 +134,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Daily avg</div>
-          <div class="varela-font boxtitle">{{this.RT_kWh_Daily_Avg}} kWH</div>
+          <div class="varela-font boxtitle2">{{this.RT_kWh_Daily_Avg}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -149,7 +149,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Total this month</div>
-          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly}} kWH</div>
+          <div class="varela-font boxtitle2">{{this.RT_kWh_Monthly}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -164,7 +164,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Monthly avg</div>
-          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly_Avg}} kWH</div>
+          <div class="varela-font boxtitle2">{{this.RT_kWh_Monthly_Avg}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
