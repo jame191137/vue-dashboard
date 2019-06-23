@@ -51,68 +51,68 @@
                 <v-card flat>
 
 
-                <div class="varela-font boxtitle">{{"V1 "}} </div>
-                <div class="varela-font boxtitle">{{"V2 "}} </div>
-                <div class="varela-font boxtitle">{{"V3 "}} </div>
-                <div class="varela-font boxtitle">{{"V12 "}} </div>
-                <div class="varela-font boxtitle">{{"V23 "}} </div>
-                <div class="varela-font boxtitle">{{"V31 "}} </div>
-                <div class="varela-font boxtitle">{{"I1 "}} </div>
-                <div class="varela-font boxtitle">{{"I2 "}} </div>
-                <div class="varela-font boxtitle">{{"I3 "}} </div>
-                <div class="varela-font boxtitle">{{"In "}} </div>
-                <div class="varela-font boxtitle">{{"Pa "}}</div>
-                <div class="varela-font boxtitle">{{"Pb "}} </div>
-                <div class="varela-font boxtitle">{{"Pc "}} </div>
-                <div class="varela-font boxtitle">{{"PSum "}} </div>
-                <div class="varela-font boxtitle">{{"Qa "}} </div>
-                <div class="varela-font boxtitle">{{"Qb "}} </div>
-                <div class="varela-font boxtitle">{{"Qc "}} </div>
-                <div class="varela-font boxtitle">{{"PFa "}} </div>
-                <div class="varela-font boxtitle">{{"PFb "}} </div>
-                <div class="varela-font boxtitle">{{"PFc "}} </div>
-                <div class="varela-font boxtitle">{{"PFSum "}} </div>
-                <div class="varela-font boxtitle">{{"Sa "}} </div>
-                <div class="varela-font boxtitle">{{"Sb "}} </div>
-                <div class="varela-font boxtitle">{{"Sc "}} </div>
-                <div class="varela-font boxtitle">{{"F "}} </div>
-                <div class="varela-font boxtitle">{{"kWh "}} </div>
+                <div class="varela-font boxtitle3">{{"V1 "}} </div>
+                <div class="varela-font boxtitle3">{{"V2 "}} </div>
+                <div class="varela-font boxtitle3">{{"V3 "}} </div>
+                <div class="varela-font boxtitle3">{{"V12 "}} </div>
+                <div class="varela-font boxtitle3">{{"V23 "}} </div>
+                <div class="varela-font boxtitle3">{{"V31 "}} </div>
+                <div class="varela-font boxtitle3">{{"I1 "}} </div>
+                <div class="varela-font boxtitle3">{{"I2 "}} </div>
+                <div class="varela-font boxtitle3">{{"I3 "}} </div>
+                <div class="varela-font boxtitle3">{{"In "}} </div>
+                <div class="varela-font boxtitle3">{{"Pa "}}</div>
+                <div class="varela-font boxtitle3">{{"Pb "}} </div>
+                <div class="varela-font boxtitle3">{{"Pc "}} </div>
+                <div class="varela-font boxtitle3">{{"PSum "}} </div>
+                <div class="varela-font boxtitle3">{{"Qa "}} </div>
+                <div class="varela-font boxtitle3">{{"Qb "}} </div>
+                <div class="varela-font boxtitle3">{{"Qc "}} </div>
+                <div class="varela-font boxtitle3">{{"PFa "}} </div>
+                <div class="varela-font boxtitle3">{{"PFb "}} </div>
+                <div class="varela-font boxtitle3">{{"PFc "}} </div>
+                <div class="varela-font boxtitle3">{{"PFSum "}} </div>
+                <div class="varela-font boxtitle3">{{"Sa "}} </div>
+                <div class="varela-font boxtitle3">{{"Sb "}} </div>
+                <div class="varela-font boxtitle3">{{"Sc "}} </div>
+                <div class="varela-font boxtitle3">{{"F "}} </div>
+                <div class="varela-font boxtitle3">{{"kWh "}} </div>
               </v-card>
               </v-flex>
               <v-flex
                 sm6
                 md6
-                lg5
+                lg4
               >
                 <v-card flat>
 
 
-                <div class="varela-font boxtitle"> {{i.RT_V1}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_V2}} </div>
-                <div class="varela-font boxtitle">{{i.RT_V3}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_V12}} </div>
-                <div class="varela-font boxtitle">{{i.RT_V23}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_V31}} </div>
-                <div class="varela-font boxtitle">{{i.RT_I1}} </div>
-                <div class="varela-font boxtitle">{{i.RT_I2}} </div>
-                <div class="varela-font boxtitle">{{i.RT_I3}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_In}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_Pa}} </div>
-                <div class="varela-font boxtitle">{{i.RT_Pb}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_Pc}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_PSum}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_Qa}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_Qb}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_Qc}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_PFa}} </div>
-                <div class="varela-font boxtitle">{{i.RT_PFb}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_PFc}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_PFSum}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_Sa}} </div>
-                <div class="varela-font boxtitle">{{i.RT_Sb}} </div>
-                <div class="varela-font boxtitle">{{i.RT_Sc}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_F}} </div>
-                <div class="varela-font boxtitle"> {{i.RT_kWh}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_V1}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_V2}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_V3}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_V12}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_V23}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_V31}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_I1}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_I2}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_I3}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_In}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_Pa}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_Pb}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_Pc}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_PSum}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_Qa}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_Qb}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_Qc}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_PFa}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_PFb}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_PFc}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_PFSum}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_Sa}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_Sb}} </div>
+                <div class="varela-font boxtitle2">{{i.RT_Sc}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_F}} </div>
+                <div class="varela-font boxtitle2"> {{i.RT_kWh}} </div>
               </v-card>
             </v-flex>
               <v-flex
@@ -123,32 +123,32 @@
                 <v-card flat>
 
 
-                <div class="varela-font boxtitle"> {{" V"}}</div>
-                <div class="varela-font boxtitle"> {{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
-                <div class="varela-font boxtitle">{{" V"}}</div>
+                <div class="varela-font boxtitle2"> {{" V"}}</div>
+                <div class="varela-font boxtitle2"> {{" V"}}</div>
+                <div class="varela-font boxtitle2">{{" V"}}</div>
+                <div class="varela-font boxtitle2">{{" V"}}</div>
+                <div class="varela-font boxtitle2">{{" V"}}</div>
+                <div class="varela-font boxtitle2">{{" V"}}</div>
+                <div class="varela-font boxtitle2">{{" A"}}</div>
+                <div class="varela-font boxtitle2">{{" A"}}</div>
+                <div class="varela-font boxtitle2">{{" A"}}</div>
+                <div class="varela-font boxtitle2">{{" A"}}</div>
+                <div class="varela-font boxtitle2">{{" kW"}}</div>
+                <div class="varela-font boxtitle2">{{" kW"}}</div>
+                <div class="varela-font boxtitle2">{{" kW"}}</div>
+                <div class="varela-font boxtitle2">{{" kW"}}</div>
+                <div class="varela-font boxtitle2">{{"kVar"}}</div>
+                <div class="varela-font boxtitle2">{{" kVar"}}</div>
+                <div class="varela-font boxtitle2">{{" kVar"}}</div>
+                <div class="varela-font boxtitle2">{{" "}}</div>
+                <div class="varela-font boxtitle2">{{" "}}</div>
+                <div class="varela-font boxtitle2">{{" "}}</div>
+                <div class="varela-font boxtitle2">{{" "}}</div>
+                <div class="varela-font boxtitle2">{{" kVa"}}</div>
+                <div class="varela-font boxtitle2">{{" kVa"}}</div>
+                <div class="varela-font boxtitle2">{{" kVa"}}</div>
+                <div class="varela-font boxtitle2">{{" Hz"}}</div>
+                <div class="varela-font boxtitle2">{{" kWh"}}</div>
 
               </v-card>
             </v-flex>
@@ -383,12 +383,19 @@ export default {
 .headtab {
   background-color: #4e73df;
 }
-.boxtitle {
+.boxtitle2 {
   color: #464854;
   font-weight: 500 !important;
   font-size: 25px;
   /* letter-spacing: -1px; */
-  text-transform: uppercase !important;
+  /* text-transform: uppercase !important; */
+}
+.boxtitle3 {
+  color: #4e73df;
+  font-weight: 500 !important;
+  font-size: 25px;
+  /* letter-spacing: -1px; */
+  /* text-transform: uppercase !important; */
 }
 .small {
   max-width: 600px;

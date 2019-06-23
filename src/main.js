@@ -21,7 +21,9 @@ import store from '@/store'
 // import Vuex from 'vuex';
 import VueApexCharts from 'vue-apexcharts'
 import VueCookies from 'vue-cookies'
+import excel from 'vue-excel-export'
 
+Vue.use(excel)
 Vue.use(VueCookies)
 
 Vue.use(VueApexCharts)

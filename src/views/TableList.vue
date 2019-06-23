@@ -287,12 +287,35 @@
 
 
 
+
   <v-layout justify-center>
+
     <v-flex lg12 pt-5>
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-table-large </v-icon>
           <span  class="title font-weight-light varela-font boxheadwhite">{{"Log Table"}}</span>
+          <v-spacer></v-spacer>
+          <export-excel
+              class   = "btn btn-default"
+              :data   = "data_table"
+              :fields = "json_fields"
+              type = "xls"
+              worksheet = "My Worksheet"
+              name    = "report_table.xls">
+              <v-btn color="blue" dark > XLS </v-btn>
+
+          </export-excel>
+          <export-excel
+              class   = "btn btn-default"
+              :data   = "data_table"
+              :fields = "json_fields"
+              type = "csv"
+              worksheet = "My Worksheet"
+              name    = "report_table.csv">
+              <v-btn color="blue" dark > CSV </v-btn>
+
+          </export-excel>
         </v-card-title>
       <template>
         <v-data-table
@@ -349,6 +372,76 @@ import axios from 'axios';
       return {
         // url_sev: 'http://localhost:8997',
         url_sev: 'http://35.186.149.130:8997',
+        json_fields: {
+          'Log_Date': 'Log_Date',
+          'Log_V1': 'Log_V1',
+          'Log_V2': 'Log_V2',
+          'Log_V3': 'Log_V3',
+          'Log_V12': 'Log_V12',
+          'Log_V23': 'Log_V23',
+          'Log_V31': 'Log_V31',
+          'Log_I1': 'Log_I1',
+          'Log_I2': 'Log_I2',
+          'Log_I3': 'Log_I3',
+          'Log_In': 'Log_In',
+          'Log_Pa': 'Log_Pa',
+          'Log_Pb': 'Log_Pb',
+          'Log_Pc': 'Log_Pc',
+          'Log_PSum': 'Log_PSum',
+          'Log_Qa': 'Log_Qa',
+          'Log_Qb': 'Log_Qb',
+          'Log_Qc': 'Log_Qc',
+          'Log_PFa': 'Log_PFa',
+          'Log_PFb': 'Log_PFb',
+          'Log_PFc': 'Log_PFc',
+          'Log_PFSum': 'Log_PFSum',
+          'Log_Sa': 'Log_Sa',
+          'Log_Sb': 'Log_Sb',
+          'Log_Sc': 'Log_Sc',
+          'Log_F': 'Log_F',
+          'Log_kWh': 'Log_kWh',
+          'Log_kWh_Diff': 'Log_kWh_Diff'
+
+           // 'Complete name': 'name',
+           // 'City': 'city',
+           // 'Telephone': 'phone.mobile',
+           // 'Telephone 2' : {
+           //     field: 'phone.landline',
+           //     callback: (value) => {
+           //         return `Landline Phone - ${value}`;
+           //     }
+           // },
+       },
+       // json_data: [
+       //     {
+       //         'name': 'Tony Peña',
+       //         'city': 'New York',
+       //         'country': 'United States',
+       //         'birthdate': '1978-03-15',
+       //         'phone': {
+       //             'mobile': '1-541-754-3010',
+       //             'landline': '(541) 754-3010'
+       //         }
+       //     },
+       //     {
+       //         'name': 'Thessaloniki',
+       //         'city': 'Athens',
+       //         'country': 'Greece',
+       //         'birthdate': '1987-11-23',
+       //         'phone': {
+       //             'mobile': '+1 855 275 5071',
+       //             'landline': '(2741) 2621-244'
+       //         }
+       //     }
+       // ],
+       json_meta: [
+           [
+               {
+                   'key': 'charset',
+                   'value': 'utf-8'
+               }
+           ]
+       ],
         data_table: [],
         timeStert: null,
         menu1: false,
