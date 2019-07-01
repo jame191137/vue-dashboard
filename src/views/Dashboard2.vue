@@ -119,7 +119,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Total today</div>
-          <div class="varela-font boxtitle2">{{this.RT_kWh_Today}} kWH</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Today}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -134,7 +134,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Daily avg</div>
-          <div class="varela-font boxtitle2">{{this.RT_kWh_Daily_Avg}} kWH</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Daily_Avg}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -149,7 +149,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Total this month</div>
-          <div class="varela-font boxtitle2">{{this.RT_kWh_Monthly}} kWH</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -164,7 +164,7 @@
           <!-- <v-card-actions>
           </v-card-actions> -->
           <div class="varela-font boxhead">Monthly avg</div>
-          <div class="varela-font boxtitle2">{{this.RT_kWh_Monthly_Avg}} kWH</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly_Avg}} kWH</div>
         </v-card-text>
       </v-card>
       </v-flex>
@@ -226,11 +226,12 @@ export default {
     this.$store.state.url_sev = 'http://35.186.149.130:8997'
 
     setInterval(() => { this.realtimeUsageAPI() }, 60000)
-    setInterval(() => { this.getLogPsum2() }, 60000)
+    setInterval(() => { this.getLogPsum() }, 60000)
+    // setInterval(() => { this.getLogPsum2() }, 60000)
     setInterval(() => { console.log(this.ZoneID) }, 1000)
     this.realtimeUsageAPI()
-    // this.getLogPsum()
-    this.getLogPsum2()
+    this.getLogPsum()
+    // this.getLogPsum2()
     this.getSumDay()
     this.getSumYear()
     this.getdataRT()
@@ -250,11 +251,12 @@ export default {
 
           this.reloadPage = true
           this.IntervalRealtime = setInterval(() => { this.realtimeUsageAPI() }, 60000)
-          this.IntervalPsum = setInterval(() => { this.getLogPsum2() }, 60000)
+          this.IntervalPsum = setInterval(() => { this.getLogPsum() }, 60000)
+          // this.IntervalPsum = setInterval(() => { this.getLogPsum2() }, 60000)
           // this.t = setInterval(() => { console.log(this.ZoneID) }, 1000)
           this.realtimeUsageAPI()
-          // this.getLogPsum()
-          this.getLogPsum2()
+          this.getLogPsum()
+          // this.getLogPsum2()
           this.getSumDay()
           this.getSumYear()
           this.getdataRT()
@@ -310,34 +312,34 @@ export default {
           console.log(error)
       })
     },
-    // getLogPsum(e) {
-    //   axios.post(this.$store.state.url_sev+'/logpsum', {
-    //     MeterID: '1'
-    //   })
-    //   .then(response => {
-    //       console.log(response.data)
-    //       this.$store.state.Psum = response.data.Psum
-    //       this.$store.state.date_Psum = response.data.date_Psum
-    //       this.updateChart()
-    //   })
-    //   .catch(error =>{
-    //       console.log(error);
-    //   })
-    // },
-    getLogPsum2(e) {
-
-      axios.post(this.$store.state.url_sev+'/logpsum3', {
-        SiteID: localStorage.SiteID
+    getLogPsum(e) {
+      axios.post(this.$store.state.url_sev+'/logpsum', {
+        MeterID: localStorage.ZoneID
       })
       .then(response => {
-          this.list_psum2 = response.data.list_psum
-          this.date_Psum2 = response.data.date_Psum
+          console.log(response.data)
+          this.list_psum = response.data.list_psum
+          this.date_Psum = response.data.date_Psum
           this.updateChart()
       })
       .catch(error =>{
           console.log(error);
       })
     },
+    // getLogPsum2(e) {
+    //
+    //   axios.post(this.$store.state.url_sev+'/logpsum3', {
+    //     SiteID: localStorage.SiteID
+    //   })
+    //   .then(response => {
+    //       this.list_psum2 = response.data.list_psum
+    //       this.date_Psum2 = response.data.date_Psum
+    //       this.updateChart()
+    //   })
+    //   .catch(error =>{
+    //       console.log(error);
+    //   })
+    // },
     getSumDay(e) {
       axios.post(this.$store.state.url_sev+'/sumday', {
         MeterID: this.ZoneID
@@ -399,8 +401,9 @@ export default {
     },
     updateChart() {
       // const newData = this.$store.state.Psum
-      console.log(this.list_psum2)
-      const newData2 = this.list_psum2
+      console.log(this.list_psum)
+      const newData2 = this.list_psum
+      // const newData2 = this.list_psum2
       this.chartOptions = {
         chart: {
             width: "100%",
@@ -429,7 +432,8 @@ export default {
           },
           xaxis: {
             // categories: this.$store.state.date_Psum
-            categories: this.date_Psum2
+            categories: this.date_Psum
+            // categories: this.date_Psum2
           },
           yaxis: [
             {
@@ -565,6 +569,8 @@ export default {
       IntervalPsum: '',
       list_psum2: [],
       date_Psum2: [],
+      date_Psum: [],
+      list_psum: [],
       ZoneID: '',
       reloadPage: true,
       test: '',

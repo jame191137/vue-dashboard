@@ -118,6 +118,7 @@
 
         >
         <v-menu
+        :close-on-content-click="false"
          :nudge-right="40"
          lazy
          transition="scale-transition"
@@ -141,6 +142,8 @@
                color="blue"
                v-model="picker"
                class="mt-3"
+               max="dateMax"
+
              ></v-date-picker>
            </div>
          </v-menu>
@@ -189,7 +192,7 @@
       <v-flex md12
         sm12
         lg1>
-        <v-subheader>To : </v-subheader>
+        <v-subheader v-if="dateStart != ''">To : </v-subheader>
       </v-flex>
 
       <v-flex
@@ -198,6 +201,8 @@
         lg2
       >
          <v-menu
+         v-if="dateStart != ''"
+         :close-on-content-click="false"
           :nudge-right="40"
           lazy
           transition="scale-transition"
@@ -221,6 +226,8 @@
                color="blue"
                v-model="picker2"
                class="mt-3"
+               :min="dateMin"
+               :max="dateMax"
              ></v-date-picker>
            </div>
          </v-menu>
@@ -233,6 +240,7 @@
         ml-3>
 
            <v-menu
+            v-if="dateStart != ''"
            ref="menu2"
             v-model="menu2"
             :close-on-content-click="false"
@@ -366,6 +374,7 @@
 </template>
 
 <script>
+
 import axios from 'axios';
   export default {
     data () {
@@ -464,9 +473,17 @@ import axios from 'axios';
           "id":"1"
         }],
         dateStart: '',
+        // dateMax: '',
+        // dateMin: '',
+        dateMin: '',
+        dateMax: '',
         dateTimeStart: '',
+        timeStart: '',
+        timeEnd: '',
         dateTimeENd: '',
         dateEnd: '',
+        datetest: new Date('2011-04-11'),
+        newDate: new Date(),
         picker: new Date().toISOString().substr(0, 10),
         picker2: new Date().toISOString().substr(0, 10),
         headers: [
@@ -505,18 +522,98 @@ import axios from 'axios';
       picker (current, prev) {
         // alert(this.picker)
         this.dateStart = this.picker
+        this.dateEnd = ''
+        this.picker2 = new Date().toISOString().substr(0, 10)
+        this.addDate(30)
+
       },
       picker2 (current, prev) {
         this.dateEnd = this.picker2
       }
     },
+    mqtt: {
+    /** 'VueMqtt/#' or 'VueMqtt/+' or '+/+' or '#' */
+      'smart/testbroker' (data) {
+          alert(data)
+        // this.buff = this.buff + data + '<br>'
+      }
+    },
     mounted () {
       this.getZone()
+
+      var mqtt = require('mqtt')
+
+      var clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
+
+      var host = '35.168.149.130:1883'
+      // var host = 'wss://localhost:3001/Mosca'
+
+      var options = {
+        keepalive: 10,
+        clientId: clientId,
+        protocolId: 'MQTT',
+        protocolVersion: 4,
+        clean: true,
+        reconnectPeriod: 1000,
+        connectTimeout: 30 * 1000,
+        will: {
+          topic: 'WillMsg',
+          payload: 'Connection Closed abnormally..!',
+          qos: 0,
+          retain: false
+        },
+        // username: 'demo',
+        // password: 'demo',
+        // username: 'smartautomation',
+        // password: '0000',
+        rejectUnauthorized: false
+      }
+
+
+
+      this.$mqtt.subscribe('smart/testbroker')
+      this.$mqtt.publish('smart/testbroker', 'sfsdfhsdjk')
+
+
     },
     methods: {
+      // parseDate(input) {
+      //   var parts = input.match(/(\d+)/g);
+      //   // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+      //   return new Date(parts[0], parts[1]-1, parts[2]); // months are 0-based
+      // },
+      pad(number) {
+        return (number < 10 ? '0' : '') + number
+      },
+      addDate(e) {
+        if (this.picker) // as myDate can be null
+         // you have to set the this.myDate again, so vue can detect it changed
+         // this is not a caveat of this specific solution, but of any binding of dates
+         // this.datetest = this.parseDate(this.picker)
+         // var tt = document.getElementById('txtDate').value;
+
+        var date = new Date(this.picker);
+        var newdate = new Date(date);
+
+        newdate.setDate(newdate.getDate() + 60);
+
+        var dd = newdate.getDate();
+        var mm = newdate.getMonth() + 1;
+        var y = newdate.getFullYear();
+
+        var someFormattedDate = y + '-' + this.pad(mm) + '-' + dd;
+        this.dateMax = new Date(someFormattedDate).toISOString().substr(0, 10)
+        this.dateMin = new Date(this.picker).toISOString().substr(0, 10)
+        // this.dateMin = '2019-06-14'
+        // this.dateMax = '2019-06-15'
+
+        // console.log(this.dateMin)
+        // console.log(this.dateMax)
+         // alert(someFormattedDate)
+      },
       checkSelect(){
-        console.log(this.dateStart)
-        console.log(this.timeStart)
+        // console.log(this.dateStart)
+        // console.log(this.timeStart)
         if (this.ZonePick == ''){
           alert('Please select zone')
         }
@@ -536,7 +633,7 @@ import axios from 'axios';
           SiteID: localStorage.SiteID
         })
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             this.list_zone = response.data.zone_data
         })
         .catch(error =>{
@@ -549,7 +646,7 @@ import axios from 'axios';
           ZoneID: this.ZonePick
         })
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             this.list_meter = response.data.meter_data
         })
         .catch(error =>{
@@ -558,9 +655,9 @@ import axios from 'axios';
       },
       getDataTable(e) {
         // alert(this.time1)
-        console.log(this.MeterPick)
-        console.log(this.dateStart)
-        console.log(this.dateEnd)
+        // console.log(this.MeterPick)
+        // console.log(this.dateStart)
+        // console.log(this.dateEnd)
         this.dateTimeStart = ''
         this.dateTimeEnd = ''
         this.dateTimeStart = this.dateStart + ' ' + this.timeStart

@@ -16,7 +16,7 @@ import data from '../store/state.js'
 import paths from './paths'
 
 function route (path, view, name) {
-  console.log(name)
+  // console.log(name)
   return {
     name: name,
     // name: name || view,
