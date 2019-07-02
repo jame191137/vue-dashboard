@@ -222,6 +222,11 @@ export default {
                 to: '/historical',
                 icon: 'mdi-clipboard-outline',
                 text: 'Historical'
+              },
+              {
+                to: '/schedule',
+                icon: 'mdi-clipboard-outline',
+                text: 'Schedule'
               }
             )
             console.log('s')

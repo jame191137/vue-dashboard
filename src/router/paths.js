@@ -48,6 +48,11 @@
      view: 'TableList'
    },
    {
+     path: '/schedule',
+     name: 'Schedule',
+     view: 'Schedule'
+   },
+   {
      path: '/energy',
      name: 'Energy',
      view: 'Energy'
