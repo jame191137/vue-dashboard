@@ -170,11 +170,11 @@ export default {
       })
     },
     getLogPsum(e) {
-      axios.post(this.$store.state.url_sev+'/logpsum', {
-        MeterID: localStorage.ZoneID
+      axios.post(this.$store.state.url_sev+'/logpsumavg', {
+        SiteID: localStorage.SiteID
       })
       .then(response => {
-          // console.log(response.data)
+          console.log(response.data)
           this.list_psum = response.data.list_psum
           this.date_Psum = response.data.date_Psum
           this.updateChart()
@@ -183,23 +183,9 @@ export default {
           console.log(error);
       })
     },
-    // getLogPsum2(e) {
-    //
-    //   axios.post(this.$store.state.url_sev+'/logpsum3', {
-    //     SiteID: localStorage.SiteID
-    //   })
-    //   .then(response => {
-    //       this.list_psum2 = response.data.list_psum
-    //       this.date_Psum2 = response.data.date_Psum
-    //       this.updateChart()
-    //   })
-    //   .catch(error =>{
-    //       console.log(error);
-    //   })
-    // },
     getSumDay(e) {
-      axios.post(this.$store.state.url_sev+'/sumday', {
-        MeterID: this.ZoneID
+      axios.post(this.$store.state.url_sev+'/sumdayavg', {
+        SiteID: localStorage.SiteID
       })
       .then(response => {
           // console.log(response.data)
@@ -212,8 +198,8 @@ export default {
       })
     },
     getSumYear(e) {
-      axios.post(this.$store.state.url_sev+'/sumyear', {
-        MeterID: this.ZoneID
+      axios.post(this.$store.state.url_sev+'/sumyearavg', {
+        SiteID: localStorage.SiteID
       })
       .then(response => {
           // console.log(response.data)
@@ -258,7 +244,7 @@ export default {
     },
     updateChart() {
       // const newData = this.$store.state.Psum
-      // console.log(this.list_psum)
+      console.log(this.list_psum)
       const newData2 = this.list_psum
       // const newData2 = this.list_psum2
       this.chartOptions = {

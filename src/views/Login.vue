@@ -133,7 +133,7 @@ import axios from 'axios';
 
               localStorage.ZoneID = response.data.zone_data[0].id
               // this.$router.push(response.data.zone_data[0].to)
-              this.$router.push('/dashboard1')
+              this.$router.push('/overview')
 
             }
         })

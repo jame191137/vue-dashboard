@@ -8,6 +8,50 @@
   >
     <v-layout wrap>
 
+        <v-flex
+          md12
+          sm12
+          lg4
+        >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+            <div class="varela-font boxhead">REALTIME USAGE ( Watts )</div>
+            <div class="varela-font boxtitle">{{this.$store.state.RT_PSum}} W</div>
+          </v-card-text>
+        </v-card>
+        </v-flex>
+
+        <v-flex
+          md12
+          sm12
+          lg4
+        >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+            <div class="varela-font boxhead">REALTIME USAGE ( Amps )</div>
+            <div class="varela-font boxtitle">{{this.$store.state.RT_ISum}} A</div>
+          </v-card-text>
+        </v-card>
+        </v-flex>
+
+        <v-flex
+          md12
+          sm12
+          lg4
+        >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+            <!-- <v-card-actions>
+            </v-card-actions> -->
+            <div class="varela-font boxhead">REALTIME USAGE ( Volts )</div>
+            <div class="varela-font boxtitle">{{this.$store.state.RT_VSum}} V</div>
+          </v-card-text>
+        </v-card>
+      </v-flex>
       <v-flex
         md12
         sm12
@@ -27,6 +71,105 @@
       </v-flex>
 
       <v-flex
+        v-for="i in button_data"
+        :key="i.id"
+        sm12
+        md6
+        lg3
+      >
+        <v-card class="border-primary" >
+          <v-card-text>
+          <div class="varela-font boxhead">{{i.name}}</div>
+            <!-- :label="`state: ${i.switch_state}`" -->
+             <v-switch
+                 v-model="i.model"
+
+                 color="success"
+                 hide-details
+               ></v-switch>
+            </v-card-text>
+        </v-card>
+      </v-flex>
+
+      <v-flex
+        v-for="i in uptime_data"
+        :key="i.id"
+        sm12
+        md6
+        lg3
+      >
+        <v-card class="border-primary" height="100%">
+          <v-card-text>
+          <div class="varela-font boxhead">{{i.name}}</div>
+
+            <div class="varela-font boxtitle">{{i.value}}</div>
+          </v-card-text>
+        </v-card>
+
+      </v-flex>
+
+
+      <v-flex
+        sm12
+        md6
+        lg3
+      >
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Total today</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Today}} kWH</div>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm12
+        md6
+        lg3
+      >
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Daily avg</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Daily_Avg}} kWH</div>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm12
+        md6
+        lg3
+      >
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Total this month</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly}} kWH</div>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        sm12
+        md6
+        lg3
+      >
+      <v-card class="border-primary" height="100%">
+        <v-card-text>
+          <!-- <v-card-actions>
+          </v-card-actions> -->
+          <div class="varela-font boxhead">Monthly avg</div>
+          <div class="varela-font boxtitle">{{this.RT_kWh_Monthly_Avg}} kWH</div>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+
+      <v-flex
         sm12
         xs12
         md12
@@ -38,7 +181,7 @@
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-chart-areaspline </v-icon>
-          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 30 days (WH)"}}</span>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 30 days (kWH)"}}</span>
         </v-card-title>
 
          <v-divider light></v-divider>
@@ -56,7 +199,7 @@
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-chart-areaspline </v-icon>
-          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 12 Months (WH)"}}</span>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 12 Months (kHW)"}}</span>
         </v-card-title>
          <v-divider light></v-divider>
         <div>
@@ -174,7 +317,7 @@ export default {
         MeterID: localStorage.ZoneID
       })
       .then(response => {
-          // console.log(response.data)
+          console.log(response.data)
           this.list_psum = response.data.list_psum
           this.date_Psum = response.data.date_Psum
           this.updateChart()
@@ -258,7 +401,7 @@ export default {
     },
     updateChart() {
       // const newData = this.$store.state.Psum
-      // console.log(this.list_psum)
+      console.log(this.list_psum)
       const newData2 = this.list_psum
       // const newData2 = this.list_psum2
       this.chartOptions = {

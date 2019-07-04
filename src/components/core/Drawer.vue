@@ -211,16 +211,23 @@ export default {
           } else {
 
             this.links = response.data.zone_data
-            this.links.push(
+            this.links.unshift(
 
               {
-                to: '/energy',
-                icon: 'mdi-clipboard-outline',
-                text: 'Energy'
-              },
+                to: '/overview',
+                icon: 'mdi-camera-timer',
+                text: 'Overview'
+              }
+            )
+            this.links.push(
+              // {
+              //   to: '/energy',
+              //   icon: 'mdi-clipboard-outline',
+              //   text: 'Energy'
+              // },
               {
                 to: '/historical',
-                icon: 'mdi-clipboard-outline',
+                icon: 'mdi-timetable',
                 text: 'Historical'
               },
               {

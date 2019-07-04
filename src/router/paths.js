@@ -41,6 +41,13 @@
    //   view: 'Dashboard2'
    // },
    {
+     path: '/overview',
+     name: 'Overview',
+     // path: '/table-list',
+     // name: 'Table List',
+     view: 'Overview'
+   },
+   {
      path: '/historical',
      name: 'Historical',
      // path: '/table-list',

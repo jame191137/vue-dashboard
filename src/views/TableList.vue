@@ -128,7 +128,7 @@
          min-width="290px">
           <template v-slot:activator="{ on }">
            <v-text-field
-             v-model="dateStart"
+             v-model="picker"
              label="Select Date"
              prepend-icon=""
              readonly
@@ -192,7 +192,7 @@
       <v-flex md12
         sm12
         lg1>
-        <v-subheader v-if="dateStart != ''">To : </v-subheader>
+        <v-subheader v-if="picker != ''">To : </v-subheader>
       </v-flex>
 
       <v-flex
@@ -201,7 +201,7 @@
         lg2
       >
          <v-menu
-         v-if="dateStart != ''"
+         v-if="picker != ''"
          :close-on-content-click="false"
           :nudge-right="40"
           lazy
@@ -212,7 +212,7 @@
           min-width="290px">
            <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="dateEnd"
+              v-model="picker2"
               label="Select Date"
               prepend-icon=""
               readonly
@@ -240,7 +240,7 @@
         ml-3>
 
            <v-menu
-            v-if="dateStart != ''"
+            v-if="picker != ''"
            ref="menu2"
             v-model="menu2"
             :close-on-content-click="false"
@@ -482,8 +482,9 @@ import axios from 'axios';
         timeEnd: '',
         dateTimeENd: '',
         dateEnd: '',
-        datetest: new Date('2011-04-11'),
+        // datetest: new Date('2011-04-11'),
         newDate: new Date(),
+        // picker: new Date('2011-04-11'),
         picker: new Date().toISOString().substr(0, 10),
         picker2: new Date().toISOString().substr(0, 10),
         headers: [
@@ -521,7 +522,7 @@ import axios from 'axios';
     watch: {
       picker (current, prev) {
         // alert(this.picker)
-        this.dateStart = this.picker
+        // this.dateStart = this.picker
         this.dateEnd = ''
         this.picker2 = new Date().toISOString().substr(0, 10)
         this.addDate(30)
@@ -574,7 +575,7 @@ import axios from 'axios';
       this.$mqtt.subscribe('smart/testbroker')
       this.$mqtt.publish('smart/testbroker', 'sfsdfhsdjk')
 
-
+      this.addDate(30)
     },
     methods: {
       // parseDate(input) {
@@ -620,7 +621,8 @@ import axios from 'axios';
         else if (this.MeterPick == ''){
           alert('Please select Equipment')
         }
-        else if (this.dateStart == '' || this.timeStart == '' || this.dateEnd == '' || this.timeEnd == '' || this.dateStart == undefined || this.timeStart == undefined || this.dateEnd == undefined || this.timeEnd == undefined ) {
+        else if ( this.timeStart == '' || this.timeEnd == '' || this.dateStart == undefined || this.timeStart == undefined || this.dateEnd == undefined || this.timeEnd == undefined ) {
+        // else if (this.dateStart == '' || this.timeStart == '' || this.dateEnd == '' || this.timeEnd == '' || this.dateStart == undefined || this.timeStart == undefined || this.dateEnd == undefined || this.timeEnd == undefined ) {
           alert('Please select Date and Time')
         }
         else{
@@ -669,8 +671,16 @@ import axios from 'axios';
           dateEnd: this.dateTimeEnd
         })
         .then(response => {
+
+          if (response.data.status == 'fail') {
+            if (response.data.message == 'not found') {
+              alert('Data not found')
+            }
+          } else {
             console.log(response.data)
             this.data_table = response.data.list_data
+          }
+
         })
         .catch(error =>{
             console.log(error);
