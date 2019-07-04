@@ -38,7 +38,7 @@
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-chart-areaspline </v-icon>
-          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 30 days (WH)"}}</span>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 30 days (kWH)"}}</span>
         </v-card-title>
 
          <v-divider light></v-divider>
@@ -56,7 +56,7 @@
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-chart-areaspline </v-icon>
-          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 12 Months (WH)"}}</span>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"Last 12 Months (kWH)"}}</span>
         </v-card-title>
          <v-divider light></v-divider>
         <div>
