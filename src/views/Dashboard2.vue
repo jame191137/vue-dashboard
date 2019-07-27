@@ -338,7 +338,7 @@ export default {
           },
           dataLabels: {
             rotateLabels: 90,
-            enabled: true,
+            enabled: false,
             offsetY: -25,
             style: {
               fontSize: '12px',
@@ -391,7 +391,7 @@ export default {
           },
         },
         dataLabels: {
-          enabled: true,
+          enabled: false,
           offsetY: -25,
           style: {
             fontSize: '12px',

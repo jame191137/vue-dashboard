@@ -7,6 +7,7 @@
       sm12
       lg12
     >
+
     <v-card class="border-primary">
       <v-card-title class="headtab">
         <v-icon dark large left > mdi-calendar-clock </v-icon>
@@ -201,8 +202,8 @@
         lg2
       >
          <v-menu
-         v-if="picker != ''"
-         :close-on-content-click="false"
+          v-if="picker != ''"
+          :close-on-content-click="false"
           :nudge-right="40"
           lazy
           transition="scale-transition"
@@ -482,11 +483,13 @@ import axios from 'axios';
         timeEnd: '',
         dateTimeENd: '',
         dateEnd: '',
-        // datetest: new Date('2011-04-11'),
+
         newDate: new Date(),
-        // picker: new Date('2011-04-11'),
-        picker: new Date().toISOString().substr(0, 10),
-        picker2: new Date().toISOString().substr(0, 10),
+
+        // picker: new Date().toISOString().substr(0, 10),
+        // picker2: new Date().toISOString().substr(0, 10),
+        picker: '',
+        picker2: '',
         headers: [
           { text: 'Log_Date', value: 'Log_Date',align: 'center' },
           { text: 'Log_V1', value: 'Log_V1',align: 'center' },
@@ -522,7 +525,7 @@ import axios from 'axios';
     watch: {
       picker (current, prev) {
         // alert(this.picker)
-        // this.dateStart = this.picker
+        this.dateStart = this.picker
         this.dateEnd = ''
         this.picker2 = new Date().toISOString().substr(0, 10)
         this.addDate(30)
@@ -532,48 +535,8 @@ import axios from 'axios';
         this.dateEnd = this.picker2
       }
     },
-    mqtt: {
-    /** 'VueMqtt/#' or 'VueMqtt/+' or '+/+' or '#' */
-      'smart/testbroker' (data) {
-          alert(data)
-        // this.buff = this.buff + data + '<br>'
-      }
-    },
     mounted () {
       this.getZone()
-
-      var mqtt = require('mqtt')
-
-      var clientId = 'mqttjs_' + Math.random().toString(16).substr(2, 8)
-
-      var host = '35.168.149.130:1883'
-      // var host = 'wss://localhost:3001/Mosca'
-
-      var options = {
-        keepalive: 10,
-        clientId: clientId,
-        protocolId: 'MQTT',
-        protocolVersion: 4,
-        clean: true,
-        reconnectPeriod: 1000,
-        connectTimeout: 30 * 1000,
-        will: {
-          topic: 'WillMsg',
-          payload: 'Connection Closed abnormally..!',
-          qos: 0,
-          retain: false
-        },
-        // username: 'demo',
-        // password: 'demo',
-        // username: 'smartautomation',
-        // password: '0000',
-        rejectUnauthorized: false
-      }
-
-
-
-      this.$mqtt.subscribe('smart/testbroker')
-      this.$mqtt.publish('smart/testbroker', 'sfsdfhsdjk')
 
       this.addDate(30)
     },
@@ -664,7 +627,9 @@ import axios from 'axios';
         this.dateTimeEnd = ''
         this.dateTimeStart = this.dateStart + ' ' + this.timeStart
         this.dateTimeEnd = this.dateEnd + ' ' + this.timeEnd
-        // alert(this.dateStart)
+        // alert('asdsad'+this.dateStart)
+        // alert(this.dateTimeEnd)
+
         axios.post(this.url_sev+'/datatable', {
           MeterID: this.MeterPick,
           dateStart: this.dateTimeStart,

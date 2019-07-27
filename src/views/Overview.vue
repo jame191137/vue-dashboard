@@ -13,7 +13,7 @@
         sm12
         lg12
       >
-        <v-card class="border-primary">
+        <v-card class="border-primary"  >
           <v-card-title class="headtab">
             <v-icon dark large left > mdi-chart-areaspline </v-icon>
             <span  class="title font-weight-light varela-font boxheadwhite">{{"Realtime Trend (WATTS)"}}</span>
@@ -255,31 +255,39 @@ export default {
           plotOptions: {
             bar: {
               dataLabels: {
-                position: 'top'
+                position: 'top',
+                enabled: false
               }
             },
           },
-          // dataLabels: {
-          //   enabled: true,
-          //   offsetY: -25,
-          //   style: {
-          //     fontSize: '12px',
-          //     colors: ["#304758"]
+          dataLabels: {
+            enabled: false,
+            // offsetY: -25,
+            // style: {
+            //   fontSize: '12px',
+            //   colors: ["#304758"]
+            // }
+          },
+          // markers: {
+          //   size: 5,
+          //   hover: {
+          //     size: 9
           //   }
           // },
-          markers: {
-            size: 5,
-            hover: {
-              size: 9
-            }
-          },
           xaxis: {
+            labels: {
+             show: true,
+             rotate: 0,
+             rotateAlways: true
+            },
             // categories: this.$store.state.date_Psum
             categories: this.date_Psum
             // categories: this.date_Psum2
           },
           yaxis: [
             {
+
+
               axisBorder: {
                 show: true,
               },
@@ -295,6 +303,10 @@ export default {
           //   }
           // }
         ],
+        legend: {
+              position: 'top',
+              offsetY: 40
+        },
       }
       // this.series = [{
       //  name: "Meter 1",
@@ -324,12 +336,12 @@ export default {
           },
           dataLabels: {
             rotateLabels: 90,
-            enabled: true,
-            offsetY: -25,
-            style: {
-              fontSize: '12px',
-              colors: ["#304758"]
-            }
+            enabled: false,
+            // offsetY: -25,
+            // style: {
+            //   fontSize: '12px',
+            //   colors: ["#304758"]
+            // }
           },
           xaxis: {
             categories: this.$store.state.dayInMonth,
@@ -371,18 +383,19 @@ export default {
         },
         plotOptions: {
           bar: {
+
             dataLabels: {
               position: 'top',
             }
           },
         },
         dataLabels: {
-          enabled: true,
-          offsetY: -25,
-          style: {
-            fontSize: '12px',
-            colors: ["#304758"]
-          }
+          enabled: false,
+          // offsetY: -25,
+          // style: {
+          //   fontSize: '20px',
+          //   colors: ["#304758"]
+          // }
         },
         xaxis: {
           categories: this.$store.state.monthInYear
@@ -399,9 +412,10 @@ export default {
 
       ],
       }
-      this.seriesYearSum = [{
+
+        this.seriesYearSum = [{
           name: "Diff",
-         data: newData
+          data: newData
         }]
       },
   },

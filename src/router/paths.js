@@ -63,6 +63,11 @@
      path: '/energy',
      name: 'Energy',
      view: 'Energy'
+   },
+   {
+     path: '/switch',
+     name: 'Switch',
+     view: 'Switch'
    }
  ]
  // updatePathZone()

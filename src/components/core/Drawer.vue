@@ -234,6 +234,11 @@ export default {
                 to: '/schedule',
                 icon: 'mdi-clipboard-outline',
                 text: 'Schedule'
+              },
+              {
+                to: '/switch',
+                icon: 'mdi-lightbulb-outline',
+                text: 'Switch'
               }
             )
             console.log('s')
@@ -241,7 +246,7 @@ export default {
           }
       })
       .catch(error =>{
-          alert('error2')
+          alert('cannot connect server')
           console.log(error);
       })
     },

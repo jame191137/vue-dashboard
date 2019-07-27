@@ -7,9 +7,10 @@
   >
   <v-layout wrap>
 
+
     <v-flex
-      md12
-      sm12
+      md9
+      sm9
       lg9
     >
       <v-card class="border-primary" >
@@ -53,6 +54,7 @@
           </v-layout>
         </v-card>
 
+        <!-- ###########start############ -->
         <v-card class="" >
           <v-card-title class="headtab">
             <!-- <v-icon dark large left > mdi-chart-areaspline </v-icon> -->
@@ -72,37 +74,48 @@
               </v-card>
             </v-flex>
 
-            <v-flex
-              lg2
-            >
-             <v-text-field
-               value=""
-               readonly
-             ></v-text-field>
-           </v-flex>
-           <v-flex
-             lg1
-           >
-           <!-- <v-card flat > -->
-             <v-card-text>
-               <!-- <v-card-actions>
-               </v-card-actions> -->
-               <div >:</div>
-             </v-card-text>
-           <!-- </v-card> -->
-         </v-flex>
-            <v-flex
-              lg2
-            >
-             <v-text-field
-               value=""
-               readonly
-             ></v-text-field>
+           <v-flex md2
+             sm2
+             lg2
+             ml-5>
+
+                <v-menu
+                 ref="menu1"
+                 v-model="menu1"
+                 :close-on-content-click="false"
+                 :nudge-right="40"
+                 :return-value.sync="d1_open_time"
+                 lazy
+                 transition="scale-transition"
+                 offset-y
+                 full-width
+                 max-width="290px"
+                 min-width="290px">
+               <template v-slot:activator="{ on }">
+                 <v-text-field
+                   class="text-xs-center"
+                   v-model="d1_open_time"
+                   label="Select Time"
+                   prepend-icon=""
+                   readonly
+                   v-on="on"
+                 ></v-text-field>
+               </template>
+               <v-time-picker
+                 format="24hr"
+                 v-if="menu1"
+                 v-model="d1_open_time"
+                 full-width
+                 color="blue"
+                 @click:minute="$refs.menu1.save(d1_open_time)"
+               ></v-time-picker>
+             </v-menu>
            </v-flex>
 
            <v-flex
 
              lg1
+             ml-5
            >
              <!-- <v-card flat > -->
                <v-card-text>
@@ -113,38 +126,51 @@
              <!-- </v-card> -->
            </v-flex>
 
-           <v-flex
+           <v-flex md2
+             sm2
              lg2
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
-          <v-flex
-            lg1
-          >
-          <!-- <v-card flat > -->
-            <v-card-text>
-              <!-- <v-card-actions>
-              </v-card-actions> -->
-              <div >:</div>
-            </v-card-text>
-          <!-- </v-card> -->
-        </v-flex>
-           <v-flex
-             lg2
-             mr-5
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
+             ml-5>
+
+                <v-menu
+                 ref="menu2"
+                 v-model="menu2"
+                 :close-on-content-click="false"
+                 :nudge-right="40"
+                 :return-value.sync="d1_close_time"
+                 lazy
+                 transition="scale-transition"
+                 offset-y
+                 full-width
+                 max-width="290px"
+                 min-width="290px">
+               <template v-slot:activator="{ on }">
+                 <v-text-field
+                   class="text-xs-center"
+                   v-model="d1_close_time"
+                   label="Select Time"
+                   prepend-icon=""
+                   readonly
+                   v-on="on"
+                 ></v-text-field>
+               </template>
+               <v-time-picker
+                 format="24hr"
+                 v-if="menu2"
+                 v-model="d1_close_time"
+                 full-width
+                 color="blue"
+                 @click:minute="$refs.menu2.save(d1_close_time)"
+               ></v-time-picker>
+             </v-menu>
+           </v-flex>
+
          </v-layout>
        </v-card>
        </v-flex>
 
+       <!-- ##########end############# -->
+
+        <!-- ##########start############# -->
        <v-flex
          md12
          sm12
@@ -169,37 +195,48 @@
              </v-card>
            </v-flex>
 
-           <v-flex
+           <v-flex md2
+             sm2
              lg2
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
-          <v-flex
-            lg1
-          >
-          <!-- <v-card flat > -->
-            <v-card-text>
-              <!-- <v-card-actions>
-              </v-card-actions> -->
-              <div >:</div>
-            </v-card-text>
-          <!-- </v-card> -->
-        </v-flex>
-           <v-flex
-             lg2
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
+             ml-5>
+
+                <v-menu
+                 ref="menu3"
+                 v-model="menu3"
+                 :close-on-content-click="false"
+                 :nudge-right="40"
+                 :return-value.sync="d2_open_time"
+                 lazy
+                 transition="scale-transition"
+                 offset-y
+                 full-width
+                 max-width="290px"
+                 min-width="290px">
+               <template v-slot:activator="{ on }">
+                 <v-text-field
+                   class="text-xs-center"
+                   v-model="d2_open_time"
+                   label="Select Time"
+                   prepend-icon=""
+                   readonly
+                   v-on="on"
+                 ></v-text-field>
+               </template>
+               <v-time-picker
+                 format="24hr"
+                 v-if="menu3"
+                 v-model="d2_open_time"
+                 full-width
+                 color="blue"
+                 @click:minute="$refs.menu3.save(d2_open_time)"
+               ></v-time-picker>
+             </v-menu>
+           </v-flex>
 
           <v-flex
 
             lg1
+            ml-5
           >
             <!-- <v-card flat > -->
               <v-card-text>
@@ -210,37 +247,50 @@
             <!-- </v-card> -->
           </v-flex>
 
-          <v-flex
+          <v-flex md2
+            sm2
             lg2
-          >
-           <v-text-field
-             value=""
-             readonly
-           ></v-text-field>
-         </v-flex>
-         <v-flex
-           lg1
-         >
-         <!-- <v-card flat > -->
-           <v-card-text>
-             <!-- <v-card-actions>
-             </v-card-actions> -->
-             <div >:</div>
-           </v-card-text>
-         <!-- </v-card> -->
-       </v-flex>
-          <v-flex
-            lg2
-            mr-5
-          >
-           <v-text-field
-             value=""
-             readonly
-           ></v-text-field>
-         </v-flex>
+            ml-5>
+
+               <v-menu
+                ref="menu4"
+                v-model="menu4"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                :return-value.sync="d2_close_time"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                max-width="290px"
+                min-width="290px">
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  class="text-xs-center"
+                  v-model="d2_close_time"
+                  label="Select Time"
+                  prepend-icon=""
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                format="24hr"
+                v-if="menu4"
+                v-model="d2_close_time"
+                full-width
+                color="blue"
+                @click:minute="$refs.menu4.save(d2_close_time)"
+              ></v-time-picker>
+            </v-menu>
+          </v-flex>
         </v-layout>
       </v-card>
       </v-flex>
+
+      <!-- ##########end############# -->
+      <!-- ##########start############# -->
+
       <v-flex
         md12
         sm12
@@ -265,37 +315,48 @@
             </v-card>
           </v-flex>
 
-          <v-flex
+          <v-flex md2
+            sm2
             lg2
-          >
-           <v-text-field
-             value=""
-             readonly
-           ></v-text-field>
-         </v-flex>
-         <v-flex
-           lg1
-         >
-         <!-- <v-card flat > -->
-           <v-card-text>
-             <!-- <v-card-actions>
-             </v-card-actions> -->
-             <div >:</div>
-           </v-card-text>
-         <!-- </v-card> -->
-       </v-flex>
-          <v-flex
-            lg2
-          >
-           <v-text-field
-             value=""
-             readonly
-           ></v-text-field>
-         </v-flex>
+            ml-5>
+
+               <v-menu
+                ref="menu5"
+                v-model="menu5"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                :return-value.sync="d3_open_time"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                max-width="290px"
+                min-width="290px">
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  class="text-xs-center"
+                  v-model="d3_open_time"
+                  label="Select Time"
+                  prepend-icon=""
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                format="24hr"
+                v-if="menu5"
+                v-model="d3_open_time"
+                full-width
+                color="blue"
+                @click:minute="$refs.menu5.save(d3_open_time)"
+              ></v-time-picker>
+            </v-menu>
+          </v-flex>
 
          <v-flex
 
            lg1
+           ml-5
          >
            <!-- <v-card flat > -->
              <v-card-text>
@@ -306,37 +367,50 @@
            <!-- </v-card> -->
          </v-flex>
 
-         <v-flex
+         <v-flex md2
+           sm2
            lg2
-         >
-          <v-text-field
-            value=""
-            readonly
-          ></v-text-field>
-        </v-flex>
-        <v-flex
-          lg1
-        >
-        <!-- <v-card flat > -->
-          <v-card-text>
-            <!-- <v-card-actions>
-            </v-card-actions> -->
-            <div >:</div>
-          </v-card-text>
-        <!-- </v-card> -->
-      </v-flex>
-         <v-flex
-           lg2
-           mr-5
-         >
-          <v-text-field
-            value=""
-            readonly
-          ></v-text-field>
-        </v-flex>
+           ml-5>
+
+              <v-menu
+               ref="menu6"
+               v-model="menu6"
+               :close-on-content-click="false"
+               :nudge-right="40"
+               :return-value.sync="d3_close_time"
+               lazy
+               transition="scale-transition"
+               offset-y
+               full-width
+               max-width="290px"
+               min-width="290px">
+             <template v-slot:activator="{ on }">
+               <v-text-field
+                 class="text-xs-center"
+                 v-model="d3_close_time"
+                 label="Select Time"
+                 prepend-icon=""
+                 readonly
+                 v-on="on"
+               ></v-text-field>
+             </template>
+             <v-time-picker
+               format="24hr"
+               v-if="menu6"
+               v-model="d3_close_time"
+               full-width
+               color="blue"
+               @click:minute="$refs.menu6.save(d3_close_time)"
+             ></v-time-picker>
+           </v-menu>
+         </v-flex>
        </v-layout>
      </v-card>
      </v-flex>
+
+     <!-- ##########end############# -->
+     <!-- ##########start############# -->
+
      <v-flex
        md12
        sm12
@@ -361,37 +435,48 @@
            </v-card>
          </v-flex>
 
-         <v-flex
+         <v-flex md2
+           sm2
            lg2
-         >
-          <v-text-field
-            value=""
-            readonly
-          ></v-text-field>
-        </v-flex>
-        <v-flex
-          lg1
-        >
-        <!-- <v-card flat > -->
-          <v-card-text>
-            <!-- <v-card-actions>
-            </v-card-actions> -->
-            <div >:</div>
-          </v-card-text>
-        <!-- </v-card> -->
-      </v-flex>
-         <v-flex
-           lg2
-         >
-          <v-text-field
-            value=""
-            readonly
-          ></v-text-field>
-        </v-flex>
+           ml-5>
+
+              <v-menu
+               ref="menu7"
+               v-model="menu7"
+               :close-on-content-click="false"
+               :nudge-right="40"
+               :return-value.sync="d4_open_time"
+               lazy
+               transition="scale-transition"
+               offset-y
+               full-width
+               max-width="290px"
+               min-width="290px">
+             <template v-slot:activator="{ on }">
+               <v-text-field
+                 class="text-xs-center"
+                 v-model="d4_open_time"
+                 label="Select Time"
+                 prepend-icon=""
+                 readonly
+                 v-on="on"
+               ></v-text-field>
+             </template>
+             <v-time-picker
+               format="24hr"
+               v-if="menu7"
+               v-model="d4_open_time"
+               full-width
+               color="blue"
+               @click:minute="$refs.menu7.save(d4_open_time)"
+             ></v-time-picker>
+           </v-menu>
+         </v-flex>
 
         <v-flex
 
           lg1
+          ml-5
         >
           <!-- <v-card flat > -->
             <v-card-text>
@@ -402,37 +487,50 @@
           <!-- </v-card> -->
         </v-flex>
 
-        <v-flex
+        <v-flex md2
+          sm2
           lg2
-        >
-         <v-text-field
-           value=""
-           readonly
-         ></v-text-field>
-       </v-flex>
-       <v-flex
-         lg1
-       >
-       <!-- <v-card flat > -->
-         <v-card-text>
-           <!-- <v-card-actions>
-           </v-card-actions> -->
-           <div >:</div>
-         </v-card-text>
-       <!-- </v-card> -->
-     </v-flex>
-        <v-flex
-          lg2
-          mr-5
-        >
-         <v-text-field
-           value=""
-           readonly
-         ></v-text-field>
-       </v-flex>
+          ml-5>
+
+             <v-menu
+              ref="menu8"
+              v-model="menu8"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="d4_close_time"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px">
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                class="text-xs-center"
+                v-model="d4_close_time"
+                label="Select Time"
+                prepend-icon=""
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-time-picker
+              format="24hr"
+              v-if="menu8"
+              v-model="d4_close_time"
+              full-width
+              color="blue"
+              @click:minute="$refs.menu8.save(d4_close_time)"
+            ></v-time-picker>
+          </v-menu>
+        </v-flex>
       </v-layout>
     </v-card>
     </v-flex>
+
+    <!-- ##########end############# -->
+    <!-- ##########start############# -->
+
     <v-flex
       md12
       sm12
@@ -457,37 +555,48 @@
           </v-card>
         </v-flex>
 
-        <v-flex
+        <v-flex md2
+          sm2
           lg2
-        >
-         <v-text-field
-           value=""
-           readonly
-         ></v-text-field>
-       </v-flex>
-       <v-flex
-         lg1
-       >
-       <!-- <v-card flat > -->
-         <v-card-text>
-           <!-- <v-card-actions>
-           </v-card-actions> -->
-           <div >:</div>
-         </v-card-text>
-       <!-- </v-card> -->
-     </v-flex>
-        <v-flex
-          lg2
-        >
-         <v-text-field
-           value=""
-           readonly
-         ></v-text-field>
-       </v-flex>
+          ml-5>
+
+             <v-menu
+              ref="menu9"
+              v-model="menu9"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="d5_open_time"
+              lazy
+              transition="scale-transition"
+              offset-y
+              full-width
+              max-width="290px"
+              min-width="290px">
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                class="text-xs-center"
+                v-model="d5_open_time"
+                label="Select Time"
+                prepend-icon=""
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-time-picker
+              format="24hr"
+              v-if="menu9"
+              v-model="d5_open_time"
+              full-width
+              color="blue"
+              @click:minute="$refs.menu9.save(d5_open_time)"
+            ></v-time-picker>
+          </v-menu>
+        </v-flex>
 
        <v-flex
 
          lg1
+         ml-5
        >
          <!-- <v-card flat > -->
            <v-card-text>
@@ -498,38 +607,49 @@
          <!-- </v-card> -->
        </v-flex>
 
-       <v-flex
+       <v-flex md2
+         sm2
          lg2
-       >
-        <v-text-field
-          value=""
-          readonly
-        ></v-text-field>
-      </v-flex>
-      <v-flex
-        lg1
-      >
-      <!-- <v-card flat > -->
-        <v-card-text>
-          <!-- <v-card-actions>
-          </v-card-actions> -->
-          <div >:</div>
-        </v-card-text>
-      <!-- </v-card> -->
-    </v-flex>
-       <v-flex
-         lg2
-         mr-5
-       >
-        <v-text-field
-          value=""
-          readonly
-        ></v-text-field>
-      </v-flex>
+         ml-5>
+
+            <v-menu
+             ref="menu10"
+             v-model="menu10"
+             :close-on-content-click="false"
+             :nudge-right="40"
+             :return-value.sync="d5_close_time"
+             lazy
+             transition="scale-transition"
+             offset-y
+             full-width
+             max-width="290px"
+             min-width="290px">
+           <template v-slot:activator="{ on }">
+             <v-text-field
+               class="text-xs-center"
+               v-model="d5_close_time"
+               label="Select Time"
+               prepend-icon=""
+               readonly
+               v-on="on"
+             ></v-text-field>
+           </template>
+           <v-time-picker
+             format="24hr"
+             v-if="menu10"
+             v-model="d5_close_time"
+             full-width
+             color="blue"
+             @click:minute="$refs.menu10.save(d5_close_time)"
+           ></v-time-picker>
+         </v-menu>
+       </v-flex>
      </v-layout>
    </v-card>
    </v-flex>
 
+   <!-- ##########end############# -->
+   <!-- ##########start############# -->
 
         <v-flex
           md12
@@ -555,37 +675,48 @@
               </v-card>
             </v-flex>
 
-            <v-flex
+            <v-flex md2
+              sm2
               lg2
-            >
-             <v-text-field
-               value=""
-               readonly
-             ></v-text-field>
-           </v-flex>
-           <v-flex
-             lg1
-           >
-           <!-- <v-card flat > -->
-             <v-card-text>
-               <!-- <v-card-actions>
-               </v-card-actions> -->
-               <div >:</div>
-             </v-card-text>
-           <!-- </v-card> -->
-         </v-flex>
-            <v-flex
-              lg2
-            >
-             <v-text-field
-               value=""
-               readonly
-             ></v-text-field>
-           </v-flex>
+              ml-5>
+
+                 <v-menu
+                  ref="menu5"
+                  v-model="menu5"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  :return-value.sync="d3_open_time"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  max-width="290px"
+                  min-width="290px">
+                <template v-slot:activator="{ on }">
+                  <v-text-field
+                    class="text-xs-center"
+                    v-model="d3_open_time"
+                    label="Select Time"
+                    prepend-icon=""
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
+                </template>
+                <v-time-picker
+                  format="24hr"
+                  v-if="menu5"
+                  v-model="d3_open_time"
+                  full-width
+                  color="blue"
+                  @click:minute="$refs.menu5.save(d3_open_time)"
+                ></v-time-picker>
+              </v-menu>
+            </v-flex>
 
            <v-flex
 
              lg1
+             ml-5
            >
              <!-- <v-card flat > -->
                <v-card-text>
@@ -596,38 +727,50 @@
              <!-- </v-card> -->
            </v-flex>
 
-           <v-flex
+           <v-flex md2
+             sm2
              lg2
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
-          <v-flex
-            lg1
-          >
-          <!-- <v-card flat > -->
-            <v-card-text>
-              <!-- <v-card-actions>
-              </v-card-actions> -->
-              <div >:</div>
-            </v-card-text>
-          <!-- </v-card> -->
-        </v-flex>
-           <v-flex
-             lg2
-             mr-5
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
+             ml-5>
+
+                <v-menu
+                 ref="menu6"
+                 v-model="menu6"
+                 :close-on-content-click="false"
+                 :nudge-right="40"
+                 :return-value.sync="d3_close_time"
+                 lazy
+                 transition="scale-transition"
+                 offset-y
+                 full-width
+                 max-width="290px"
+                 min-width="290px">
+               <template v-slot:activator="{ on }">
+                 <v-text-field
+                   class="text-xs-center"
+                   v-model="d3_close_time"
+                   label="Select Time"
+                   prepend-icon=""
+                   readonly
+                   v-on="on"
+                 ></v-text-field>
+               </template>
+               <v-time-picker
+                 format="24hr"
+                 v-if="menu6"
+                 v-model="d3_close_time"
+                 full-width
+                 color="blue"
+                 @click:minute="$refs.menu6.save(d3_close_time)"
+               ></v-time-picker>
+             </v-menu>
+           </v-flex>
          </v-layout>
        </v-card>
        </v-flex>
 
+       <!-- ##########end############# -->
+       <!-- ##########start############# -->
+       
        <v-flex
          md12
          sm12
@@ -652,37 +795,48 @@
              </v-card>
            </v-flex>
 
-           <v-flex
+           <v-flex md2
+             sm2
              lg2
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
-          <v-flex
-            lg1
-          >
-          <!-- <v-card flat > -->
-            <v-card-text>
-              <!-- <v-card-actions>
-              </v-card-actions> -->
-              <div >:</div>
-            </v-card-text>
-          <!-- </v-card> -->
-        </v-flex>
-           <v-flex
-             lg2
-           >
-            <v-text-field
-              value=""
-              readonly
-            ></v-text-field>
-          </v-flex>
+             ml-5>
+
+                <v-menu
+                 ref="menu5"
+                 v-model="menu5"
+                 :close-on-content-click="false"
+                 :nudge-right="40"
+                 :return-value.sync="d3_open_time"
+                 lazy
+                 transition="scale-transition"
+                 offset-y
+                 full-width
+                 max-width="290px"
+                 min-width="290px">
+               <template v-slot:activator="{ on }">
+                 <v-text-field
+                   class="text-xs-center"
+                   v-model="d3_open_time"
+                   label="Select Time"
+                   prepend-icon=""
+                   readonly
+                   v-on="on"
+                 ></v-text-field>
+               </template>
+               <v-time-picker
+                 format="24hr"
+                 v-if="menu5"
+                 v-model="d3_open_time"
+                 full-width
+                 color="blue"
+                 @click:minute="$refs.menu5.save(d3_open_time)"
+               ></v-time-picker>
+             </v-menu>
+           </v-flex>
 
           <v-flex
 
             lg1
+            ml-5
           >
             <!-- <v-card flat > -->
               <v-card-text>
@@ -693,34 +847,43 @@
             <!-- </v-card> -->
           </v-flex>
 
-          <v-flex
+          <v-flex md2
+            sm2
             lg2
-          >
-           <v-text-field
-             value=""
-             readonly
-           ></v-text-field>
-         </v-flex>
-         <v-flex
-           lg1
-         >
-         <!-- <v-card flat > -->
-           <v-card-text>
-             <!-- <v-card-actions>
-             </v-card-actions> -->
-             <div >:</div>
-           </v-card-text>
-         <!-- </v-card> -->
-       </v-flex>
-          <v-flex
-            lg2
-            mr-5
-          >
-           <v-text-field
-             value=""
-             readonly
-           ></v-text-field>
-         </v-flex>
+            ml-5>
+
+               <v-menu
+                ref="menu6"
+                v-model="menu6"
+                :close-on-content-click="false"
+                :nudge-right="40"
+                :return-value.sync="d3_close_time"
+                lazy
+                transition="scale-transition"
+                offset-y
+                full-width
+                max-width="290px"
+                min-width="290px">
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  class="text-xs-center"
+                  v-model="d3_close_time"
+                  label="Select Time"
+                  prepend-icon=""
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-time-picker
+                format="24hr"
+                v-if="menu6"
+                v-model="d3_close_time"
+                full-width
+                color="blue"
+                @click:minute="$refs.menu6.save(d3_close_time)"
+              ></v-time-picker>
+            </v-menu>
+          </v-flex>
         </v-layout>
       </v-card>
     </v-flex>
@@ -746,33 +909,39 @@ export default {
     return {
       // url_sev: 'http://localhost:8997',
       url_sev: 'http://35.186.149.130:8997',
-      datameter: [],
-      hour_Psum: [],
-      date_Psum: [],
-      list_psum: [],
-      rand: 0,
-      chartOptions: {
-        chart: {
-          id: 'vuechart-example',
-          height: 200
-          },
-          xaxis: {
-            // categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-            categories: []
-          }
-        },
-      series: [{
-          name: 'series-1',
-          data: []
-          // data: [30, 40, 35, 50, 49, 60, 70, 91]
-      }],
-
+      d1_open_time: '',
+      menu1: false,
+      d2_open_time: '',
+      menu2: false,
+      d3_open_time: null,
+      menu3: false,
+      d4_open_time: null,
+      menu4: false,
+      d5_open_time: null,
+      menu5: false,
+      d6_open_time: null,
+      menu6: false,
+      d7_open_time: null,
+      menu7: false,
+      d1_close_time: null,
+      menu8: false,
+      d2_close_time: null,
+      menu9: false,
+      d3_close_time: null,
+      menu10: false,
+      d4_close_time: null,
+      menu11: false,
+      d5_close_time: null,
+      menu12: false,
+      d6_close_time: null,
+      menu13: false,
+      d7_close_time: null,
+      menu14: false
     }
+
   },
   mounted () {
-    this.getdataMeter()
-    // this.updateChart()
-    this.getLogPsumAll()
+
   },
   watch: {
 
@@ -781,146 +950,6 @@ export default {
 
 	},
   methods: {
-
-    realtimeUsageAPI(e) {
-
-      axios.post(this.$store.state.url_sev+'/realtimeusage', {
-          ZoneID: this.ZoneID
-      })
-      .then(response => {
-
-          this.$store.state.RT_PSum = response.data.RT_PSum
-          this.$store.state.RT_ISum = response.data.RT_ISum
-          this.$store.state.RT_VSum = response.data.RT_VSum
-          // console.log(this.$store.state.RT_PSum)
-          // console.log(response.data.UPrivilege)
-      })
-      .catch(error =>{
-          // this.errors.push(error);
-          console.log(error)
-      })
-    },
-    // getLogPsum(e) {
-    //   axios.post(this.$store.state.url_sev+'/logpsum', {
-    //     MeterID: '1'
-    //   })
-    //   .then(response => {
-    //       console.log(response.data)
-    //       this.$store.state.Psum = response.data.Psum
-    //       this.$store.state.date_Psum = response.data.date_Psum
-    //       this.updateChart()
-    //   })
-    //   .catch(error =>{
-    //       console.log(error);
-    //   })
-    // },
-    getdataMeter(e) {
-
-      axios.post(this.url_sev+'/datameter', {
-        SiteID: localStorage.SiteID
-        // ZoneID: localStorage.SiteID
-      })
-      .then(response => {
-          this.datameter = response.data.datameter
-          // this.date_Psum2 = response.data.date_Psum
-          // this.updateChart()
-      })
-      .catch(error =>{
-          console.log(error);
-      })
-    },
-    getLogPsumAll(e) {
-      console.log(localStorage.SiteID)
-      axios.post(this.url_sev+'/logpsumall', {
-        SiteID: localStorage.SiteID
-      })
-      .then(response => {
-          console.log(response.data)
-          this.list_psum = response.data.list_psum
-          this.hour_Psum = response.data.hour_Psum
-          this.updateChart()
-      })
-      .catch(error =>{
-          console.log(error);
-      })
-    },
-    // getLogPsum2(e) {
-    //
-    //   axios.post(this.$store.state.url_sev+'/logpsum2', {
-    //     ZoneID: this.ZoneID
-    //   })
-    //   .then(response => {
-    //       this.list_psum2 = response.data.list_psum
-    //       this.date_Psum2 = response.data.date_Psum
-    //       this.updateChart()
-    //   })
-    //   .catch(error =>{
-    //       console.log(error);
-    //   })
-    // },
-    updateChart() {
-      // const newData = this.$store.state.Psum
-      // console.log(this.list_psum2)
-      const newData2 = this.list_psum
-      this.chartOptions = {
-        chart: {
-            width: "100%",
-            height: 500
-          },
-          plotOptions: {
-            bar: {
-              dataLabels: {
-                position: 'top'
-              }
-            },
-          },
-          // dataLabels: {
-          //   enabled: true,
-          //   offsetY: -10,
-          //   style: {
-          //     fontSize: '12px',
-          //     colors: ["#304758"]
-          //   }
-          // },
-          markers: {
-            size: 5,
-            hover: {
-              size: 9
-            }
-          },
-          xaxis: {
-            // categories: this.$store.state.date_Psum
-            categories: this.date_Psum
-          },
-          yaxis: [
-            {
-              axisBorder: {
-                show: true,
-              },
-              title: {
-                text: "Kw"
-              }
-          }
-          // ,
-          // {
-          //   opposite: true,
-          //   axisBorder: {
-          //     show: true,
-          //   }
-          // }
-        ],
-      }
-      // this.series = [{
-      //  name: "Meter 1",
-      //  data: [2, 4, 3, 2, 3, 4, 2, 3 ]
-      //  },
-      //  {
-      //   name: "Meter 2",
-      //   data: [2, 4, 3, 2, 3, 4, 2, 3 ]
-      //  }]
-      // console.log(newData2)
-      this.series = newData2
-    },
 
   },
 
