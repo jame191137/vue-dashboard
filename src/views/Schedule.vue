@@ -17,6 +17,8 @@
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-calendar-clock</v-icon>
           <span  class="title font-weight-light varela-font boxheadwhite">{{"Schedule"}}</span>
+          <v-spacer></v-spacer>
+          <v-btn v-on:click="setTime ()" color="primary">SAVE</v-btn>
         </v-card-title>
 
         <v-flex
@@ -24,7 +26,7 @@
           sm12
           lg12
         >
-        <v-card flat class="" >
+        <v-card v-if="1==0" flat class="" >
           <v-layout row warp>
             <v-flex
               lg2
@@ -48,6 +50,7 @@
             >
                 <v-card-text>
                   <v-btn color="primary">Schedule</v-btn>
+
                 </v-card-text>
 
             </v-flex>
@@ -681,11 +684,11 @@
               ml-5>
 
                  <v-menu
-                  ref="menu5"
-                  v-model="menu5"
+                  ref="menu11"
+                  v-model="menu11"
                   :close-on-content-click="false"
                   :nudge-right="40"
-                  :return-value.sync="d3_open_time"
+                  :return-value.sync="d6_open_time"
                   lazy
                   transition="scale-transition"
                   offset-y
@@ -695,7 +698,7 @@
                 <template v-slot:activator="{ on }">
                   <v-text-field
                     class="text-xs-center"
-                    v-model="d3_open_time"
+                    v-model="d6_open_time"
                     label="Select Time"
                     prepend-icon=""
                     readonly
@@ -704,11 +707,11 @@
                 </template>
                 <v-time-picker
                   format="24hr"
-                  v-if="menu5"
-                  v-model="d3_open_time"
+                  v-if="menu11"
+                  v-model="d6_open_time"
                   full-width
                   color="blue"
-                  @click:minute="$refs.menu5.save(d3_open_time)"
+                  @click:minute="$refs.menu11.save(d6_open_time)"
                 ></v-time-picker>
               </v-menu>
             </v-flex>
@@ -733,11 +736,11 @@
              ml-5>
 
                 <v-menu
-                 ref="menu6"
-                 v-model="menu6"
+                 ref="menu12"
+                 v-model="menu12"
                  :close-on-content-click="false"
                  :nudge-right="40"
-                 :return-value.sync="d3_close_time"
+                 :return-value.sync="d6_close_time"
                  lazy
                  transition="scale-transition"
                  offset-y
@@ -747,7 +750,7 @@
                <template v-slot:activator="{ on }">
                  <v-text-field
                    class="text-xs-center"
-                   v-model="d3_close_time"
+                   v-model="d6_close_time"
                    label="Select Time"
                    prepend-icon=""
                    readonly
@@ -756,11 +759,11 @@
                </template>
                <v-time-picker
                  format="24hr"
-                 v-if="menu6"
-                 v-model="d3_close_time"
+                 v-if="menu12"
+                 v-model="d6_close_time"
                  full-width
                  color="blue"
-                 @click:minute="$refs.menu6.save(d3_close_time)"
+                 @click:minute="$refs.menu12.save(d6_close_time)"
                ></v-time-picker>
              </v-menu>
            </v-flex>
@@ -770,7 +773,7 @@
 
        <!-- ##########end############# -->
        <!-- ##########start############# -->
-       
+
        <v-flex
          md12
          sm12
@@ -801,11 +804,11 @@
              ml-5>
 
                 <v-menu
-                 ref="menu5"
-                 v-model="menu5"
+                 ref="menu13"
+                 v-model="menu13"
                  :close-on-content-click="false"
                  :nudge-right="40"
-                 :return-value.sync="d3_open_time"
+                 :return-value.sync="d7_open_time"
                  lazy
                  transition="scale-transition"
                  offset-y
@@ -815,7 +818,7 @@
                <template v-slot:activator="{ on }">
                  <v-text-field
                    class="text-xs-center"
-                   v-model="d3_open_time"
+                   v-model="d7_open_time"
                    label="Select Time"
                    prepend-icon=""
                    readonly
@@ -824,11 +827,11 @@
                </template>
                <v-time-picker
                  format="24hr"
-                 v-if="menu5"
-                 v-model="d3_open_time"
+                 v-if="menu13"
+                 v-model="d7_open_time"
                  full-width
                  color="blue"
-                 @click:minute="$refs.menu5.save(d3_open_time)"
+                 @click:minute="$refs.menu13.save(d7_open_time)"
                ></v-time-picker>
              </v-menu>
            </v-flex>
@@ -853,11 +856,11 @@
             ml-5>
 
                <v-menu
-                ref="menu6"
-                v-model="menu6"
+                ref="menu14"
+                v-model="menu14"
                 :close-on-content-click="false"
                 :nudge-right="40"
-                :return-value.sync="d3_close_time"
+                :return-value.sync="d7_close_time"
                 lazy
                 transition="scale-transition"
                 offset-y
@@ -867,7 +870,7 @@
               <template v-slot:activator="{ on }">
                 <v-text-field
                   class="text-xs-center"
-                  v-model="d3_close_time"
+                  v-model="d7_close_time"
                   label="Select Time"
                   prepend-icon=""
                   readonly
@@ -876,11 +879,11 @@
               </template>
               <v-time-picker
                 format="24hr"
-                v-if="menu6"
-                v-model="d3_close_time"
+                v-if="menu14"
+                v-model="d7_close_time"
                 full-width
                 color="blue"
-                @click:minute="$refs.menu6.save(d3_close_time)"
+                @click:minute="$refs.menu14.save(d7_close_time)"
               ></v-time-picker>
             </v-menu>
           </v-flex>
@@ -936,12 +939,13 @@ export default {
       d6_close_time: null,
       menu13: false,
       d7_close_time: null,
-      menu14: false
+      menu14: false,
+      list_time: []
     }
 
   },
   mounted () {
-
+    this.getTimeStatus()
   },
   watch: {
 
@@ -950,6 +954,64 @@ export default {
 
 	},
   methods: {
+    getTimeStatus(e) {
+      // alert(f)
+      // this.stage_btn = stage
+      axios.post(this.url_sev+'/schedulestatus', {
+
+      })
+      .then(response => {
+          console.log(response.data)
+          this.list_time = response.data.list_time
+          // console.log(this.list_time[1])
+          // this.stage_btn1 = false
+          this.d1_open_time = this.list_time[0],
+          this.d1_close_time = this.list_time[1],
+          this.d2_open_time = this.list_time[2],
+          this.d2_close_time = this.list_time[3],
+          this.d3_open_time = this.list_time[4],
+          this.d3_close_time = this.list_time[5],
+          this.d4_open_time = this.list_time[6],
+          this.d4_close_time = this.list_time[7],
+          this.d5_open_time = this.list_time[8],
+          this.d5_close_time = this.list_time[9],
+          this.d6_open_time = this.list_time[10],
+          this.d6_close_time = this.list_time[11],
+          this.d7_open_time = this.list_time[12],
+          this.d7_close_time = this.list_time[13],
+          console.log(this.d1_open_time)
+      })
+      .catch(error =>{
+          console.log(error);
+      })
+    },
+    setTime(e) {
+      // alert(f)
+      // this.stage_btn = stage
+      axios.post(this.url_sev+'/setschedule', {
+        d1_open_time : this.d1_open_time,
+        d1_close_time : this.d1_close_time,
+        d2_open_time : this.d2_open_time,
+        d2_close_time : this.d2_close_time,
+        d3_open_time : this.d3_open_time,
+        d3_close_time : this.d3_close_time,
+        d4_open_time : this.d4_open_time,
+        d4_close_time : this.d4_close_time,
+        d5_open_time : this.d5_open_time,
+        d5_close_time : this.d5_close_time,
+        d6_open_time : this.d6_open_time,
+        d6_close_time : this.d6_close_time,
+        d7_open_time : this.d7_open_time,
+        d7_close_time : this.d7_close_time,
+      })
+      .then(response => {
+          console.log(response.data)
+          alert("save success")
+      })
+      .catch(error =>{
+          console.log(error);
+      })
+    }
 
   },
 

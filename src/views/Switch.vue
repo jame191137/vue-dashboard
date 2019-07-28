@@ -20,7 +20,7 @@
 
         <!-- #############start############# -->
         <v-flex
-          v-if="SiteID == '1'"
+          v-if="SiteID == '1' && adminStatus == 'Admin'"
           md12
           sm12
           lg12
@@ -75,7 +75,7 @@
 
         <!-- #############start############# -->
         <v-flex
-          v-if="SiteID == '2'"
+          v-if="SiteID == '2' && adminStatus == 'Admin'"
           md12
           sm12
           lg12
@@ -130,7 +130,7 @@
 
         <!-- #############start############# -->
         <v-flex
-          v-if="SiteID == '3'"
+          v-if="SiteID == '3' && adminStatus == 'Admin'"
           md12
           sm12
           lg12
@@ -202,6 +202,7 @@ export default {
       url_sev: 'http://35.186.149.130:8997',
       SiteID: localStorage.SiteID,
       // switch1: true,
+      list_meter_status: [],
       stage_btn1: true,
       stage_btn2: true,
       stage_btn3: true,
@@ -211,6 +212,7 @@ export default {
       stage_btn7: true,
       stage_btn8: true,
       stage_btn9: true,
+      adminStatus : localStorage.adminStatus
     }
   },
   mounted () {
@@ -246,6 +248,18 @@ export default {
       })
       .then(response => {
           console.log(response.data)
+          this.list_meter_status = response.data.list_meter_status
+          console.log(this.list_meter_status[1])
+          // this.stage_btn1 = false
+          this.stage_btn1 = this.list_meter_status[0],
+          this.stage_btn2 = this.list_meter_status[1],
+          this.stage_btn3 = this.list_meter_status[2],
+          this.stage_btn4 = this.list_meter_status[3],
+          this.stage_btn5 = this.list_meter_status[4],
+          this.stage_btn6 = this.list_meter_status[5],
+          this.stage_btn7 = this.list_meter_status[6],
+          this.stage_btn8 = this.list_meter_status[7],
+          this.stage_btn9 = this.list_meter_status[8]
           // alert(response.data)
       })
       .catch(error =>{
