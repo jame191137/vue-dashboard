@@ -83,7 +83,7 @@
                 to=""
 
               >
-                <p class="text-lg-center">Forgot Password ?</p>
+                <!-- <p class="text-lg-center">Forgot Password ?</p> -->
                 </router-link>
             </v-flex>
           </v-layout>
