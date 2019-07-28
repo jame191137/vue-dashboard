@@ -84,7 +84,7 @@
         <v-card class="" >
           <v-card-title class="headtab">
             <!-- <v-icon dark large left > mdi-chart-areaspline </v-icon> -->
-            <span  class="title font-weight-light varela-font boxheadwhite">{{"Site 1"}}</span>
+            <span  class="title font-weight-light varela-font boxheadwhite">{{"Site 2"}}</span>
           </v-card-title>
           <v-layout warp>
 
@@ -139,7 +139,7 @@
         <v-card class="" >
           <v-card-title class="headtab">
             <!-- <v-icon dark large left > mdi-chart-areaspline </v-icon> -->
-            <span  class="title font-weight-light varela-font boxheadwhite">{{"Site 1"}}</span>
+            <span  class="title font-weight-light varela-font boxheadwhite">{{"Site 3"}}</span>
           </v-card-title>
           <v-layout warp>
 
