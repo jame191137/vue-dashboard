@@ -18,7 +18,7 @@
           <v-icon dark large left > mdi-calendar-clock</v-icon>
           <span  class="title font-weight-light varela-font boxheadwhite">{{"Schedule"}}</span>
           <v-spacer></v-spacer>
-          <v-btn v-on:click="setTime ()" color="primary">SAVE</v-btn>
+          <v-btn :disabled="adminStatus != 'Admin'" v-on:click="setTime ()" color="primary">SAVE</v-btn>
         </v-card-title>
 
         <v-flex
@@ -96,6 +96,7 @@
                  min-width="290px">
                <template v-slot:activator="{ on }">
                  <v-text-field
+                   :disabled="adminStatus != 'Admin'"
                    class="text-xs-center"
                    v-model="d1_open_time"
                    label="Select Time"
@@ -148,6 +149,8 @@
                  min-width="290px">
                <template v-slot:activator="{ on }">
                  <v-text-field
+                   :disabled="adminStatus != 'Admin'"
+
                    class="text-xs-center"
                    v-model="d1_close_time"
                    label="Select Time"
@@ -217,6 +220,7 @@
                  min-width="290px">
                <template v-slot:activator="{ on }">
                  <v-text-field
+                   :disabled="adminStatus != 'Admin'"
                    class="text-xs-center"
                    v-model="d2_open_time"
                    label="Select Time"
@@ -269,6 +273,7 @@
                 min-width="290px">
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  :disabled="adminStatus != 'Admin'"
                   class="text-xs-center"
                   v-model="d2_close_time"
                   label="Select Time"
@@ -337,6 +342,7 @@
                 min-width="290px">
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  :disabled="adminStatus != 'Admin'"
                   class="text-xs-center"
                   v-model="d3_open_time"
                   label="Select Time"
@@ -389,6 +395,8 @@
                min-width="290px">
              <template v-slot:activator="{ on }">
                <v-text-field
+                 :disabled="adminStatus != 'Admin'"
+
                  class="text-xs-center"
                  v-model="d3_close_time"
                  label="Select Time"
@@ -457,6 +465,8 @@
                min-width="290px">
              <template v-slot:activator="{ on }">
                <v-text-field
+                 :disabled="adminStatus != 'Admin'"
+
                  class="text-xs-center"
                  v-model="d4_open_time"
                  label="Select Time"
@@ -509,6 +519,8 @@
               min-width="290px">
             <template v-slot:activator="{ on }">
               <v-text-field
+                :disabled="adminStatus != 'Admin'"
+
                 class="text-xs-center"
                 v-model="d4_close_time"
                 label="Select Time"
@@ -577,6 +589,8 @@
               min-width="290px">
             <template v-slot:activator="{ on }">
               <v-text-field
+                :disabled="adminStatus != 'Admin'"
+
                 class="text-xs-center"
                 v-model="d5_open_time"
                 label="Select Time"
@@ -629,6 +643,8 @@
              min-width="290px">
            <template v-slot:activator="{ on }">
              <v-text-field
+               :disabled="adminStatus != 'Admin'"
+
                class="text-xs-center"
                v-model="d5_close_time"
                label="Select Time"
@@ -697,6 +713,8 @@
                   min-width="290px">
                 <template v-slot:activator="{ on }">
                   <v-text-field
+                    :disabled="adminStatus != 'Admin'"
+
                     class="text-xs-center"
                     v-model="d6_open_time"
                     label="Select Time"
@@ -749,6 +767,8 @@
                  min-width="290px">
                <template v-slot:activator="{ on }">
                  <v-text-field
+                   :disabled="adminStatus != 'Admin'"
+
                    class="text-xs-center"
                    v-model="d6_close_time"
                    label="Select Time"
@@ -817,6 +837,8 @@
                  min-width="290px">
                <template v-slot:activator="{ on }">
                  <v-text-field
+                   :disabled="adminStatus != 'Admin'"
+
                    class="text-xs-center"
                    v-model="d7_open_time"
                    label="Select Time"
@@ -869,6 +891,8 @@
                 min-width="290px">
               <template v-slot:activator="{ on }">
                 <v-text-field
+                  :disabled="adminStatus != 'Admin'"
+
                   class="text-xs-center"
                   v-model="d7_close_time"
                   label="Select Time"
@@ -940,7 +964,8 @@ export default {
       menu13: false,
       d7_close_time: null,
       menu14: false,
-      list_time: []
+      list_time: [],
+      adminStatus : localStorage.adminStatus
     }
 
   },

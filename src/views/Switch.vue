@@ -12,7 +12,7 @@
       sm12
       lg9
     >
-      <v-card class="border-primary" >
+      <v-card class="border-primary" v-if="adminStatus == 'Admin'">
         <v-card-title class="headtab">
           <v-icon dark large left >mdi-lightbulb-outline</v-icon>
           <span class="title font-weight-light varela-font boxheadwhite">{{"Switch"}}</span>

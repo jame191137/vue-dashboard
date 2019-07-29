@@ -100,7 +100,8 @@ export default {
     logo: './img/vuetifylogo.png',
     logo_cp: 'images/logo_cp.png',
     links: [],
-    responsive: false
+    responsive: false,
+    adminStatus : localStorage.adminStatus
   }),
   computed: {
     ...mapState('app', ['image', 'color']),
@@ -234,13 +235,18 @@ export default {
                 to: '/schedule',
                 icon: 'mdi-clipboard-outline',
                 text: 'Schedule'
-              },
-              {
-                to: '/switch',
-                icon: 'mdi-lightbulb-outline',
-                text: 'Switch'
               }
             )
+            if (this.adminStatus == 'Admin') {
+              // alert('ok')
+              this.links.push(
+                {
+                  to: '/switch',
+                  icon: 'mdi-lightbulb-outline',
+                  text: 'Switch'
+                }
+              )
+            }
             console.log('s')
 
           }
