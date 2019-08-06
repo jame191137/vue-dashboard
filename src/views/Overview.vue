@@ -8,6 +8,7 @@
   >
     <v-layout wrap>
 
+
       <v-flex
         md12
         sm12
@@ -26,6 +27,49 @@
         </v-card>
       </v-flex>
 
+      <!-- #################### -->
+      <v-flex
+        sm12
+        xs12
+        md12
+        lg7
+      >
+      <!-- <v-card>
+          <DateChart :chart-data="datacollection" :width="100" :height="50"> </DateChart>
+      </v-card> -->
+      <v-card class="border-primary">
+        <v-card-title class="headtab">
+          <v-icon dark large left > mdi-chart-areaspline </v-icon>
+          <span  class="title font-weight-light varela-font boxheadwhitesmall">{{"save enegry 30 days(kWH)"}}</span>
+        </v-card-title>
+
+         <v-divider light></v-divider>
+        <div>
+          <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart> -->
+          <apexchart type="bar" :options="chartOptionsDaySave" :series="seriesDaySave"></apexchart>
+        </div>
+      </v-card>
+      </v-flex>
+
+      <v-flex
+        md12
+        sm12
+        lg5
+      >
+      <v-card class="border-primary">
+        <v-card-title class="headtab">
+          <v-icon dark large left > mdi-chart-areaspline </v-icon>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"save enegry 12 Months (kWH)"}}</span>
+        </v-card-title>
+         <v-divider light></v-divider>
+        <div>
+          <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptions3" :series="series3"></apexchart> -->
+          <apexchart type="bar" :options="chartOptionsYearSave" :series="seriesYearSave"></apexchart>
+        </div>
+      </v-card>
+      </v-flex>
+      <!-- #################### -->
+      
       <v-flex
         sm12
         xs12
@@ -66,48 +110,7 @@
       </v-card>
       </v-flex>
 
-    <!-- #################### -->
-    <v-flex
-      sm12
-      xs12
-      md12
-      lg7
-    >
-    <!-- <v-card>
-        <DateChart :chart-data="datacollection" :width="100" :height="50"> </DateChart>
-    </v-card> -->
-    <v-card class="border-primary">
-      <v-card-title class="headtab">
-        <v-icon dark large left > mdi-chart-areaspline </v-icon>
-        <span  class="title font-weight-light varela-font boxheadwhitesmall">{{"save enegry 30 days(kWH)"}}</span>
-      </v-card-title>
 
-       <v-divider light></v-divider>
-      <div>
-        <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart> -->
-        <apexchart type="bar" :options="chartOptionsDaySave" :series="seriesDaySave"></apexchart>
-      </div>
-    </v-card>
-    </v-flex>
-
-    <v-flex
-      md12
-      sm12
-      lg5
-    >
-    <v-card class="border-primary">
-      <v-card-title class="headtab">
-        <v-icon dark large left > mdi-chart-areaspline </v-icon>
-        <span  class="title font-weight-light varela-font boxheadwhite">{{"save enegry 12 Months (kWH)"}}</span>
-      </v-card-title>
-       <v-divider light></v-divider>
-      <div>
-        <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptions3" :series="series3"></apexchart> -->
-        <apexchart type="bar" :options="chartOptionsYearSave" :series="seriesYearSave"></apexchart>
-      </div>
-    </v-card>
-    </v-flex>
-    <!-- #################### -->
     </v-layout>
   </v-container>
 </template>
