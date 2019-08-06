@@ -69,7 +69,7 @@
       </v-card>
       </v-flex>
       <!-- #################### -->
-      
+
       <v-flex
         sm12
         xs12
@@ -225,7 +225,7 @@ export default {
       })
     },
     getSumDay(e) {
-      axios.post(this.$store.state.url_sev+'/sumdayavg', {
+      axios.post(this.$store.state.url_sev+'/sumdayavg2', {
         SiteID: localStorage.SiteID
       })
       .then(response => {
@@ -239,7 +239,7 @@ export default {
       })
     },
     getSumYear(e) {
-      axios.post(this.$store.state.url_sev+'/sumyearavg', {
+      axios.post(this.$store.state.url_sev+'/sumyearavg2', {
         SiteID: localStorage.SiteID
       })
       .then(response => {
