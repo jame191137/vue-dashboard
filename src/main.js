@@ -46,7 +46,7 @@ var options = {
   rejectUnauthorized: false
 }
 // Vue.use(VueMqtt, 'ws://iot.eclipse.org/ws', options)
-Vue.use(VueMqtt, 'mqtt://35.186.149.130:1883', options)
+// Vue.use(VueMqtt, 'mqtt://35.186.149.130:1883', options)
 // Vue.use(VueMqtt, 'wss://test.mosquitto.org:8081', options)
 
 Vue.use(excel)

@@ -13,6 +13,10 @@ const data = {
   diff_dayInMonth: [],
   monthInYear: [],
   diff_monthInYear: [],
+  save_dayInMonth: [],
+  save_diff_dayInMonth: [],
+  save_monthInYear: [],
+  save_diff_monthInYear: [],
   url_sev: ''
 }
 

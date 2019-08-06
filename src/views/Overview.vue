@@ -30,7 +30,7 @@
         sm12
         xs12
         md12
-        lg8
+        lg7
       >
       <!-- <v-card>
           <DateChart :chart-data="datacollection" :width="100" :height="50"> </DateChart>
@@ -51,7 +51,7 @@
       <v-flex
         md12
         sm12
-        lg4
+        lg5
       >
       <v-card class="border-primary">
         <v-card-title class="headtab">
@@ -65,6 +65,49 @@
         </div>
       </v-card>
       </v-flex>
+
+    <!-- #################### -->
+    <v-flex
+      sm12
+      xs12
+      md12
+      lg7
+    >
+    <!-- <v-card>
+        <DateChart :chart-data="datacollection" :width="100" :height="50"> </DateChart>
+    </v-card> -->
+    <v-card class="border-primary">
+      <v-card-title class="headtab">
+        <v-icon dark large left > mdi-chart-areaspline </v-icon>
+        <span  class="title font-weight-light varela-font boxheadwhitesmall">{{"save enegry 30 days(kWH)"}}</span>
+      </v-card-title>
+
+       <v-divider light></v-divider>
+      <div>
+        <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart> -->
+        <apexchart type="bar" :options="chartOptionsDaySave" :series="seriesDaySave"></apexchart>
+      </div>
+    </v-card>
+    </v-flex>
+
+    <v-flex
+      md12
+      sm12
+      lg5
+    >
+    <v-card class="border-primary">
+      <v-card-title class="headtab">
+        <v-icon dark large left > mdi-chart-areaspline </v-icon>
+        <span  class="title font-weight-light varela-font boxheadwhite">{{"save enegry 12 Months (kWH)"}}</span>
+      </v-card-title>
+       <v-divider light></v-divider>
+      <div>
+        <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptions3" :series="series3"></apexchart> -->
+        <apexchart type="bar" :options="chartOptionsYearSave" :series="seriesYearSave"></apexchart>
+      </div>
+    </v-card>
+    </v-flex>
+    <!-- #################### -->
     </v-layout>
   </v-container>
 </template>
@@ -91,6 +134,10 @@ export default {
     // this.getLogPsum2()
     this.getSumDay()
     this.getSumYear()
+
+    this.getSaveDay()
+    this.getSaveYear()
+
     this.getdataRT()
     this.getCBUptime()
   },
@@ -116,6 +163,10 @@ export default {
           // this.getLogPsum2()
           this.getSumDay()
           this.getSumYear()
+
+          this.getSaveDay()
+          this.getSaveYear()
+
           this.getdataRT()
           this.getCBUptime()
       });
@@ -125,20 +176,7 @@ export default {
       // alert(this.test.charAt(9))
     }
 
-    // switch1(newValue){
-    //   if (this.button_data.switch_state == 'ON') {
-    //     this.button_data.switch_state = 'OFF'
-    //   } else {
-    //     this.button_data.switch_state = 'ON'
-    //   }
-    // },
-    // switch2(newValue){
-    //   if (this.button_data.switch_state == 'ON') {
-    //     this.button_data.switch_state = 'OFF'
-    //   } else {
-    //     this.button_data.switch_state = 'ON'
-    //   }
-    // },
+
 
   },
   created() {
@@ -206,6 +244,36 @@ export default {
           this.$store.state.diff_monthInYear= response.data.diff
           this.$store.state.monthInYear = response.data.monthInYear
           this.updateChartYearSum()
+      })
+      .catch(error =>{
+          console.log(error);
+      })
+    },
+    getSaveDay(e) {
+      axios.post(this.$store.state.url_sev+'/saveday', {
+        SiteID: localStorage.SiteID
+      })
+      .then(response => {
+          console.log('save day')
+          console.log(response.data)
+          this.$store.state.save_diff_dayInMonth = response.data.diff
+          this.$store.state.save_dayInMonth = response.data.dayInMonth
+          this.updateChartDaySave()
+      })
+      .catch(error =>{
+          console.log(error);
+      })
+    },
+    getSaveYear(e) {
+      axios.post(this.$store.state.url_sev+'/savemonth', {
+        SiteID: localStorage.SiteID
+      })
+      .then(response => {
+          console.log('save year')
+          console.log(response.data)
+          this.$store.state.save_diff_monthInYear = response.data.diff
+          this.$store.state.save_monthInYear = response.data.monthInYear
+          this.updateChartYearSave()
       })
       .catch(error =>{
           console.log(error);
@@ -418,6 +486,105 @@ export default {
           data: newData
         }]
       },
+    updateChartDaySave() {
+      const newData = this.$store.state.save_diff_dayInMonth
+      this.chartOptionsDaySave = {
+        chart: {
+          // id: 'vuechart-example'
+            width: "100%",
+            height: 300
+          },
+          plotOptions: {
+            bar: {
+              dataLabels: {
+                position: 'top',
+              }
+            },
+          },
+          dataLabels: {
+            rotateLabels: 90,
+            enabled: false,
+            // offsetY: -25,
+            // style: {
+            //   fontSize: '12px',
+            //   colors: ["#304758"]
+            // }
+          },
+          xaxis: {
+            categories: this.$store.state.save_dayInMonth,
+            title: {
+              // text: "kwh"
+            }
+          },
+          yaxis: [
+            {
+              axisBorder: {
+                show: true,
+              },
+              title: {
+                // text: "kwh"
+              }
+          }
+          // ,
+          // {
+          //   opposite: true,
+          //   axisBorder: {
+          //     show: true,
+          //   }
+          // }
+        ],
+      }
+      this.seriesDaySave = [
+        {
+        name: "Diff",
+        data: newData
+      }
+    ]
+    },
+    updateChartYearSave() {
+      const newData = this.$store.state.save_diff_monthInYear
+      this.chartOptionsYearSave = {
+        chart: {
+          width: "100%",
+          height: 300
+        },
+        plotOptions: {
+          bar: {
+
+            dataLabels: {
+              position: 'top',
+            }
+          },
+        },
+        dataLabels: {
+          enabled: false,
+          // offsetY: -25,
+          // style: {
+          //   fontSize: '20px',
+          //   colors: ["#304758"]
+          // }
+        },
+        xaxis: {
+          categories: this.$store.state.save_monthInYear
+        },
+        yaxis: [
+          {
+            axisBorder: {
+              show: true,
+            },
+            title: {
+              // text: "kwh"
+            }
+        }
+
+      ],
+      }
+
+        this.seriesYearSave = [{
+          name: "Diff",
+          data: newData
+        }]
+      },
   },
   data () {
     return {
@@ -479,6 +646,32 @@ export default {
         name: 'series-1',
         data: []
       }],
+      chartOptionsDaySave: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: []
+          // categories: [1, 2, 3, 4, 5, 6, 7, 8 ,9,10,11, 12, 13, 14, 15, 16, 17, 18 ,19, 20,21 ,22, 23, 24,25, 26, 27, 28 ,29,30 ]
+        }
+      },
+      seriesDaySave: [{
+        name: 'series-1',
+        // data: [2, 4, 3, 2, 3, 4, 2, 3 ,2, 3 ,2, 4, 3, 2, 3, 4, 2, 3 ,2, 3 ,2, 4, 3, 2, 3, 4, 2, 3 ,2, 3 ]
+        data: []
+      }],
+      chartOptionsYearSave: {
+        chart: {
+          id: 'vuechart-example'
+        },
+        xaxis: {
+          categories: []
+        }
+      },
+      seriesYearSave: [{
+        name: 'series-1',
+        data: []
+      }],
       RT_PSum: 0,
       RT_ISum: 0,
       RT_VSum: 0,
@@ -527,6 +720,13 @@ export default {
 .boxheadwhite {
   color: #ffffff;
   font-size: 15px;
+  font-weight: 900 !important;
+  /* letter-spacing: -1px; */
+  /* text-transform: uppercase !important; */
+}
+.boxheadwhitesmall {
+  color: #ffffff;
+  font-size: 10px;
   font-weight: 900 !important;
   /* letter-spacing: -1px; */
   text-transform: uppercase !important;
