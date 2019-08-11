@@ -539,7 +539,7 @@ export default {
       }
       this.seriesDaySave = [
         {
-        name: "Diff",
+        name: "% Saving",
         data: newData
       }
     ]
@@ -584,7 +584,7 @@ export default {
       }
 
         this.seriesYearSave = [{
-          name: "Diff",
+          name: "% Saving",
           data: newData
         }]
       },
