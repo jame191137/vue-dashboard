@@ -40,7 +40,7 @@
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-chart-areaspline </v-icon>
-          <span  class="title font-weight-light varela-font boxheadwhitesmall">{{"save enegry 30 days(kWH)"}}</span>
+          <span  class="title font-weight-light varela-font boxheadwhitesmall">{{"% save enegry 30 days(kWH)"}}</span>
         </v-card-title>
 
          <v-divider light></v-divider>
@@ -59,7 +59,7 @@
       <v-card class="border-primary">
         <v-card-title class="headtab">
           <v-icon dark large left > mdi-chart-areaspline </v-icon>
-          <span  class="title font-weight-light varela-font boxheadwhite">{{"save enegry 12 Months (kWH)"}}</span>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"% save enegry 12 Months (kWH)"}}</span>
         </v-card-title>
          <v-divider light></v-divider>
         <div>
