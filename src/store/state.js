@@ -15,8 +15,10 @@ const data = {
   diff_monthInYear: [],
   save_dayInMonth: [],
   save_diff_dayInMonth: [],
+  save_diff_kwh_dayInMonth: [],
   save_monthInYear: [],
   save_diff_monthInYear: [],
+  save_diff_kwh_monthInYear: [],
   url_sev: ''
 }
 

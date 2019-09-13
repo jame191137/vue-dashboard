@@ -65,7 +65,7 @@
         lg2
         ml-3
         pt-5>
-        <v-subheader v-if="ZonePick !== ''">Equipment : </v-subheader>
+        <v-subheader v-if="ZonePick !== '' && ZonePick !== '99'">Equipment : </v-subheader>
       </v-flex>
 
       <v-flex
@@ -74,7 +74,7 @@
         mr-5
         pt-5
       >
-          <v-menu v-if="ZonePick !== ''" offset-y>
+          <v-menu v-if="ZonePick !== '' && ZonePick !== '99'" offset-y>
             <template v-slot:activator="{ on }">
              <v-text-field
                v-model="MeterName"
@@ -297,7 +297,7 @@
 
 
 
-  <v-layout justify-center>
+  <v-layout justify-center v-if="ShowTable==1">
 
     <v-flex lg12 pt-5>
       <v-card class="border-primary">
@@ -370,6 +370,59 @@
     </v-flex>
 
     </v-layout>
+
+
+  <v-layout justify-center v-if="ShowTable==2">
+
+    <v-flex lg12 pt-5>
+      <v-card class="border-primary">
+        <v-card-title class="headtab">
+          <v-icon dark large left > mdi-table-large </v-icon>
+          <span  class="title font-weight-light varela-font boxheadwhite">{{"kWh Table"}}</span>
+          <v-spacer></v-spacer>
+          <export-excel
+              class   = "btn btn-default"
+              :data   = "data_table_kwh"
+              :fields = "json_fields2"
+              type = "xls"
+              worksheet = "My Worksheet"
+              name    = "report_table.xls">
+              <v-btn color="blue" dark > XLS </v-btn>
+
+          </export-excel>
+          <export-excel
+              class   = "btn btn-default"
+              :data   = "data_table_kwh"
+              :fields = "json_fields2"
+              type = "csv"
+              worksheet = "My Worksheet"
+              name    = "report_table.csv">
+              <v-btn color="blue" dark > CSV </v-btn>
+
+          </export-excel>
+        </v-card-title>
+      <template>
+        <v-data-table
+          :headers="headers2"
+          :items="data_table_kwh"
+          class="elevation-1"
+        >
+          <template v-slot:items="props">
+            <td class="text-xs-center">{{ props.item.log_date }}</td>
+            <td class="text-xs-center">{{ props.item.Sum_Energy }}</td>
+            <td class="text-xs-center">{{ props.item.Zone1_kW }}</td>
+            <td class="text-xs-center">{{ props.item.Zone1_Energy }}</td>
+            <td class="text-xs-center">{{ props.item.Zone2_kW }}</td>
+            <td class="text-xs-center">{{ props.item.Zone2_Energy }}</td>
+            <td class="text-xs-center">{{ props.item.Zone3_kW }}</td>
+            <td class="text-xs-center">{{ props.item.Zone3_Energy }}</td>
+          </template>
+        </v-data-table>
+      </template>
+    </v-card>
+    </v-flex>
+
+    </v-layout>
   </v-layout>
   </v-container>
 </template>
@@ -382,6 +435,16 @@ import axios from 'axios';
       return {
         // url_sev: 'http://localhost:8997',
         url_sev: 'http://35.186.149.130:8997',
+        json_fields2: {
+          'log_date': 'log_date',
+          'Sum_Energy': 'Sum_Energy',
+          'Zone1_kW': 'Zone1_kW',
+          'Zone1_Energy': 'Zone1_Energy',
+          'Zone2_kW': 'Zone2_kW',
+          'Zone2_Energy': 'Zone2_Energy',
+          'Zone3_kW': 'Zone3_kW',
+          'Zone3_Energy': 'Zone3_Energy',
+        },
         json_fields: {
           'Log_Date': 'Log_Date',
           'Log_V1': 'Log_V1',
@@ -412,38 +475,7 @@ import axios from 'axios';
           'Log_kWh': 'Log_kWh',
           'Log_kWh_Diff': 'Log_kWh_Diff'
 
-           // 'Complete name': 'name',
-           // 'City': 'city',
-           // 'Telephone': 'phone.mobile',
-           // 'Telephone 2' : {
-           //     field: 'phone.landline',
-           //     callback: (value) => {
-           //         return `Landline Phone - ${value}`;
-           //     }
-           // },
        },
-       // json_data: [
-       //     {
-       //         'name': 'Tony Peña',
-       //         'city': 'New York',
-       //         'country': 'United States',
-       //         'birthdate': '1978-03-15',
-       //         'phone': {
-       //             'mobile': '1-541-754-3010',
-       //             'landline': '(541) 754-3010'
-       //         }
-       //     },
-       //     {
-       //         'name': 'Thessaloniki',
-       //         'city': 'Athens',
-       //         'country': 'Greece',
-       //         'birthdate': '1987-11-23',
-       //         'phone': {
-       //             'mobile': '+1 855 275 5071',
-       //             'landline': '(2741) 2621-244'
-       //         }
-       //     }
-       // ],
        json_meta: [
            [
                {
@@ -453,6 +485,8 @@ import axios from 'axios';
            ]
        ],
         data_table: [],
+        data_table_kwh: [],
+        ShowTable: '',
         timeStert: null,
         menu1: false,
         modal1: false,
@@ -519,7 +553,17 @@ import axios from 'axios';
           { text: 'Log_F', value: 'Log_F',align: 'center' },
           { text: 'Log_kWh', value: 'Log_kWh',align: 'center' },
           { text: 'Log_kWh_Diff', value: 'Log_kWh_Diff',align: 'center' }
-        ]
+        ],
+        headers2: [
+          { text: 'log_date', value: 'log_date',align: 'center' },
+          { text: 'Sum_Energy', value: 'Sum_Energy',align: 'center' },
+          { text: 'Zone1_kW', value: 'Zone1_kW',align: 'center' },
+          { text: 'Zone1_Energy', value: 'Zone1_Energy',align: 'center' },
+          { text: 'Zone2_kW', value: 'Zone2_kW',align: 'center' },
+          { text: 'Zone2_Energy', value: 'Zone2_Energy',align: 'center' },
+          { text: 'Zone3_kW', value: 'Zone3_kW',align: 'center' },
+          { text: 'Zone3_Energy', value: 'Zone3_Energy',align: 'center' }
+        ],
       }
     },
     watch: {
@@ -578,10 +622,11 @@ import axios from 'axios';
       checkSelect(){
         // console.log(this.dateStart)
         // console.log(this.timeStart)
-        if (this.ZonePick == ''){
+        if (this.ZonePick == '' && this.ZonePick != '99'){
           alert('Please select zone')
         }
-        else if (this.MeterPick == ''){
+        else if (this.MeterPick == '' && this.ZonePick != '99'){
+          // alert(this.ZonePick)
           alert('Please select Equipment')
         }
         else if ( this.timeStart == '' || this.timeEnd == '' || this.dateStart == undefined || this.timeStart == undefined || this.dateEnd == undefined || this.timeEnd == undefined ) {
@@ -589,7 +634,16 @@ import axios from 'axios';
           alert('Please select Date and Time')
         }
         else{
-          this.getDataTable()
+          if (this.ZonePick != '99'){
+            this.getDataTable()
+            this.ShowTable = 1
+            // alert('getDataTable')
+          }else{
+            this.getDataTableKwh()
+            this.ShowTable = 2
+            // alert('getDataTablekwh')
+          }
+
         }
       },
       getZone(e) {
@@ -600,6 +654,8 @@ import axios from 'axios';
         .then(response => {
             // console.log(response.data)
             this.list_zone = response.data.zone_data
+            this.list_zone.push({"id": "99","text": "All Zone"})
+            console.log(this.list_zone)
         })
         .catch(error =>{
             console.log(error);
@@ -644,6 +700,39 @@ import axios from 'axios';
           } else {
             console.log(response.data)
             this.data_table = response.data.list_data
+          }
+
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+      },
+      getDataTableKwh(e) {
+        // alert(this.time1)
+        // console.log(this.MeterPick)
+        // console.log(this.dateStart)
+        // console.log(this.dateEnd)
+        this.dateTimeStart = ''
+        this.dateTimeEnd = ''
+        this.dateTimeStart = this.dateStart + ' ' + this.timeStart
+        this.dateTimeEnd = this.dateEnd + ' ' + this.timeEnd
+        // alert('asdsad'+this.dateStart)
+        // alert(this.dateTimeEnd)
+
+        axios.post(this.url_sev+'/datatablekwh', {
+          SiteID: localStorage.SiteID,
+          dateStart: this.dateTimeStart,
+          dateEnd: this.dateTimeEnd
+        })
+        .then(response => {
+
+          if (response.data.status == 'fail') {
+            if (response.data.message == 'not found') {
+              alert('Data not found')
+            }
+          } else {
+            console.log(response.data)
+            this.data_table_kwh = response.data.list_data
           }
 
         })

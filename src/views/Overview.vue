@@ -46,7 +46,8 @@
          <v-divider light></v-divider>
         <div>
           <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart> -->
-          <apexchart type="bar" :options="chartOptionsDaySave" :series="seriesDaySave"></apexchart>
+          <!-- <apexchart type="bar" :options="chartOptionsDaySave" :series="seriesDaySave"></apexchart> -->
+          <apexchart height="50%"  type="bar" :options="chartOptionsDaySave" :series="seriesDaySave"></apexchart>
         </div>
       </v-card>
       </v-flex>
@@ -87,6 +88,7 @@
 
          <v-divider light></v-divider>
         <div>
+          <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart> -->
           <!-- <apexchart height="200%" width="80%" type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart> -->
           <apexchart type="bar" :options="chartOptionsDaySum" :series="seriesDaySum"></apexchart>
         </div>
@@ -143,6 +145,11 @@ export default {
 
     this.getdataRT()
     this.getCBUptime()
+
+
+    // this.updateTest()
+
+
   },
   watch: {
 
@@ -252,14 +259,30 @@ export default {
           console.log(error);
       })
     },
+    // getSaveDay(e) {
+    //   axios.post(this.$store.state.url_sev+'/saveday', {
+    //     SiteID: localStorage.SiteID
+    //   })
+    //   .then(response => {
+    //       console.log('save day')
+    //       console.log(response.data)
+    //       this.$store.state.save_diff_dayInMonth = response.data.diff
+    //       this.$store.state.save_dayInMonth = response.data.dayInMonth
+    //       this.updateChartDaySave()
+    //   })
+    //   .catch(error =>{
+    //       console.log(error);
+    //   })
+    // },
     getSaveDay(e) {
       axios.post(this.$store.state.url_sev+'/saveday', {
         SiteID: localStorage.SiteID
       })
       .then(response => {
           console.log('save day')
-          console.log(response.data)
+          console.log(response.data.diff_kwh)
           this.$store.state.save_diff_dayInMonth = response.data.diff
+          this.$store.state.save_diff_kwh_dayInMonth = response.data.diff_kwh
           this.$store.state.save_dayInMonth = response.data.dayInMonth
           this.updateChartDaySave()
       })
@@ -275,6 +298,7 @@ export default {
           console.log('save year')
           console.log(response.data)
           this.$store.state.save_diff_monthInYear = response.data.diff
+          this.$store.state.save_diff_kwh_monthInYear = response.data.diff_kwh
           this.$store.state.save_monthInYear = response.data.monthInYear
           this.updateChartYearSave()
       })
@@ -489,105 +513,322 @@ export default {
           data: newData
         }]
       },
+    // updateChartDaySave() {
+    //   const newData = this.$store.state.save_diff_dayInMonth
+    //   this.chartOptionsDaySave = {
+    //     chart: {
+    //       // id: 'vuechart-example'
+    //         width: "100%",
+    //         height: 300
+    //       },
+    //       plotOptions: {
+    //         bar: {
+    //           dataLabels: {
+    //             position: 'top',
+    //           }
+    //         },
+    //       },
+    //       dataLabels: {
+    //         rotateLabels: 90,
+    //         enabled: false,
+    //         // offsetY: -25,
+    //         // style: {
+    //         //   fontSize: '12px',
+    //         //   colors: ["#304758"]
+    //         // }
+    //       },
+    //       xaxis: {
+    //         categories: this.$store.state.save_dayInMonth,
+    //         title: {
+    //           // text: "kwh"
+    //         }
+    //       },
+    //       yaxis: [
+    //         {
+    //           axisBorder: {
+    //             show: true,
+    //           },
+    //           title: {
+    //             // text: "kwh"
+    //           }
+    //       }
+    //       // ,
+    //       // {
+    //       //   opposite: true,
+    //       //   axisBorder: {
+    //       //     show: true,
+    //       //   }
+    //       // }
+    //     ],
+    //   }
+    //   this.seriesDaySave = [
+    //     {
+    //     name: "% qwdwqd",
+    //     data: newData
+    //   }
+    // ]
+    // },
     updateChartDaySave() {
       const newData = this.$store.state.save_diff_dayInMonth
+      const newData2 = this.$store.state.save_diff_kwh_dayInMonth
       this.chartOptionsDaySave = {
         chart: {
-          // id: 'vuechart-example'
-            width: "100%",
-            height: 300
-          },
-          plotOptions: {
-            bar: {
-              dataLabels: {
-                position: 'top',
-              }
-            },
-          },
-          dataLabels: {
-            rotateLabels: 90,
-            enabled: false,
-            // offsetY: -25,
-            // style: {
-            //   fontSize: '12px',
-            //   colors: ["#304758"]
-            // }
-          },
-          xaxis: {
-            categories: this.$store.state.save_dayInMonth,
-            title: {
-              // text: "kwh"
-            }
-          },
-          yaxis: [
-            {
-              axisBorder: {
-                show: true,
-              },
-              title: {
-                // text: "kwh"
-              }
-          }
-          // ,
-          // {
-          //   opposite: true,
-          //   axisBorder: {
-          //     show: true,
-          //   }
-          // }
-        ],
-      }
-      this.seriesDaySave = [
-        {
-        name: "% Saving",
-        data: newData
-      }
-    ]
+       height: 350,
+       type: 'line',
+       stacked: false
+     },
+     dataLabels: {
+       enabled: false
+     },
+     stroke: {
+       width: [1, 1, 4]
+     },
+     title: {
+     },
+     xaxis: {
+       categories: this.$store.state.save_dayInMonth,
+       title: {
+         // text: "kwh"
+       }
+       // categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+     },
+     yaxis: [
+       {
+         axisTicks: {
+           show: true,
+         },
+         axisBorder: {
+           show: true,
+           color: '#008FFB'
+         },
+         labels: {
+           style: {
+             color: '#008FFB',
+           }
+         },
+         title: {
+           // text: "Income (thousand crores)",
+           style: {
+             color: '#008FFB',
+           }
+         },
+         tooltip: {
+           enabled: false
+         }
+       },
+
+       {
+         seriesName: 'Revenue',
+         opposite: true,
+         axisTicks: {
+           show: true,
+         },
+         axisBorder: {
+           show: true,
+           color: '#FEB019'
+         },
+         labels: {
+           style: {
+             color: '#FEB019',
+           },
+         },
+         title: {
+           // text: "Revenue (thousand crores)",
+           style: {
+             color: '#FEB019',
+           }
+         }
+       },
+     ],
+     tooltip: {
+       fixed: {
+         enabled: true,
+         position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+         offsetY: 30,
+         offsetX: 60
+       },
+     },
+     legend: {
+       horizontalAlign: 'left',
+       offsetX: 40
+     }
+   }
+   this.seriesDaySave = [  {
+           name: "% save",
+           type: 'column',
+           data: newData
+         }
+         ,{
+          name: 'kWh save',
+          type: 'column',
+          // data: [1000,2000,3000,4444,2222,3333,1111,5555]
+          data: newData2
+        }
+        //  {
+        //   name: 'Cashflow',
+        //   type: 'column',
+        //   data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
+        // },
+        // {
+        //   name: 'Revenue',
+        //   type: 'line',
+        //   data: [20, 29, 37, 36, 44, 45, 50, 58]
+        // }
+      ]
     },
+    // updateChartYearSave() {
+    //   const newData = this.$store.state.save_diff_monthInYear
+    //   this.chartOptionsYearSave = {
+    //     chart: {
+    //       width: "100%",
+    //       height: 300
+    //     },
+    //     plotOptions: {
+    //       bar: {
+    //
+    //         dataLabels: {
+    //           position: 'top',
+    //         }
+    //       },
+    //     },
+    //     dataLabels: {
+    //       enabled: false,
+    //       // offsetY: -25,
+    //       // style: {
+    //       //   fontSize: '20px',
+    //       //   colors: ["#304758"]
+    //       // }
+    //     },
+    //     xaxis: {
+    //       categories: this.$store.state.save_monthInYear
+    //     },
+    //     yaxis: [
+    //       {
+    //         axisBorder: {
+    //           show: false,
+    //         },
+    //         title: {
+    //           // text: "kwh"
+    //         }
+    //     }
+    //
+    //   ],
+    //   }
+    //
+    //     this.seriesYearSave = [{
+    //       name: "% Saving",
+    //       data: newData
+    //     }]
+    //   },
     updateChartYearSave() {
       const newData = this.$store.state.save_diff_monthInYear
+      const newData2 = this.$store.state.save_diff_kwh_monthInYear
       this.chartOptionsYearSave = {
         chart: {
-          width: "100%",
-          height: 300
-        },
-        plotOptions: {
-          bar: {
+       height: 350,
+       type: 'line',
+       stacked: false
+     },
+     dataLabels: {
+       enabled: false
+     },
 
-            dataLabels: {
-              position: 'top',
-            }
-          },
-        },
-        dataLabels: {
-          enabled: false,
-          // offsetY: -25,
-          // style: {
-          //   fontSize: '20px',
-          //   colors: ["#304758"]
-          // }
-        },
-        xaxis: {
-          categories: this.$store.state.save_monthInYear
-        },
-        yaxis: [
-          {
-            axisBorder: {
-              show: true,
-            },
-            title: {
-              // text: "kwh"
-            }
+     stroke: {
+       width: [1, 1, 4]
+     },
+     title: {
+     },
+     xaxis: {
+       categories: this.$store.state.save_monthInYear,
+       title: {
+         // text: "kwh"
+       }
+       // categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+     },
+     yaxis: [
+       {
+         axisTicks: {
+           show: true,
+         },
+         axisBorder: {
+           show: true,
+           color: '#008FFB'
+         },
+         labels: {
+           style: {
+             color: '#008FFB',
+           }
+         },
+         title: {
+           // text: "Income (thousand crores)",
+           style: {
+             color: '#008FFB',
+           }
+         },
+         tooltip: {
+           enabled: false
+         }
+       },
+
+       {
+         seriesName: 'Revenue',
+         opposite: true,
+         axisTicks: {
+           show: true,
+         },
+         axisBorder: {
+           show: true,
+           color: '#FEB019'
+         },
+         labels: {
+           style: {
+             color: '#FEB019',
+           },
+         },
+         title: {
+           // text: "Revenue (thousand crores)",
+           style: {
+             color: '#FEB019',
+           }
+         }
+       },
+     ],
+     tooltip: {
+       fixed: {
+         enabled: true,
+         position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+         offsetY: 30,
+         offsetX: 60
+       },
+     },
+     legend: {
+       horizontalAlign: 'left',
+       offsetX: 40
+     }
+   }
+   this.seriesYearSave = [  {
+           name: "% save",
+           type: 'column',
+           data: newData
+         }
+         ,{
+          name: 'kWh save',
+          type: 'column',
+          // data: [1000,2000,3000,4444,2222,3333,1111,5555]
+          data: newData2
         }
-
-      ],
-      }
-
-        this.seriesYearSave = [{
-          name: "% Saving",
-          data: newData
-        }]
-      },
+        //  {
+        //   name: 'Cashflow',
+        //   type: 'column',
+        //   data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
+        // },
+        // {
+        //   name: 'Revenue',
+        //   type: 'line',
+        //   data: [20, 29, 37, 36, 44, 45, 50, 58]
+        // }
+      ]
+    },
   },
   data () {
     return {
